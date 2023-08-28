@@ -3,10 +3,15 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.json": "1b6b4d141f5a64f30b0d7792cd80397a",
-"assets/AssetManifest.smcbin": "8c0c26d04d6618e55bfe57c4ddd83258",
+const RESOURCES = {"assets/AssetManifest.json": "ca127efa1653135b5a90260b2c0598a9",
+"assets/AssetManifest.smcbin": "2cd49b25943a88571a1d0bb46ec98dbc",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/fonts/MaterialIcons-Regular.otf": "aa86c796d8bd180961e0031d09569d63",
+"assets/fonts/MaterialIcons-Regular.otf": "a74b73bcbd56e966c8119295d27428b0",
+"assets/lib/assets/images/739c6e8d": "0ca4379330bada73778845f0d32b6894",
+"assets/lib/assets/images/856cf234": "0ca4379330bada73778845f0d32b6894",
+"assets/lib/assets/images/a07e7041": "6e5b653c691d1c11af2dce9cb1aacead",
+"assets/lib/assets/images/c5b38389": "6e5b653c691d1c11af2dce9cb1aacead",
+"assets/lib/assets/images/homepage/about_me_bannner.png": "ba5eed713376c0c7827f3189643d310a",
 "assets/lib/assets/images/homepage/homepage_banner.png": "07cdda0fc3de799e4d3244eb927e6bae",
 "assets/lib/assets/images/logo.png": "6e5b653c691d1c11af2dce9cb1aacead",
 "assets/lib/assets/images/LTIs/clickk/Clickk_logo_banner.png": "cff9560c2465d2876a3ad20dcdf8ee97",
@@ -15,6 +20,9 @@ const RESOURCES = {"assets/AssetManifest.json": "1b6b4d141f5a64f30b0d7792cd80397
 "assets/lib/assets/images/LTIs/clickk/how_to_do.jpg": "bcf9c139683f700eab9634d1bd352c05",
 "assets/lib/assets/images/LTIs/clickk/me_working_on_website.png": "aeca5687c2f707df2b2e2e2c1b8186b2",
 "assets/lib/assets/images/LTIs/clickk/street_picture.PNG": "e5535f26ab637bbb177cdb92709c54ee",
+"assets/lib/assets/images/LTIs/saphi/2261a6ea": "0edbce150556dbb8e5254c5dfa0b3b7d",
+"assets/lib/assets/images/LTIs/saphi/c659507e": "0edbce150556dbb8e5254c5dfa0b3b7d",
+"assets/lib/assets/images/LTIs/saphi/eb1db823": "0edbce150556dbb8e5254c5dfa0b3b7d",
 "assets/lib/assets/images/LTIs/saphi/Saphi_Enclosure_Design1.jpg": "d97bbcb8024fc98c48d4f1411b3a506a",
 "assets/lib/assets/images/LTIs/saphi/Saphi_First_Project.PNG": "1e5f4fbea32adf1f3e5c87b0925e5255",
 "assets/lib/assets/images/LTIs/saphi/Saphi_logo.png": "66f580def257db4ae25bb73c77a505f6",
@@ -41,6 +49,7 @@ const RESOURCES = {"assets/AssetManifest.json": "1b6b4d141f5a64f30b0d7792cd80397
 "assets/lib/assets/images/projects/raspberry_pi/raspberry_pi_small_icon.png": "85307f51819e2b84e6ab615a2c08a798",
 "assets/lib/assets/images/projects/raspberry_pi/RetroPi_Banner.png": "0ac10819492e5c6e1d8ffff0fc74bd87",
 "assets/lib/assets/images/projects/raspberry_pi/Sense-hat.png": "a39eb83df1f736bc679a87e66758d6c8",
+"assets/lib/assets/images/senior_study/future_pathway_plan/future_pathway_plan_banner.png": "157a7c52b9a65e3e763decbac4dd91e3",
 "assets/lib/assets/images/skills/alternative_communcation_icon.png": "4201688c50474af10e3d2ae499e9d92c",
 "assets/lib/assets/images/skills/arduino_logo.png": "4e9beaa6c1eea560a18dcac9e7dced07",
 "assets/lib/assets/images/skills/blender_logo.png": "1a674ca60d5bbb12aebe0fb1441b7c4b",
@@ -62,7 +71,7 @@ const RESOURCES = {"assets/AssetManifest.json": "1b6b4d141f5a64f30b0d7792cd80397
 "assets/lib/assets/images/skills/social_reasoning_logo.png": "9a217c2a5892c73d7f87df1bab068fc5",
 "assets/lib/assets/images/skills/trouble_shooting_logo.png": "e059c102081eac85c3ae317f3d47c65b",
 "assets/lib/assets/images/title_image.png": "594c3f79b5806c6a8fbc7a8d46a72035",
-"assets/NOTICES": "036786dbe6fe608bfff4bca84ad50c73",
+"assets/NOTICES": "409b07ea026ac7d983130eaea91318b9",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "57d849d738900cfd590e9adc7e208250",
 "assets/shaders/ink_sparkle.frag": "f8b80e740d33eb157090be4e995febdf",
 "canvaskit/canvaskit.js": "76f7d822f42397160c5dfc69cbc9b2de",
@@ -80,11 +89,11 @@ const RESOURCES = {"assets/AssetManifest.json": "1b6b4d141f5a64f30b0d7792cd80397
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "e8d26581de495134f03202434354e521",
-"/": "e8d26581de495134f03202434354e521",
-"main.dart.js": "444c431af7b2fccdd4ea01965c97370b",
+"index.html": "d22992a0b59fd420d4f628de81dd9463",
+"/": "d22992a0b59fd420d4f628de81dd9463",
+"main.dart.js": "1fdbac63ad2f2812679aa308332117fd",
 "manifest.json": "e74af8957b5899dc6da961caee768ec9",
-"version.json": "009c9e65172e010890f7f65fde438006"};
+"version.json": "a243814a030ee1e61d407963a8595df7"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
