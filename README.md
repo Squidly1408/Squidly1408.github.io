@@ -29,5 +29,5 @@ This is the portfolio of Lucas Newman, a software designer / developer. It has h
 
 ## Feedback
 
-If you have any feedback, please reach out to us at Squidly1408@gmail.com
+If you have any feedback, please reach out to me at Squidly1408@gmail.com
 
