@@ -86329,8 +86329,8 @@ $S:188}
 A.qm.prototype={
 af(){return new A.Vd(A.ir(),new A.ab_("Other projects","Where I keep a full catalog of each of my projects",A.a([new A.ql("SRG","SRG or Stroke Recovery Glove, is a glove that is aimed to help provide communication to stroke recovery Patients.","srg"),new A.ql("AAC app","An AAC or Augmentative and Alternative Communication App is an app to help build or replace communication everyday.","aac"),new A.ql("Project Database","A database website that lets students and teachers collaborate together.","project-database"),new A.ql("Auslan Glove","A glove that can understand Australian Sign-language and convert it to a verbal form of communication.","auslan-glove")],t.Gc)),B.j)}}
 A.Vd.prototype={
-K(a){var s=null,r=A.bx("lib/assets/images/other_projects/projects_banner.png",B.G),q=t.w,p=A.M(a,s,q).w,o=this.e,n=t.p
-return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([A.bD(B.C,A.a([r,A.cp(0,new A.bH(B.bf,s,s,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(o.a,s,s,s,A.aI(s,s,B.z,s,s,s,s,s,s,s,s,A.M(a,s,q).w.a.a*0.04,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),A.aU(o.b,s,s,s,A.aI(s,s,B.i,s,s,s,s,s,s,s,s,A.M(a,s,q).w.a.a*0.02,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],n),B.q,B.E,B.r),s),s,p.a.a*0.65),s))],n),B.p,B.B),A.fB(new A.ao5(this),4,B.ac,!0)],n),B.q,B.at,B.r),s)],n),B.p,B.B),s,s),new A.hP(this.d,s))}}
+K(a){var s=null,r=this.d,q=A.bx("lib/assets/images/other_projects/projects_banner.png",B.G),p=t.w,o=A.M(a,s,p).w,n=this.e,m=t.p
+return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([A.bD(B.C,A.a([q,A.cp(0,new A.bH(B.bf,s,s,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(n.a,s,s,s,A.aI(s,s,B.z,s,s,s,s,s,s,s,s,A.M(a,s,p).w.a.a*0.04,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),A.aU(n.b,s,s,s,A.aI(s,s,B.i,s,s,s,s,s,s,s,s,A.M(a,s,p).w.a.a*0.02,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],m),B.q,B.E,B.r),s),s,o.a.a*0.65),s))],m),B.p,B.B),A.fB(new A.ao5(this),4,B.ac,!0)],m),B.q,B.at,B.r),r)],m),B.p,B.B),s,s),new A.hP(r,s))}}
 A.ao5.prototype={
 $2(a,b){var s,r,q,p,o,n,m,l=null
 if(b!==3)s=(b&1)===1?"lib/assets/images/other_projects/left_middle.png":"lib/assets/images/other_projects/right_middle.png"
@@ -86350,19 +86350,19 @@ $S:0}
 A.qn.prototype={
 af(){return new A.Ve(A.ir(),B.j)}}
 A.Ve.prototype={
-K(a){var s,r,q,p,o,n=null,m="lib/assets/images/outlearning/divider.png",l=A.bx("lib/assets/images/outlearning/outlearning_banner.png",B.G),k=t.w,j=A.M(a,n,k).w,i=t.p
-j=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU("OutLearning",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU("LTI or Learning Through Internship is a program ran by Big Picture School that gets students to go into the workforce to learn real life and practical skills related to their passions. We find these chances ourselves through online resaerch and contacting business's, organisations, or charities.",n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],i),B.q,B.E,B.r),n),n,j.a.a*0.65),n))],i),B.p,B.B)
-l=A.M(a,n,k).w
-l=A.uC(new A.aq(B.dX,A.bq(A.Jp(A.iV(15),A.bx("lib/assets/images/outlearning/saphi.png",B.G)),n,l.a.a),n),n,n,n,n,new A.ao6(),n,n)
+K(a){var s,r,q,p,o,n=null,m="lib/assets/images/outlearning/divider.png",l=this.d,k=A.bx("lib/assets/images/outlearning/outlearning_banner.png",B.G),j=t.w,i=A.M(a,n,j).w,h=t.p
+i=A.bD(B.C,A.a([k,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU("OutLearning",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,j).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU("LTI or Learning Through Internship is a program ran by Big Picture School that gets students to go into the workforce to learn real life and practical skills related to their passions. We find these chances ourselves through online resaerch and contacting business's, organisations, or charities.",n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,j).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],h),B.q,B.E,B.r),n),n,i.a.a*0.65),n))],h),B.p,B.B)
+k=A.M(a,n,j).w
+k=A.uC(new A.aq(B.dX,A.bq(A.Jp(A.iV(15),A.bx("lib/assets/images/outlearning/saphi.png",B.G)),n,k.a.a),n),n,n,n,n,new A.ao6(),n,n)
 s=A.bx(m,B.G)
-r=A.M(a,n,k).w
+r=A.M(a,n,j).w
 r=A.uC(new A.aq(B.dX,A.bq(A.Jp(A.iV(15),A.bx("lib/assets/images/outlearning/uon.png",B.G)),n,r.a.a),n),n,n,n,n,new A.ao7(),n,n)
 q=A.bx(m,B.G)
-p=A.M(a,n,k).w
+p=A.M(a,n,j).w
 p=A.uC(new A.aq(B.dX,A.bq(A.Jp(A.iV(15),A.bx("lib/assets/images/outlearning/clickk.png",B.G)),n,p.a.a),n),n,n,n,n,new A.ao8(),n,n)
 o=A.bx(m,B.G)
-k=A.M(a,n,k).w
-return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([j,l,s,r,q,p,o,A.uC(new A.aq(B.dX,A.bq(A.Jp(A.iV(15),A.bx("lib/assets/images/outlearning/nubots.png",B.G)),n,k.a.a),n),n,n,n,n,new A.ao9(),n,n),A.bx("lib/assets/images/outlearning/footer_image.png",B.G)],i),B.q,B.at,B.r),n)],i),B.p,B.B),n,n),new A.hP(this.d,n))}}
+j=A.M(a,n,j).w
+return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([i,k,s,r,q,p,o,A.uC(new A.aq(B.dX,A.bq(A.Jp(A.iV(15),A.bx("lib/assets/images/outlearning/nubots.png",B.G)),n,j.a.a),n),n,n,n,n,new A.ao9(),n,n),A.bx("lib/assets/images/outlearning/footer_image.png",B.G)],h),B.q,B.at,B.r),l)],h),B.p,B.B),n,n),new A.hP(l,n))}}
 A.ao6.prototype={
 $0(){A.eR(A.cQ("https://saphi.engineering/",0,null))},
 $S:0}
@@ -86379,18 +86379,18 @@ A.qF.prototype={
 af(){var s="link"
 return new A.W4(A.ir(),new A.nV("AAC App","Augmentative and Alternative Communication (AAC) app, this is an app designed for tablets and the like to turn their use into a AAC device designed to help facilitate and improve communication amungst people who require these devices to communicate. My AAC app stands out by focusing on edit-ablility and use-ability as well as allowing the users to customize the experience depending on their certain needs, for instance a person may need bigger buttons due to lack of motor function, or another person may require more buttons on one screen bc they might not have the motor function to swipe across to access extra buttons.",A.a(["Michelle Batey - Speech Patholigist at Early Start","Anne Spruce - SLSO at Cooks Hill Campus","Alex Newman-adam - Special Eduction Teacher","Jackie Newman-adam - Parent"],t.s),A.a([new A.cq("Research document","https://1drv.ms/w/s!AlWOX6vBn5L2s3N4rHNAJ-0PVygW?e=FoHHGq"),new A.cq("",s),new A.cq("",s),new A.cq("",s)],t.hK)),B.j)}}
 A.W4.prototype={
-K(a){var s,r,q,p,o=this,n=null,m=A.bx(u.p,B.G),l=t.w,k=A.M(a,n,l).w,j=o.e,i=t.p
-k=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(j.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(j.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],i),B.q,B.E,B.r),n),n,k.a.a*0.65),n))],i),B.p,B.B)
-j=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoG(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,n),n))],i),B.p,B.B)
-m=A.bx(u.P,B.G)
-s=A.M(a,n,l).w
-s=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoH(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],i),B.p,B.B)
-m=A.bx(u.A,B.G)
-r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
-q=A.M(a,n,l).w.a.a>1000?A.M(a,n,l).w.a.a*0.4:A.M(a,n,l).w.a.a*0.2
-p=A.M(a,n,l).w.a.a>1000?3:5
-A.M(a,n,l).toString
-return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([k,j,s,A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoI(),9,B.ac,!0),n)],i),B.q,B.E,B.r),n,n),n))],i),B.p,B.B)],i),B.q,B.at,B.r),n)],i),B.p,B.B),n,n),new A.hP(o.d,n))}}
+K(a){var s,r,q,p,o=this,n=null,m=o.d,l=A.bx(u.p,B.G),k=t.w,j=A.M(a,n,k).w,i=o.e,h=t.p
+j=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(i.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(i.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],h),B.q,B.E,B.r),n),n,j.a.a*0.65),n))],h),B.p,B.B)
+i=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoG(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,n),n))],h),B.p,B.B)
+l=A.bx(u.P,B.G)
+s=A.M(a,n,k).w
+s=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoH(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],h),B.p,B.B)
+l=A.bx(u.A,B.G)
+r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
+q=A.M(a,n,k).w.a.a>1000?A.M(a,n,k).w.a.a*0.4:A.M(a,n,k).w.a.a*0.2
+p=A.M(a,n,k).w.a.a>1000?3:5
+A.M(a,n,k).toString
+return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([j,i,s,A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoI(),9,B.ac,!0),n)],h),B.q,B.E,B.r),n,n),n))],h),B.p,B.B)],h),B.q,B.at,B.r),m)],h),B.p,B.B),n,n),new A.hP(m,n))}}
 A.aoG.prototype={
 $2(a,b){var s=null
 return new A.aq(B.ah,A.hO(A.a([A.aU(this.a.e.c[b],s,s,s,A.aI(s,s,B.i,s,s,s,s,s,s,s,s,A.M(a,s,t.w).w.a.a*0.02,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],t.p),B.q,B.E,B.r),s)},
@@ -86409,18 +86409,18 @@ A.qG.prototype={
 af(){var s="link"
 return new A.W5(A.ir(),new A.nV("Auslan Glove","This was a project to test and demonstrate my skills, this project was aimed to create a glove that can understand basic Australian sign-language (Auslan). This project has had many variations but with each new variation we change and improve the glove / electronics / software / cases. Currently this project is paused in favour of the SRG project.",A.a([u.N,"Kiwako Ito - Associate Professor UON ",u.i,""],t.s),A.a([new A.cq("changes documentation",u.H),new A.cq("",s),new A.cq("",s),new A.cq("",s)],t.hK)),B.j)}}
 A.W5.prototype={
-K(a){var s,r,q,p,o=this,n=null,m=A.bx(u.p,B.G),l=t.w,k=A.M(a,n,l).w,j=o.e,i=t.p
-k=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(j.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(j.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],i),B.q,B.E,B.r),n),n,k.a.a*0.65),n))],i),B.p,B.B)
-j=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoK(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,n),n))],i),B.p,B.B)
-m=A.bx(u.P,B.G)
-s=A.M(a,n,l).w
-s=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoL(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],i),B.p,B.B)
-m=A.bx(u.A,B.G)
-r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
-q=A.M(a,n,l).w.a.a>1000?A.M(a,n,l).w.a.a*0.4:A.M(a,n,l).w.a.a*0.2
-p=A.M(a,n,l).w.a.a>1000?3:5
-A.M(a,n,l).toString
-return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([k,j,s,A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoM(),5,B.ac,!0),n)],i),B.q,B.E,B.r),n,n),n))],i),B.p,B.B)],i),B.q,B.at,B.r),n)],i),B.p,B.B),n,n),new A.hP(o.d,n))}}
+K(a){var s,r,q,p,o=this,n=null,m=o.d,l=A.bx(u.p,B.G),k=t.w,j=A.M(a,n,k).w,i=o.e,h=t.p
+j=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(i.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(i.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],h),B.q,B.E,B.r),n),n,j.a.a*0.65),n))],h),B.p,B.B)
+i=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoK(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,n),n))],h),B.p,B.B)
+l=A.bx(u.P,B.G)
+s=A.M(a,n,k).w
+s=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoL(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],h),B.p,B.B)
+l=A.bx(u.A,B.G)
+r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
+q=A.M(a,n,k).w.a.a>1000?A.M(a,n,k).w.a.a*0.4:A.M(a,n,k).w.a.a*0.2
+p=A.M(a,n,k).w.a.a>1000?3:5
+A.M(a,n,k).toString
+return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([j,i,s,A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoM(),5,B.ac,!0),n)],h),B.q,B.E,B.r),n,n),n))],h),B.p,B.B)],h),B.q,B.at,B.r),m)],h),B.p,B.B),n,n),new A.hP(m,n))}}
 A.aoK.prototype={
 $2(a,b){var s=null
 return new A.aq(B.ah,A.hO(A.a([A.aU(this.a.e.c[b],s,s,s,A.aI(s,s,B.i,s,s,s,s,s,s,s,s,A.M(a,s,t.w).w.a.a*0.02,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],t.p),B.q,B.E,B.r),s)},
@@ -86438,18 +86438,18 @@ $S:15}
 A.qH.prototype={
 af(){return new A.W6(A.ir(),new A.nV("Project Database","A problem with Cooks Hill Campus\u2019s way of learning, Big Picture Learning, is that the collaboration between student\u2019s projects is minimal. Hence where my social media app comes in, It is designed to allow for collaboration and insight into other students project for teachers and students alike, tailored to Cooks Hill Campus as a school. This project is still going on.",A.a(["Jamaica Sparks - EX Advisor at Cooks Hill Campus","Margot Knowles - Advisor at Cooks Hill Campus","",""],t.s),A.a([new A.cq("Github Project","https://github.com/Squidly1408/project_database"),new A.cq("",""),new A.cq("",""),new A.cq("","")],t.hK)),B.j)}}
 A.W6.prototype={
-K(a){var s,r,q,p,o=this,n=null,m=A.bx(u.p,B.G),l=t.w,k=A.M(a,n,l).w,j=o.e,i=t.p
-k=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(j.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(j.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],i),B.q,B.E,B.r),n),n,k.a.a*0.65),n))],i),B.p,B.B)
-j=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoO(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,n),n))],i),B.p,B.B)
-m=A.bx(u.P,B.G)
-s=A.M(a,n,l).w
-s=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoP(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],i),B.p,B.B)
-m=A.bx(u.A,B.G)
-r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
-q=A.M(a,n,l).w.a.a>1000?A.M(a,n,l).w.a.a*0.4:A.M(a,n,l).w.a.a*0.2
-p=A.M(a,n,l).w.a.a>1000?3:5
-A.M(a,n,l).toString
-return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([k,j,s,A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoQ(),3,B.ac,!0),n)],i),B.q,B.E,B.r),n,n),n))],i),B.p,B.B)],i),B.q,B.at,B.r),n)],i),B.p,B.B),n,n),new A.hP(o.d,n))}}
+K(a){var s,r,q,p,o=this,n=null,m=o.d,l=A.bx(u.p,B.G),k=t.w,j=A.M(a,n,k).w,i=o.e,h=t.p
+j=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(i.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(i.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],h),B.q,B.E,B.r),n),n,j.a.a*0.65),n))],h),B.p,B.B)
+i=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoO(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,n),n))],h),B.p,B.B)
+l=A.bx(u.P,B.G)
+s=A.M(a,n,k).w
+s=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoP(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],h),B.p,B.B)
+l=A.bx(u.A,B.G)
+r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
+q=A.M(a,n,k).w.a.a>1000?A.M(a,n,k).w.a.a*0.4:A.M(a,n,k).w.a.a*0.2
+p=A.M(a,n,k).w.a.a>1000?3:5
+A.M(a,n,k).toString
+return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([j,i,s,A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoQ(),3,B.ac,!0),n)],h),B.q,B.E,B.r),n,n),n))],h),B.p,B.B)],h),B.q,B.at,B.r),m)],h),B.p,B.B),n,n),new A.hP(m,n))}}
 A.aoO.prototype={
 $2(a,b){var s=null
 return new A.aq(B.ah,A.hO(A.a([A.aU(this.a.e.c[b],s,s,s,A.aI(s,s,B.i,s,s,s,s,s,s,s,s,A.M(a,s,t.w).w.a.a*0.02,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],t.p),B.q,B.E,B.r),s)},
@@ -86468,18 +86468,18 @@ A.qI.prototype={
 af(){var s="link"
 return new A.W7(A.ir(),new A.nV("SRG","The SRG project is a project that started out with the Auslan Glove project, where we were designing a glove that can translate Auslan to a verbal form of communication. The SRG project uses the skills and knowledge from the Auslan glove project into this one. This project is aimed to create a glove that can aid stroke recovery patients by allowing a better form of communication between them and others via the electronics in the glove.",A.a([u.N,u.i,"",""],t.s),A.a([new A.cq("changes documentation",u.H),new A.cq("",s),new A.cq("",s),new A.cq("",s)],t.hK)),B.j)}}
 A.W7.prototype={
-K(a){var s,r,q,p,o=this,n=null,m=A.bx(u.p,B.G),l=t.w,k=A.M(a,n,l).w,j=o.e,i=t.p
-k=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(j.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(j.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],i),B.q,B.E,B.r),n),n,k.a.a*0.65),n))],i),B.p,B.B)
-j=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoS(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,n),n))],i),B.p,B.B)
-m=A.bx(u.P,B.G)
-s=A.M(a,n,l).w
-s=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoT(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],i),B.p,B.B)
-m=A.bx(u.A,B.G)
-r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
-q=A.M(a,n,l).w.a.a>1000?A.M(a,n,l).w.a.a*0.4:A.M(a,n,l).w.a.a*0.2
-p=A.M(a,n,l).w.a.a>1000?3:5
-A.M(a,n,l).toString
-return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([k,j,s,A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoU(),5,B.ac,!0),n)],i),B.q,B.E,B.r),n,n),n))],i),B.p,B.B)],i),B.q,B.at,B.r),n)],i),B.p,B.B),n,n),new A.hP(o.d,n))}}
+K(a){var s,r,q,p,o=this,n=null,m=o.d,l=A.bx(u.p,B.G),k=t.w,j=A.M(a,n,k).w,i=o.e,h=t.p
+j=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(i.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(i.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],h),B.q,B.E,B.r),n),n,j.a.a*0.65),n))],h),B.p,B.B)
+i=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoS(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,n),n))],h),B.p,B.B)
+l=A.bx(u.P,B.G)
+s=A.M(a,n,k).w
+s=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoT(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],h),B.p,B.B)
+l=A.bx(u.A,B.G)
+r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
+q=A.M(a,n,k).w.a.a>1000?A.M(a,n,k).w.a.a*0.4:A.M(a,n,k).w.a.a*0.2
+p=A.M(a,n,k).w.a.a>1000?3:5
+A.M(a,n,k).toString
+return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([j,i,s,A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoU(),5,B.ac,!0),n)],h),B.q,B.E,B.r),n,n),n))],h),B.p,B.B)],h),B.q,B.at,B.r),m)],h),B.p,B.B),n,n),new A.hP(m,n))}}
 A.aoS.prototype={
 $2(a,b){var s=null
 return new A.aq(B.ah,A.hO(A.a([A.aU(this.a.e.c[b],s,s,s,A.aI(s,s,B.i,s,s,s,s,s,s,s,s,A.M(a,s,t.w).w.a.a*0.02,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],t.p),B.q,B.E,B.r),s)},
@@ -86498,18 +86498,18 @@ A.qJ.prototype={
 af(){var s="enter mentors name",r="title",q="link"
 return new A.W8(A.ir(),new A.nV("Enter title","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a tristique tellus. In dolor lorem, lobortis sed volutpat eget, placerat pulvinar elit. Vivamus ac vestibulum nunc, id ornare augue. Praesent porta nec neque non pretium. Pellentesque sit amet maximus mi. Duis accumsan non tortor maximus pretium. Cras nunc felis, fringilla et mi at, porttitor lobortis mauris. Aenean semper efficitur pretium. Proin neque ipsum, bibendum vel efficitur eget, accumsan non nulla.",A.a([s,s,s,s],t.s),A.a([new A.cq(r,q),new A.cq(r,q),new A.cq(r,q),new A.cq(r,q)],t.hK)),B.j)}}
 A.W8.prototype={
-K(a){var s,r,q,p,o=this,n=null,m=A.bx(u.p,B.G),l=t.w,k=A.M(a,n,l).w,j=o.e,i=t.p
-k=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(j.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(j.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],i),B.q,B.E,B.r),n),n,k.a.a*0.65),n))],i),B.p,B.B)
-j=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoW(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,n),n))],i),B.p,B.B)
-m=A.bx(u.P,B.G)
-s=A.M(a,n,l).w
-s=A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoX(o),4,B.ac,!0)],i),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],i),B.p,B.B)
-m=A.bx(u.A,B.G)
-r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,l).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
-q=A.M(a,n,l).w.a.a>1000?A.M(a,n,l).w.a.a*0.4:A.M(a,n,l).w.a.a*0.2
-p=A.M(a,n,l).w.a.a>1000?3:5
-A.M(a,n,l).toString
-return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([k,j,s,A.bD(B.C,A.a([m,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoY(),0,B.ac,!0),n)],i),B.q,B.E,B.r),n,n),n))],i),B.p,B.B)],i),B.q,B.at,B.r),n)],i),B.p,B.B),n,n),new A.hP(o.d,n))}}
+K(a){var s,r,q,p,o=this,n=null,m=o.d,l=A.bx(u.p,B.G),k=t.w,j=A.M(a,n,k).w,i=o.e,h=t.p
+j=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.bf,n,n,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(i.a,n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.aU(i.b,n,n,n,A.aI(n,n,B.i,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.02,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)],h),B.q,B.E,B.r),n),n,j.a.a*0.65),n))],h),B.p,B.B)
+i=A.bD(B.C,A.a([A.bx(u.J,B.G),A.cp(0,new A.bH(B.F,n,n,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoW(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,n),n))],h),B.p,B.B)
+l=A.bx(u.P,B.G)
+s=A.M(a,n,k).w
+s=A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.aT,n,n,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n),A.fB(new A.aoX(o),4,B.ac,!0)],h),B.q,B.E,B.r),n),n,s.a.a*0.65),n))],h),B.p,B.B)
+l=A.bx(u.A,B.G)
+r=A.aU("Skills:",n,n,n,A.aI(n,n,B.z,n,n,n,n,n,n,n,n,A.M(a,n,k).w.a.a*0.04,n,n,n,n,n,!0,n,n,n,n,n,n,n,n),n,n)
+q=A.M(a,n,k).w.a.a>1000?A.M(a,n,k).w.a.a*0.4:A.M(a,n,k).w.a.a*0.2
+p=A.M(a,n,k).w.a.a>1000?3:5
+A.M(a,n,k).toString
+return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([j,i,s,A.bD(B.C,A.a([l,A.cp(0,new A.bH(B.F,n,n,A.cN(A.bv(A.a([r,new A.aq(new A.aF(q,0,q,0),A.ub(new A.m9(p,1),new A.aoY(),0,B.ac,!0),n)],h),B.q,B.E,B.r),n,n),n))],h),B.p,B.B)],h),B.q,B.at,B.r),m)],h),B.p,B.B),n,n),new A.hP(m,n))}}
 A.aoW.prototype={
 $2(a,b){var s=null
 return new A.aq(B.ah,A.hO(A.a([A.aU(this.a.e.c[b],s,s,s,A.aI(s,s,B.i,s,s,s,s,s,s,s,s,A.M(a,s,t.w).w.a.a*0.02,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],t.p),B.q,B.E,B.r),s)},
@@ -86528,21 +86528,21 @@ A.r6.prototype={
 af(){var s="link",r=t.hK
 return new A.Xs(A.ir(),new A.nV("Senior Project","What is a senior project? Well a senior project is a project undertaken by senior students at Cooks Hill Campus, meant to demonstrate your abilities, skills, and knowledge on your chosen subject. My senior project consists of me completing multiple smaller projects which will all come together to make my portfolio, a portfolio that will help me get a place into the University of Newcastle, and help me get a job in the field of software development. My project range in the field of technology but they share one thing, they all have a use or purpose in the real world.",A.a([u.N,"Jamaica Sparks - Advisor at Cooks Hill Campus","Alex Newman-Adam - Parent","Jackie Newman-Adam - Parent"],t.s),A.a([new A.cq("Project Proposal","https://1drv.ms/w/s!AlWOX6vBn5L2qzNFjFLVgI2E7AbG?e=LlucWM"),new A.cq("",s),new A.cq("",s),new A.cq("",s)],r)),A.a([new A.cq("AAC Project","aac"),new A.cq("Auslan Glove","auslan-glove"),new A.cq("","project-3"),new A.cq("","project-4")],r),B.j)}}
 A.Xs.prototype={
-K(a){var s,r,q,p,o,n=this,m=null,l=u.J,k=A.bx(u.p,B.G),j=t.w,i=A.M(a,m,j).w,h=n.e,g=t.p
-i=A.bD(B.C,A.a([k,A.cp(0,new A.bH(B.bf,m,m,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(h.a,m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,j).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m),A.aU(h.b,m,m,m,A.aI(m,m,B.i,m,m,m,m,m,m,m,m,A.M(a,m,j).w.a.a*0.02,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m)],g),B.q,B.E,B.r),m),m,i.a.a*0.65),m))],g),B.p,B.B)
-h=A.bD(B.C,A.a([A.bx(l,B.G),A.cp(0,new A.bH(B.F,m,m,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,j).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m),A.fB(new A.aqw(n),4,B.ac,!0)],g),B.q,B.E,B.r),m),m,m),m))],g),B.p,B.B)
-k=A.bx(u.P,B.G)
-s=A.M(a,m,j).w
-s=A.bD(B.C,A.a([k,A.cp(0,new A.bH(B.aT,m,m,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Projects:",m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,j).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m),A.fB(new A.aqx(n),4,B.ac,!0)],g),B.q,B.E,B.r),m),m,s.a.a*0.65),m))],g),B.p,B.B)
-k=A.bx(l,B.G)
-r=A.M(a,m,j).w
-r=A.bD(B.C,A.a([k,A.cp(0,new A.bH(B.aT,m,m,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,j).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m),A.fB(new A.aqy(n),4,B.ac,!0)],g),B.q,B.E,B.r),m),m,r.a.a*0.65),m))],g),B.p,B.B)
-k=A.bx(u.A,B.G)
-q=A.aU("Skills:",m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,j).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m)
-p=A.M(a,m,j).w.a.a>1000?A.M(a,m,j).w.a.a*0.4:A.M(a,m,j).w.a.a*0.2
-o=A.M(a,m,j).w.a.a>1000?3:5
-A.M(a,m,j).toString
-return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([i,h,s,r,A.bD(B.C,A.a([k,A.cp(0,new A.bH(B.F,m,m,A.cN(A.bv(A.a([q,new A.aq(new A.aF(p,0,p,0),A.ub(new A.m9(o,1),new A.aqz(),12,B.ac,!0),m)],g),B.q,B.E,B.r),m,m),m))],g),B.p,B.B)],g),B.q,B.at,B.r),m)],g),B.p,B.B),m,m),new A.hP(n.d,m))}}
+K(a){var s,r,q,p,o,n=this,m=null,l=u.J,k=n.d,j=A.bx(u.p,B.G),i=t.w,h=A.M(a,m,i).w,g=n.e,f=t.p
+h=A.bD(B.C,A.a([j,A.cp(0,new A.bH(B.bf,m,m,A.bq(new A.aq(B.bw,A.bv(A.a([A.aU(g.a,m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,i).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m),A.aU(g.b,m,m,m,A.aI(m,m,B.i,m,m,m,m,m,m,m,m,A.M(a,m,i).w.a.a*0.02,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m)],f),B.q,B.E,B.r),m),m,h.a.a*0.65),m))],f),B.p,B.B)
+g=A.bD(B.C,A.a([A.bx(l,B.G),A.cp(0,new A.bH(B.F,m,m,A.cN(new A.aq(B.aJ,A.bv(A.a([A.aU("Mentors:",m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,i).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m),A.fB(new A.aqw(n),4,B.ac,!0)],f),B.q,B.E,B.r),m),m,m),m))],f),B.p,B.B)
+j=A.bx(u.P,B.G)
+s=A.M(a,m,i).w
+s=A.bD(B.C,A.a([j,A.cp(0,new A.bH(B.aT,m,m,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Projects:",m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,i).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m),A.fB(new A.aqx(n),4,B.ac,!0)],f),B.q,B.E,B.r),m),m,s.a.a*0.65),m))],f),B.p,B.B)
+j=A.bx(l,B.G)
+r=A.M(a,m,i).w
+r=A.bD(B.C,A.a([j,A.cp(0,new A.bH(B.aT,m,m,A.bq(new A.aq(B.aJ,A.bv(A.a([A.aU("Resources:",m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,i).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m),A.fB(new A.aqy(n),4,B.ac,!0)],f),B.q,B.E,B.r),m),m,r.a.a*0.65),m))],f),B.p,B.B)
+j=A.bx(u.A,B.G)
+q=A.aU("Skills:",m,m,m,A.aI(m,m,B.z,m,m,m,m,m,m,m,m,A.M(a,m,i).w.a.a*0.04,m,m,m,m,m,!0,m,m,m,m,m,m,m,m),m,m)
+p=A.M(a,m,i).w.a.a>1000?A.M(a,m,i).w.a.a*0.4:A.M(a,m,i).w.a.a*0.2
+o=A.M(a,m,i).w.a.a>1000?3:5
+A.M(a,m,i).toString
+return A.m0(B.ct,B.aH,A.bq(A.bD(B.C,A.a([A.m5(A.bv(A.a([h,g,s,r,A.bD(B.C,A.a([j,A.cp(0,new A.bH(B.F,m,m,A.cN(A.bv(A.a([q,new A.aq(new A.aF(p,0,p,0),A.ub(new A.m9(o,1),new A.aqz(),12,B.ac,!0),m)],f),B.q,B.E,B.r),m,m),m))],f),B.p,B.B)],f),B.q,B.at,B.r),k)],f),B.p,B.B),m,m),new A.hP(k,m))}}
 A.aqw.prototype={
 $2(a,b){var s=null
 return new A.aq(B.ah,A.hO(A.a([A.aU(this.a.e.c[b],s,s,s,A.aI(s,s,B.i,s,s,s,s,s,s,s,s,A.M(a,s,t.w).w.a.a*0.02,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],t.p),B.q,B.E,B.r),s)},
