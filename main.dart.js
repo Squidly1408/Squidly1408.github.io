@@ -88989,7 +88989,7 @@ if(h.f){s=h.d
 s===$&&A.b()
 r=h.r
 s=A.bo(B.F,A.a([new A.Eh(s,g),A.nK(A.ba(A.es(A.aB4(B.D_,A.ff(!s.a.f?B.HX:B.HW,B.i,g,40),5,new A.anc(h)),!1,!1,!1,r),80,80),B.c_,new A.and(h),new A.ane(h),g)],t.p),B.l,B.z)}else s=A.bk(A.a([A.cp(new A.A5(70,B.A,g),g,g),A.aM("Loading",g,g,g,A.aD(g,g,B.i,g,g,g,g,g,g,g,g,g,g,g,g,g,g,!0,g,g,g,g,g,g,g,g),g,g)],t.p),B.m,B.C,B.q)
-s=A.qk(B.by,new A.Jf(2,s,g),g,g,g,g,new A.anf(h))
+s=A.qk(B.by,new A.Jf(2.3,s,g),g,g,g,g,new A.anf(h))
 r=t.w
 q=A.A(a,g,r).w
 q=A.qp(new A.ak(B.dh,A.ba(A.yF(A.il(15),A.bl("lib/assets/images/homepage/about_me_bannner.png",B.E)),g,q.a.a),g),g,g,g,g,new A.ang(),g,g)
