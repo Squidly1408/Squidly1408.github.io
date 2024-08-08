@@ -1,0 +1,443 @@
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    display: none;
+}
+
+/* body */
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow-y: scroll;
+}
+
+/* fonts */
+
+@font-face {
+    font-family: Bayon;
+    src: url(assets/fonts/bayon_font.ttf);
+}
+
+@font-face {
+    font-family: AudioWide;
+    src: url(assets/fonts/Audiowide.ttf);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* header including nav links, socials icons and opening text */
+.header {
+background-image: url(assets/images/banner.png);
+background-size: 100vw;
+height: 50vw;
+
+}
+
+/* socials icons */
+
+.icons {
+    padding-top: 1vw;
+    padding-left: 2vw;
+}
+
+.icons .icon {
+width: 2.5vw;
+height: 2.5vw;
+padding: 3px;
+}
+
+/* mobile view icons */
+
+
+/* nav bar links */
+
+.navbar {
+    top: 0.5vw;
+    right: 2vw;
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+}
+.navbar .navlink {
+    padding: 5px;
+    font-size: 1.5vw;
+    font-family: Bayon;
+    cursor: pointer;
+    
+}
+
+.navbar .navlink1 {
+    padding: 5px;
+    font-size: 1.5vw;
+    font-family: Bayon;
+    cursor: pointer;
+    color: #03767b;
+    
+}
+
+.navbar .logo {
+        width: 6vw;
+}
+
+/* opening text */
+
+.bannerText {
+    top: 10vw;
+    right: 2vw;
+    position: absolute;
+    text-align: right;
+}
+
+.bannerText h1 {
+    font-family: AudioWide;
+    font-size: min(7vw, 70px);
+    padding: 0%;
+    margin-bottom: 0%;
+}
+
+.bannerText p {
+    font-family: Bayon;
+    font-size: min(2.5vw, 25px);
+    margin-top: 0%;
+}
+
+/* about section icluding about me text and skills logos */
+
+.about {
+    background-color: #171717;
+}
+
+/* heading text */
+.heading {
+    display: flex;
+    position: static;
+    justify-content: center;
+    width: 90vw;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+    margin: auto;
+    align-items: end;
+}
+
+.heading .headingTag {
+    font-size: min(3.5vw, 35px);
+    font-family: AudioWide;
+    color: #03767b;
+    padding: 5px;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+}
+
+.heading .headingText {
+    font-size: min(3.8vw, 38px);
+    font-family: AudioWide;
+    color: #ffffff;
+    padding: 5px;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+}
+
+/* about me text */
+.paragraph {
+    position: static;
+    font-size: min(1.5vw, 20px);
+    font-family: Bayon;
+    color: #adadad;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+}
+
+.SkillsandBigPicture {
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+}
+
+/* Big Picture Education Stuff */
+.big_picture_section {
+    flex: 1;
+    flex-wrap: wrap;
+    padding: 10vw;
+    left: 0vw;
+    justify-content: center;
+}
+
+.big_picture_heading {
+    position: static;
+    font-size: min(2.5vw, 25px);;
+    font-family: Bayon;
+    color: #ffffff;
+    padding-right: 20px;
+    text-align: left;
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+}
+
+.big_picture_text {
+    padding-top: 0%;
+    margin-top: 0%;
+    position: static;
+    font-size: min(1.5vw, 20px);
+    font-family: Bayon;
+    color: #adadad;
+    padding-right: 20px;
+    text-align: left;
+}
+
+/* skills grid */
+.skillsGrid {
+    flex: 1;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns : repeat(3,0.25fr);
+    grid-template-rows: repeat(4, 8vw);
+    grid-gap: 10px;
+}
+
+.grid_image {
+    width:80%;
+    height:80%;
+    object-fit:contain;
+  }
+
+/* projects section */
+
+.projects {
+    background-image: url(assets/images/projects_section.png);
+    background-size: 100vw;
+
+    align-items: center;
+}
+
+/* heading text */
+.projects .heading {
+    display: flex;
+    position: static;
+    justify-content: center;
+    width: 90vw;
+    padding-top: 5vw;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.projects .heading .headingTag {
+    font-size: min(3.5vw, 35px);
+    font-family: AudioWide;
+    color: #03767b;
+    padding: 5px;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+}
+
+.projects .heading .headingText {
+    font-size: min(3.8vw, 38px);
+    font-family: AudioWide;
+    color: #171717;
+    padding: 5px;
+    margin-bottom: 0%;
+    padding-bottom: 0%;;
+}
+
+/* projects grid to display projects */
+
+.project_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 40vw);
+    margin: auto;
+    gap: 2vw;
+    width: 80vw;
+}
+
+/* by project */
+
+.project {
+    display: flex;
+    align-items: center;
+    padding: 2vw;
+    text-align: center;
+    width: 40vw;
+    cursor: pointer;
+}
+
+/* projects text in general */
+
+.Project_text {
+    display: block;
+    align-items: start;
+    text-align: start;
+    font-family: Bayon;
+}
+
+/* projects heading */
+
+.Project_text h4 {
+    margin-bottom: 0px;
+    font-size: min(2.5vw, 25px);
+}
+
+/* project about text */
+
+.Project_text p {
+    margin-top: 0px;
+    font-size: min(2vw, 20px);
+}
+
+/* img for the project */
+
+.project_image {
+    width: min(12vw, 80px);
+    height: min(12vw, 80px);
+    padding: 3px;
+}
+
+/* Experience section */
+
+.experience {
+    background-image: url(assets/images/experience.png);
+    background-size: 100vw;
+
+    align-items: center;
+}
+
+/* heading text */
+.experience .heading {
+    display: flex;
+    position: static;
+    justify-content: center;
+    width: 90vw;
+    padding-top: 22vw;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.experience .heading .headingTag {
+    font-size: min(3.5vw, 35px);
+    font-family: AudioWide;
+    color: #03767b;
+    padding: 5px;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+}
+
+.experience .heading .headingText {
+    font-size: min(3.8vw, 38px);
+    font-family: AudioWide;
+    color: #ffffff;
+    padding: 5px;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+}
+
+.place_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 40vw);
+    margin: auto;
+    gap: 2vw;
+    width: 80vw;
+}
+
+/* by project */
+
+.place {
+    display: flex;
+    align-items: center;
+    padding: 2vw;
+    text-align: center;
+    width: 40vw;
+    cursor: pointer;
+}
+
+/* projects text in general */
+
+.Place_text {
+    display: block;
+    align-items: start;
+    text-align: start;
+    font-family: Bayon;
+    color: #ffffff;
+}
+
+/* projects heading */
+
+.Place_text h4 {
+    margin-bottom: 0px;
+    font-size: min(2.5vw, 25px);
+}
+
+/* project about text */
+
+.Place_text p {
+    margin-top: 0px;
+    font-size: min(2vw, 20px);
+}
+
+/* img for the project */
+
+.place_image {
+    width: min(12vw, 80px);
+    height: min(12vw, 80px);
+    padding: 3px;
+}
+
+/* footer of links */
+.footer {
+    background-color: #171717;
+    height: 8vw;
+    align-items: center;
+}
+
+.footer_icons {
+    bottom: 1vw;
+    padding-right: 2vw;
+    padding-top: auto;
+    padding-bottom: auto;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.footer_icons .footer_icon {
+width: 2.5vw;
+height: 2.5vw;
+padding-right: 5px;
+}
+
+/* footer image */
+.footer .logo {
+    width: 5vw;
+    float: right;
+}
+
+  /* to change the amount in a row depending on the screen width */
+  @media screen and (max-width: 1000px) {
+    /* switches about section horizontal */
+    .SkillsandBigPicture {
+        display: inline-block;
+        align-self: center;
+        justify-content: space-between;
+        align-items: center;
+        width: 100vw;
+    }
+    .skillsGrid {
+    flex: 1;
+    flex-wrap: wrap;
+    display: grid;
+    justify-content: center;
+    grid-template-columns : repeat(3,0.25fr);
+    grid-template-rows: repeat(4, 8vw);
+    grid-gap: 10px;
+    }
+    /* makes icons invisble */
+    .icons {
+        display: none !important;
+    }
+}
