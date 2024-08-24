@@ -6,3 +6,7 @@ function travel(link){
 function Scroll(Element){
     document.getElementById(Element).scrollIntoView();
 }
+
+function back() {
+  window.location.href="../index.html";
+}
