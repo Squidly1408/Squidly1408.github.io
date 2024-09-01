@@ -172,7 +172,10 @@ a {
 .big_picture_section {
     flex: 1;
     flex-wrap: wrap;
-    padding: 10vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-top: 4vw;
+    padding-bottom: 2vw;
     left: 0vw;
     justify-content: center;
 }
@@ -180,7 +183,6 @@ a {
 .big_picture_heading {
     position: static;
     font-size: min(2.5vw, 30px);
-    ;
     font-family: Bayon;
     color: #ffffff;
     padding-right: 20px;
@@ -227,6 +229,78 @@ a {
     text-align: center;
     margin-bottom: 0%;
 }
+
+/* quotes section */
+
+.quotes {
+    align-items: center;
+    padding-bottom: 5vw;
+}
+
+.quote_container {
+    display: inline-flex;
+    align-items: center;
+    align-content: space-evenly;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.quote_button {
+    font-size: min(7vw, 70px);
+    font-family: AudioWide;
+    color: #03767b;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+    display: inline-flex;
+    padding-left: 10vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.quote_heading {
+    display: inline-flex;
+    align-content: space-between;
+}
+
+.quotes h4{
+    position: static;
+    font-size: min(5vw, 50px);
+    font-family: Bayon;
+    color: #ffffff;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-bottom: 0%;
+    text-align: left;
+    margin-bottom: 0%;
+    text-decoration: underline;
+    text-decoration-color: #03767b;
+}
+
+.quotes h5{
+    position: static;
+    font-size: min(2.5vw, 30px);
+    font-family: Bayon;
+    color: #ffffff;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    text-align: left;
+    margin-bottom: 0%;
+}
+
+.quotes p{
+    position: static;
+    font-size: min(1.5vw, 20px);
+    font-family: Bayon;
+    color: #adadad;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    text-align: left;
+    margin-bottom: 0%;
+}
+
+
+
 
 /* projects section */
 
