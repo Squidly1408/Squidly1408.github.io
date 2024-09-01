@@ -256,6 +256,7 @@ a {
     padding-left: 10vw;
     padding-left: 1vw;
     padding-right: 1vw;
+    cursor: pointer;
 }
 
 .quote_heading {
