@@ -4,11 +4,16 @@
     display: none;
 }
 
+html body {
+    overscroll-behavior: none;
+}
+
 /* body */
 body {
     margin: 0px;
     padding: 0px;
     overflow-y: scroll;
+    background-color: #ffffff;
 }
 
 /* fonts */
@@ -314,9 +319,10 @@ a {
 .projects_title {
     background-image: url(assets/images/projects_section.png);
     width: 100vw;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     align-items: center;
-    padding-top: 5vw;
+    padding-top: 3vw;
 }
 
 /* heading text */
@@ -555,6 +561,10 @@ a {
 
 /* to change the amount in a row depending on the screen width */
 @media screen and (max-width: 1000px) {
+
+    body {
+        -webkit-text-size-adjust: 100%;
+    }
 
     /* switches about section horizontal */
     .SkillsandBigPicture {
