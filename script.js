@@ -22,7 +22,7 @@ const quotes = [
 
 const authors = [
   'Dr. Jacqueline D Bailey, Associate Lecturer - Computing & IT, The University of Newcastle',
-  'Chris, Director of CLICKK',
+  'Chris Chapman, Director of Clickk Pty Ltd',
   'Liam, CCO of SAPHI Engineering',
   'Thomas Deane, Head Teacher of Well Being, Newcastle High School',
   'Chris Chapman, Director of Clickk Pty Ltd',

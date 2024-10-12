@@ -248,6 +248,7 @@ a {
     align-content: space-evenly;
     margin-left: 5vw;
     margin-right: 5vw;
+    height: max(32vw, 100px);
 }
 
 .quote_button {
@@ -314,15 +315,19 @@ a {
     background-color: #ffffff;
     background-size: 100vw;
     align-items: center;
+    width: 100vw;
 }
 
 .projects_title {
     background-image: url(assets/images/projects_section.png);
     width: 100vw;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
     align-items: center;
     padding-top: 3vw;
+    
+    
 }
 
 /* heading text */
@@ -330,7 +335,7 @@ a {
     display: flex;
     position: static;
     justify-content: center;
-    width: 90vw;
+    width: 100vw;
     padding-top: 10vw;
     margin-bottom: 0%;
     padding-bottom: 0%;
