@@ -270,7 +270,7 @@ a {
     align-content: space-between;
 }
 
-.quotes h4{
+.quotes h4 {
     position: static;
     font-size: min(5vw, 50px);
     font-family: Bayon;
@@ -284,24 +284,40 @@ a {
     text-decoration-color: #03767b;
 }
 
-.quotes h5{
+.quotes h5 {
     position: static;
-    font-size: min(2.5vw, 30px);
+    font-size: min(2vw, 25px);
     font-family: Bayon;
     color: #ffffff;
-    padding-left: 10vw;
-    padding-right: 10vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
     text-align: left;
     margin-bottom: 0%;
 }
 
-.quotes p{
+.quote_author_container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.quotes img {
+    margin-left: 5vw;
+    margin-right: 2vw;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #03767b;
+    border-width: 2px;
+}
+
+.quotes p {
     position: static;
     font-size: min(1.5vw, 20px);
     font-family: Bayon;
     color: #adadad;
-    padding-left: 10vw;
-    padding-right: 10vw;
+
+    padding-right: 5vw;
     text-align: left;
     margin-bottom: 0%;
 }
@@ -326,8 +342,8 @@ a {
     background-position: center;
     align-items: center;
     padding-top: 3vw;
-    
-    
+
+
 }
 
 /* heading text */
