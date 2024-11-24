@@ -10,8 +10,8 @@ html body {
 
 /* body */
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     overflow-y: scroll;
     background-color: #ffffff;
 }
@@ -37,7 +37,6 @@ a {
     background-image: url(assets/images/banner.png);
     background-size: 100vw;
     height: 50vw;
-
 }
 
 /* socials icons */
@@ -50,11 +49,8 @@ a {
 .icons .icon {
     width: 2.5vw;
     height: 2.5vw;
-    padding: 3px;
+    padding: 0.2rem;
 }
-
-/* mobile view icons */
-
 
 /* nav bar links */
 
@@ -67,20 +63,18 @@ a {
 }
 
 .navbar .navlink {
-    padding: 5px;
+    padding: 0.3rem;
     font-size: 1.5vw;
     font-family: Bayon;
     cursor: pointer;
-
 }
 
 .navbar .navlink1 {
-    padding: 5px;
+    padding: 0.3rem;
     font-size: 1.5vw;
     font-family: Bayon;
     cursor: pointer;
     color: #03767b;
-
 }
 
 .navbar .logo {
@@ -98,21 +92,23 @@ a {
 
 .bannerText h1 {
     font-family: AudioWide;
-    font-size: min(7vw, 70px);
-    padding: 0%;
-    margin-bottom: 0%;
+    font-size: min(7vw, 4.375rem);
+    padding: 0;
+    margin-bottom: 0;
 }
 
 .bannerText p {
     font-family: Bayon;
-    font-size: min(2.5vw, 25px);
-    margin-top: 0%;
+    font-size: min(2.5vw, 1.5625rem);
+    margin-top: 0;
 }
 
-/* about section icluding about me text and skills logos */
+/* about section including about me text and skills logos */
 
 .about {
     background-color: #171717;
+    display: flex;
+    flex-direction: column;
 }
 
 /* heading text */
@@ -121,101 +117,150 @@ a {
     position: static;
     justify-content: center;
     width: 90vw;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    margin-bottom: 0;
+    padding-bottom: 0;
     margin: auto;
     align-items: end;
 }
 
 .heading .headingTag {
-    font-size: min(5vw, 50px);
+    font-size: min(4vw, 2.5rem);
     font-family: AudioWide;
     color: #03767b;
-    padding: 5px;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    padding: 0.3rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .heading .headingText {
-    font-size: min(5.5vw, 55px);
+    font-size: min(4.5vw, 2.8125rem);
     font-family: AudioWide;
     color: #ffffff;
-    padding: 5px;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    padding: 0.3rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* about me text */
 .paragraph {
     position: static;
-    font-size: min(2.5vw, 30px);
+    font-size: min(1.5vw, 1.25rem);
     font-family: Bayon;
     color: #adadad;
     padding-left: 10vw;
     padding-right: 10vw;
     text-align: center;
-    margin-bottom: 0%;
+    margin-bottom: 0;
 }
 
 .paragraph a {
     position: static;
-    font-size: min(2.5vw, 30px);
+    font-size: min(1.5vw, 1.25rem);
     font-family: Bayon;
     color: #03767b;
     text-align: center;
 }
 
-.SkillsandBigPicture {
+.SkillsandAchievements {
     display: flex;
     align-self: center;
     justify-content: space-between;
-    align-items: center;
+    align-items: top;
     width: 100vw;
 }
 
 /* Big Picture Education Stuff */
-.big_picture_section {
+.achievements_section {
     flex: 1;
     flex-wrap: wrap;
-    padding-left: 10vw;
-    padding-right: 10vw;
-    padding-top: 4vw;
+    padding-left: 8vw;
+    padding-right: 2vw;
     padding-bottom: 2vw;
-    left: 0vw;
     justify-content: center;
+    width: 50vw;
 }
 
-.big_picture_heading {
+.achievements_title {
     position: static;
-    font-size: min(2.5vw, 30px);
+    font-size: min(1.5vw, 1.25rem);
     font-family: Bayon;
-    color: #ffffff;
+    color: #03767b;
     padding-right: 20px;
     text-align: left;
-    padding-bottom: 0%;
-    margin-bottom: 0%;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    text-align: center;
 }
 
-.big_picture_text {
-    padding-top: 0%;
-    margin-top: 0%;
+.achievement {
+    display: inline-flex;
+    flex-direction: column;
+    align-content: flex-end;
+    padding-top: 2vw;
+}
+
+.achievement h4 {
     position: static;
-    font-size: min(2vw, 25px);
+    font-size: min(1.5vw, 1.25rem);
+    font-family: Bayon;
+    color: #ffffff;
+    text-align: left;
+    margin: 0;
+}
+
+.achievement h5 {
+    position: static;
+    font-size: min(1vw, 0.9375rem);
+    font-family: Bayon;
+    color: #adadad;
+    text-align: left;
+    margin: 0;
+    padding-left: 0.5vw;
+}
+
+.achievement p {
+    position: static;
+    font-size: min(1.25vw, 1rem);
     font-family: Bayon;
     color: #adadad;
     padding-right: 20px;
     text-align: left;
+    margin: 0;
+    padding-left: 0.5vw;
+}
+
+/* skills section */
+
+/* title */
+.skills_title {
+    position: static;
+    font-size: min(1.5vw, 1.25rem);
+    font-family: Bayon;
+    color: #03767b;
+    padding-right: 5px;
+    text-align: left;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    text-align: center;
 }
 
 /* skills grid */
 .skillsGrid {
     flex: 1;
+    padding-top: 2vw;
     flex-wrap: wrap;
     display: grid;
     grid-template-columns: repeat(3, 10vw);
     grid-template-rows: repeat(5, 8vw);
-    grid-gap: 10px;
-    padding-bottom: 10px;
+    grid-gap: 0.625rem;
+    padding-bottom: 0.625rem;
+    padding-right: 10vw;
+    padding-left: 10vw;
+}
+
+.skill {
+    position: relative;
+    text-align: center;
 }
 
 .grid_image {
@@ -224,15 +269,27 @@ a {
     object-fit: contain;
 }
 
+.skill:hover .grid_image {
+    transform: scale(0.5);
+    filter: brightness(1.2);
+}
+
 .grid_text {
-    position: static;
-    font-size: min(1.5vw, 15px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    opacity: 0;
+    font-size: min(1.5vw, 0.9375rem);
     font-family: Bayon;
     color: #adadad;
-    padding-left: 20px;
-    padding-right: 20px;
     text-align: center;
-    margin-bottom: 0%;
+    transition: opacity 0.3s ease;
+}
+
+.skill:hover .grid_text {
+    opacity: 1;
 }
 
 /* quotes section */
@@ -240,29 +297,42 @@ a {
 .quotes {
     align-items: center;
     padding-bottom: 5vw;
+    width: 95vw;
 }
 
 .quote_container {
     display: inline-flex;
     align-items: center;
     align-content: space-evenly;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    height: max(32vw, 100px);
+    margin-left: 10vw;
+    margin-right: 10vw;
+    height: max(32vw, 6.25rem);
 }
 
-.quote_button {
-    font-size: min(7vw, 70px);
+.quote_button_left {
+    font-size: min(6vw, 3.75rem);
     font-family: AudioWide;
     color: #03767b;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
     display: inline-flex;
-    padding-left: 10vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
+    position: absolute;
     cursor: pointer;
+    left: 10vw;
+}
+
+.quote_button_right {
+    font-size: min(6vw, 3.75rem);
+    font-family: AudioWide;
+    color: #03767b;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    position: absolute;
+    display: inline-flex;
+    cursor: pointer;
+    right: 10vw;
 }
 
 .quote_heading {
@@ -272,27 +342,27 @@ a {
 
 .quotes h4 {
     position: static;
-    font-size: min(5vw, 50px);
+    font-size: min(4vw, 2.5rem);
     font-family: Bayon;
     color: #ffffff;
     padding-left: 10vw;
     padding-right: 10vw;
-    padding-bottom: 0%;
+    padding-bottom: 0;
     text-align: left;
-    margin-bottom: 0%;
+    margin-bottom: 0;
     text-decoration: underline;
     text-decoration-color: #03767b;
 }
 
 .quotes h5 {
     position: static;
-    font-size: min(2vw, 25px);
+    font-size: min(2.2vw, 1.375rem);
     font-family: Bayon;
     color: #ffffff;
     padding-left: 5vw;
     padding-right: 5vw;
     text-align: left;
-    margin-bottom: 0%;
+    margin-bottom: 0;
 }
 
 .quote_author_container {
@@ -303,8 +373,8 @@ a {
 .quotes img {
     margin-left: 5vw;
     margin-right: 2vw;
-    width: 5vw;
-    height: 5vw;
+    width: 4vw;
+    height: 4vw;
     border-radius: 50%;
     border-style: solid;
     border-color: #03767b;
@@ -313,17 +383,13 @@ a {
 
 .quotes p {
     position: static;
-    font-size: min(1.5vw, 20px);
+    font-size: min(1vw, 0.9375rem);
     font-family: Bayon;
     color: #adadad;
-
     padding-right: 5vw;
     text-align: left;
-    margin-bottom: 0%;
+    margin-bottom: 0;
 }
-
-
-
 
 /* projects section */
 
@@ -342,8 +408,6 @@ a {
     background-position: center;
     align-items: center;
     padding-top: 3vw;
-
-
 }
 
 /* heading text */
@@ -353,29 +417,28 @@ a {
     justify-content: center;
     width: 100vw;
     padding-top: 10vw;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    margin-bottom: 0;
+    padding-bottom: 0;
     margin-left: auto;
     margin-right: auto;
 }
 
 .projects .heading .headingTag {
-    font-size: min(5vw, 50px);
+    font-size: min(4vw, 2.5rem);
     font-family: AudioWide;
-    color: #03767b;
-    padding: 5px;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    color: #10d0d6;
+    padding: 0.3rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .projects .heading .headingText {
-    font-size: min(5.5vw, 55px);
+    font-size: min(4.5vw, 2.8125rem);
     font-family: AudioWide;
     color: #171717;
-    padding: 5px;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
-    ;
+    padding: 0.3rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* projects grid to display projects */
@@ -383,7 +446,7 @@ a {
 .projects_content {
     background-image: url(assets/images/experience.png);
     width: 100vw;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     align-items: center;
     background-size: contain;
     background-position: bottom;
@@ -392,7 +455,7 @@ a {
 }
 
 .project_grid {
-    padding: 0%;
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(2, 45vw);
     margin: auto;
@@ -416,6 +479,7 @@ a {
 /* projects text in general */
 
 .Project_text {
+    color: #171717;
     display: block;
     align-items: start;
     text-align: start;
@@ -425,30 +489,23 @@ a {
 /* projects heading */
 
 .Project_text h4 {
-    margin-bottom: 0px;
-    font-size: min(3vw, 30px);
-}
-
-/* transition image */
-
-.transition_image {
-    width: 100vw;
+    margin-bottom: 0;
+    font-size: min(2vw, 1.25rem);
 }
 
 /* project about text */
 
 .Project_text p {
-    margin-top: 0px;
-    font-size: min(2.5vw, 25px);
+    margin-top: 0;
+    font-size: min(1.5vw, 0.9375rem);
 }
 
 /* img for the project */
 
 .project_image {
-    width: max(15vw, 20px);
-    height: max(15vw, 20px);
+    width: max(15vw, 1.25rem);
+    height: max(15vw, 1.25rem);
 }
-
 
 /* skills list for experience and projects */
 
@@ -475,28 +532,28 @@ a {
     position: static;
     justify-content: center;
     width: 90vw;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    margin-bottom: 0;
+    padding-bottom: 0;
     margin-left: auto;
     margin-right: auto;
 }
 
 .experience .heading .headingTag {
-    font-size: min(5vw, 50px);
+    font-size: min(4vw, 2.5rem);
     font-family: AudioWide;
     color: #03767b;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .experience .heading .headingText {
-    font-size: min(5.5vw, 55px);
+    font-size: min(4.5vw, 2.8125rem);
     font-family: AudioWide;
     color: #ffffff;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .place_grid {
@@ -531,29 +588,29 @@ a {
 /* projects heading */
 
 .Place_text h4 {
-    margin-bottom: 0px;
-    font-size: min(3vw, 30px);
+    margin-bottom: 0;
+    font-size: min(2vw, 1.25rem);
 }
 
 /* project about text */
 
 .Place_text p {
-    margin-top: 0px;
-    font-size: min(2.5vw, 25px);
+    margin-top: 0;
+    font-size: min(1.5vw, 0.9375rem);
 }
 
 /* img for the project */
 
 .place_image {
-    width: max(15vw, 20px);
-    height: max(15vw, 20px);
-    padding-left: 5px;
+    width: max(15vw, 1.25rem);
+    height: max(15vw, 1.25rem);
+    padding-left: 0.3rem;
 }
 
 /* footer of links */
 .footer {
     background-color: #171717;
-    height: max(8vw, 30px);
+    height: max(8vw, 1.875rem);
     align-items: center;
 }
 
@@ -570,8 +627,8 @@ a {
 .footer_icons .footer_icon {
     width: 2.5vw;
     height: 2.5vw;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-right: 0.3125rem;
+    padding-left: 0.3125rem;
 }
 
 /* footer image */
@@ -584,16 +641,20 @@ a {
 @media screen and (max-width: 1000px) {
 
     body {
-        -webkit-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 200%;
     }
 
     /* switches about section horizontal */
-    .SkillsandBigPicture {
+    .SkillsandAchievements {
         display: inline-block;
         align-self: center;
         justify-content: space-between;
         align-items: center;
         width: 100vw;
+    }
+
+    .achievements_section {
+        width: 90vw;
     }
 
     .skillsGrid {
@@ -603,7 +664,7 @@ a {
         justify-content: center;
         grid-template-columns: repeat(3, 0.25fr);
         grid-template-rows: repeat(5, 8vw);
-        grid-gap: 10px;
+        grid-gap: 0.625rem;
     }
 
     /* makes the project images vertical */
@@ -611,15 +672,15 @@ a {
         display: inline-block;
         align-items: center;
         padding: 2vw;
-        padding-top: 0%;
+        padding-top: 0;
         text-align: center;
         width: 45vw;
         cursor: pointer;
     }
 
     .project_image {
-        width: max(25vw, 40px);
-        height: max(25vw, 40px);
+        width: max(25vw, 2.5rem);
+        height: max(25vw, 2.5rem);
     }
 
     /* makes the experience vertical */
@@ -633,12 +694,12 @@ a {
     }
 
     .place_image {
-        width: max(25vw, 40px);
-        height: max(25vw, 40px);
-        padding-left: 5px;
+        width: max(25vw, 2.5rem);
+        height: max(25vw, 2.5rem);
+        padding-left: 0.3125rem;
     }
 
-    /* makes icons invisble */
+    /* makes icons invisible */
     .icons {
         display: none !important;
     }

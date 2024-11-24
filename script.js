@@ -68,3 +68,4 @@ function update() {
   document.getElementById('author_image').src = authors_images[currentAuthorImage];
   document.getElementById('author').innerText = authors[currentAuthor];
 }
+
