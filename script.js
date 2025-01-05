@@ -49,14 +49,6 @@ const switchTime = 15000;
 // Auto switch text every switchTime milliseconds
 setInterval(showNext, switchTime);
 
-date = new Date();
-month = date.getMonth();
-day = date.getDate();
-
-if (month == 1 && day == 14) {
-document.getElementById('logo').src = 'assets/images/valentinesDay_logo.svg';
-}
-
 function showNext() {
   currentQuote = (currentQuote + 1) % quotes.length;
   currentAuthorImage = (currentAuthorImage + 1) % authors_images.length;
@@ -77,3 +69,19 @@ function update() {
   document.getElementById('author').innerText = authors[currentAuthor];
 }
 
+date = new Date();
+month = date.getMonth();
+day = date.getDate();
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (month == 1 && day == 14) {
+    document.getElementById('logo').src = 'assets/images/valentinesDay/logo.svg';
+    document.getElementById('bannerSubText').innerHTML = '♥ Happy Valentines Day My Love of My Life ♥';
+    document.getElementById('header').style.backgroundImage = 'url(assets/images/valentinesDay/banner.png)';
+    document.getElementById('projects').style.backgroundImage = 'url(assets/images/valentinesDay/projects_section.png)';
+    document.getElementById('experience').style.backgroundImage = 'url(assets/images/valentinesDay/experience.png)';
+    document.getElementById('logo_footer').src = 'assets/images/valentinesDay/logo.svg';
+    document.documentElement.style.setProperty('--primary-color', '#90a2d4');
+    document.documentElement.style.setProperty('--highlight-color', '#c0b8dd');
+  }
+});
