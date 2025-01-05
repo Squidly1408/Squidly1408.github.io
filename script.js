@@ -74,7 +74,7 @@ month = date.getMonth();
 day = date.getDate();
 
 document.addEventListener('DOMContentLoaded', function() {
-  if (month == 1 && day == 14) {
+  if ((month == 1 && day == 14) || (month == 9 && day == 13)) {
     document.getElementById('logo').src = 'assets/images/valentinesDay/logo.svg';
     document.getElementById('bannerSubText').innerHTML = '♥ Happy Valentines Day My Love of My Life ♥';
     document.getElementById('header').style.backgroundImage = 'url(assets/images/valentinesDay/banner.png)';
