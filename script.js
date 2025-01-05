@@ -49,6 +49,14 @@ const switchTime = 15000;
 // Auto switch text every switchTime milliseconds
 setInterval(showNext, switchTime);
 
+date = new Date();
+month = date.getMonth();
+day = date.getDate();
+
+if (month == 1 && day == 14) {
+document.getElementById('logo').src = 'assets/images/valentinesDay_logo.svg';
+}
+
 function showNext() {
   currentQuote = (currentQuote + 1) % quotes.length;
   currentAuthorImage = (currentAuthorImage + 1) % authors_images.length;
