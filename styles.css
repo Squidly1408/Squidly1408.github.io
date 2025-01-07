@@ -619,18 +619,39 @@ a {
 /* footer of links */
 .footer {
     background-color: var(--secondary-color);
-    height: max(8vw, 1.875rem);
+    align-items: center;
+    width: 100vw;
+    padding-top: 5vw;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.acknowledgemets {
+    display: inline-flex;
     align-items: center;
 }
 
+.acknowledgemets img {
+    height: 2vw;
+    padding-left: 1vw;
+
+}
+
+.acknowledgemets p {
+    font-size: min(1.5vw, 0.9375rem);
+    color: var(--tertiary-color);
+    font-family: Bayon;
+    display: inline-flex;
+    padding-left: 1vw;
+
+}
+
 .footer_icons {
-    bottom: 1vw;
     padding-right: 2vw;
-    padding-top: auto;
-    padding-bottom: auto;
     float: right;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+
 }
 
 .footer_icons .footer_icon {

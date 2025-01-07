@@ -75,17 +75,17 @@ day = date.getDate();
 
 document.addEventListener('DOMContentLoaded', function() {
   if ((month == 1 && day == 14) || (month == 9 && day == 13)) {
-    document.getElementById('logo').src = 'assets/images/events/valentinesDay/logo.svg';
-    document.getElementById('bannerSubText').innerHTML = '♥ Happy Valentines Day My Love of My Life ♥';
-    document.getElementById('header').style.backgroundImage = 'url(assets/images/events/valentinesDay/banner.png)';
-    document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/valentinesDay/projects_section.png)';
-    document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/valentinesDay/experience.png)';
-    document.getElementById('logo_footer').src = 'assets/images/events/valentinesDay/logo.svg';
+    document.getElementById('logo').src = 'assets/images/valentinesDay/logo.svg';
+    if (month == 9 && day == 13) {
+      document.getElementById('bannerSubText').innerHTML = '♥ Happy Birth Day My Love of My Life ♥';  
+    } else{
+      document.getElementById('bannerSubText').innerHTML = '♥ Happy Valentines Day My Love of My Life ♥';
+    }
+    document.getElementById('header').style.backgroundImage = 'url(assets/images/valentinesDay/banner.png)';
+    document.getElementById('projects').style.backgroundImage = 'url(assets/images/valentinesDay/projects_section.png)';
+    document.getElementById('experience').style.backgroundImage = 'url(assets/images/valentinesDay/experience.png)';
+    document.getElementById('logo_footer').src = 'assets/images/valentinesDay/logo.svg';
     document.documentElement.style.setProperty('--primary-color', '#90a2d4');
     document.documentElement.style.setProperty('--highlight-color', '#c0b8dd');
-  }else {
-  if (month == 5) {
-    document.getElementById('logo').src = 'assets/images/events/pride/logo.svg';
-    document.getElementById('logo_footer').src = 'assets/images/events/pride/logo.svg';
-  }}
+  }
 });
