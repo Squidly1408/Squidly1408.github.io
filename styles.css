@@ -449,7 +449,7 @@ a {
 .projects .heading .headingText {
     font-size: min(4.5vw, 2.8125rem);
     font-family: AudioWide;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     padding: 0.3rem;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -494,7 +494,7 @@ a {
 /* projects text in general */
 
 .Project_text {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     display: block;
     align-items: start;
     text-align: start;
@@ -677,7 +677,7 @@ a {
 @media screen and (max-width: 1000px) {
 
     body {
-        -webkit-text-size-adjust: 200%;
+        -webkit-text-size-adjust: 100%;
     }
 
     /* switches about section horizontal */
