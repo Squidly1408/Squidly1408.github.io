@@ -1,0 +1,105 @@
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    display: none;
+}
+
+/* body */
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow-y: scroll;
+}
+
+/* fonts */
+
+@font-face {
+    font-family: Bayon;
+    src: url(../assets/fonts/bayon_font.ttf);
+}
+
+@font-face {
+    font-family: AudioWide;
+    src: url(../assets/fonts/Audiowide.ttf);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* header including nav links, socials icons and opening text */
+.header {
+    background-image: url(../assets/images/banner.png);
+    background-size: 100vw;
+    height: 50vw;
+
+}
+
+/* socials icons */
+
+.icons {
+    padding-top: 1vw;
+    padding-left: 2vw;
+}
+
+.icons .icon {
+    width: 2.5vw;
+    height: 2.5vw;
+    padding: 3px;
+}
+
+/* mobile view icons */
+
+
+/* nav bar links */
+
+.navbar {
+    top: 0.5vw;
+    right: 2vw;
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+}
+
+.navbar .navlink {
+    padding: 5px;
+    font-size: 1.5vw;
+    font-family: Bayon;
+    cursor: pointer;
+
+}
+
+.navbar .navlink1 {
+    padding: 5px;
+    font-size: 1.5vw;
+    font-family: Bayon;
+    cursor: pointer;
+    color: #03767b;
+
+}
+
+.navbar .logo {
+    width: 6vw;
+}
+
+/* opening text */
+
+.bannerText {
+    top: 10vw;
+    right: 2vw;
+    position: absolute;
+    text-align: right;
+}
+
+.bannerText h1 {
+    font-family: AudioWide;
+    font-size: min(7vw, 70px);
+    padding: 0%;
+    margin-bottom: 0%;
+}
+
+.bannerText p {
+    font-family: Bayon;
+    font-size: min(2.5vw, 25px);
+    margin-top: 0%;
+}

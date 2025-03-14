@@ -1,0 +1,12 @@
+# robots.txt for https://squidly1408.github.io/
+
+User-agent: *
+Disallow: /private/  # Block bots from crawling this folder
+Disallow: /temp/     # Block bots from crawling this folder
+
+# Allow specific folders or files
+Allow: /public/
+Allow: /index.html
+
+# Sitemap (if available)
+Sitemap: https://squidly1408.github.io/sitemap.xml
