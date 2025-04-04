@@ -74,12 +74,16 @@ month = date.getMonth();
 day = date.getDate();
 
 document.addEventListener('DOMContentLoaded', function() {
-  if ((month == 1 && day == 14) || (month == 9 && day == 13)) {
+  if ((month == 1 && day == 14) || (month == 9 && day == 13) || (month == 5 && day == 2)) {
     document.getElementById('logo').src = 'assets/images/valentinesDay/logo.svg';
-    if (month == 9 && day == 13) {
-      document.getElementById('bannerSubText').innerHTML = '♥ Happy Birth Day My Love of My Life ♥';  
-    } else{
+    if (month == 1 && day == 14) {
       document.getElementById('bannerSubText').innerHTML = '♥ Happy Valentines Day My Love of My Life ♥';
+    } else if (month == 9 && day == 13) {
+      document.getElementById('bannerSubText').innerHTML = '♥ Happy Birth Day My Love of My Life ♥';  
+    } else {
+      const anniversary = new Date('2023-06-02');
+      const timeFromAnniversary = (date.getFullYear() - anniversary.getFullYear());
+      document.getElementById('bannerSubText').innerHTML = '♥ Happy ' + timeFromAnniversary + ' Year Anniversary My Love of My Life ♥';
     }
     document.getElementById('header').style.backgroundImage = 'url(assets/images/valentinesDay/banner.png)';
     document.getElementById('projects').style.backgroundImage = 'url(assets/images/valentinesDay/projects_section.png)';
@@ -87,5 +91,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('logo_footer').src = 'assets/images/valentinesDay/logo.svg';
     document.documentElement.style.setProperty('--primary-color', '#90a2d4');
     document.documentElement.style.setProperty('--highlight-color', '#c0b8dd');
+  }
+  if (month == 5 && day != 0o2) {
+
+    document.getElementById('logo').src = 'assets/images/pride/pride_logo.svg';
+    document.getElementById('logo_footer').src = 'assets/images/pride/pride_logo.svg';
   }
 });
