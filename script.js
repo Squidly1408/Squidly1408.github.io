@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (month == 1 && day == 14) {
       document.getElementById('bannerSubText').innerHTML = '♥ Happy Valentines Day My Love of My Life ♥';
     } else if (month == 9 && day == 13) {
-      document.getElementById('bannerSubText').innerHTML = '♥ Happy Birth Day My Love of My Life ♥';  
+      document.getElementById('bannerSubText').innerHTML = '♥ Happy BirthDay My Love of My Life ♥';  
     } else {
       const anniversary = new Date('2023-06-02');
       const timeFromAnniversary = (date.getFullYear() - anniversary.getFullYear());
