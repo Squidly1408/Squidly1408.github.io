@@ -7,4 +7,28 @@
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
+
+    <!-- 404 page -->
+    <url>
+        <loc>https://squidly1408.github.io/pages/404_page</loc>
+        <lastmod>2025-04-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+     <!-- Last message page -->
+    <url>
+        <loc>https://squidly1408.github.io/pages/endOfMe</loc>
+        <lastmod>2025-04-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+     <!-- Cooks Hill version -->
+    <url>
+        <loc>https://squidly1408.github.io/old_versions/CooksHillCampus_Version/</loc>
+        <lastmod>2025-04-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>
