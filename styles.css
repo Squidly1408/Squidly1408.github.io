@@ -22,6 +22,8 @@
 
 html body {
     overscroll-behavior: none;
+
+
 }
 
 /* body */
@@ -53,6 +55,7 @@ a {
     background-image: url(assets/images/banner.png);
     background-size: 100vw;
     height: 50vw;
+    background-color: var(--background-primary);
 }
 
 /* socials icons */
@@ -738,5 +741,11 @@ a {
     /* makes icons invisible */
     .icons {
         display: none !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        -webkit-filter: brightness(75%);
     }
 }
