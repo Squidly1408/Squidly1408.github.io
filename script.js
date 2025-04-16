@@ -16,6 +16,7 @@ const quotes = [
   '"Lucas was an absolute pleasure to deal with. He assisted us with some website and graphic design tasks. He performed them to a very high standard. \n\n I have no hesitation in recommending Lucas to any local design or development companies."',
   '“Lucas is a talented future engineer with a bright future ahead. He has a passion for technology and it shows!”',
   '"As Lucas’s teacher when he began his journey in project-based learning, I had the pleasure of seeing him demonstrate incredible adaptability, a deep thirst for knowledge, and a keen ability to solve problems. What stood out most was his consistent incorporation of social justice into your projects, showcasing not only his intellect but also his commitment to making a positive impact in the world."',
+  '"Lucas contributed an interactive javascript module for the Big Picture Learning Australia\'s website. He was a pleasure to work with. He was highly responsive to any feature requests and his code was clean, effective and elegant. Lucas is the kind of student who clearly demonstrates the effectiveness of the Big Picture Learning design to help students thrive and we look forward to working more with him in the future."',
   '"Lucas is very intelligent and self-managed. He is very process driven and provides a high standard of work."',
   '"I met Lucas when he was a high school student conducting a project under the Big Picture program. The goal was to build an Auslan glove, using a Raspberry Pi and an array of sensors - to determine the positions of the hand joints - and then AI techniques to process the data and translate hand movements into language"... "and Lucas has demonstrated deep knowledge of both the hardware and software for the project, as well as lots of enthusiasm and curiosity, which are rare traits in high schoolers."',
   '"Lucas’s willingness to help and support others, strive for personal excellence and take on feedback make him an excellent learner. It has been a pleasure see his growth in his time at Cooks Hill Campus and I look forward to seeing his next steps."'
@@ -26,6 +27,7 @@ const authors_images = [
   'assets/images/quotes/clickk.png',
   'assets/images/quotes/saphi.png',
   'assets/images/quotes/nhs.png',
+  'assets/images/quotes/bpea.png',
   'assets/images/quotes/clickk.png',
   'assets/images/quotes/uon.png',
   'assets/images/quotes/chc.png',
@@ -36,6 +38,7 @@ const authors = [
   'Chris Chapman, Director of Clickk Pty Ltd',
   'Liam, CCO of SAPHI Engineering',
   'Thomas Deane, Head Teacher of Well Being, Newcastle High School',
+  'Joe Wickert. CTO Big Picture Learning Australia',
   'Chris Chapman, Director of Clickk Pty Ltd',
   'Dr. Alexandre Mendes, Senior Lecturer - Computing & IT, School of Inofrmation and Physical Sciences, The University of Newcastle',
   'Nick Willis, Ex Deputy Campus Leader, Cooks Hill Campus, Newcastle High School'
