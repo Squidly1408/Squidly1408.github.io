@@ -98,3 +98,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('logo_footer').src = 'assets/images/pride/pride_logo.svg';
   }
 });
+
+  window.addEventListener("load", () => {
+    const hash = window.location.hash;
+
+    if (hash) {
+      const target = document.getElementById(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+
+        // Clean up the URL
+        history.replaceState(null, null, window.location.pathname);
+      }
+    }
+  });
