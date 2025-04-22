@@ -27,7 +27,6 @@ This is my Portfolio, a place where you can learn who I am, my skills, my achiev
 
 
 ### Portfolio Links
-* Email: Squidly1408@gmail.com
 * [Email](mailto:squidly1408@gmail.com)
 * [GitHub](https://github.com/Squidly1408)
 * [LinkedIn](https://www.linkedin.com/in/squidly1408/)
