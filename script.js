@@ -34,7 +34,7 @@ const authors_images = [
 ]
 
 const authors = [
-  'Dr. Jacqueline D Bailey, Lecturer - Computing & IT, School of Inofrmation and Physical Sciences, The University of Newcastle',
+  'Dr. Jacqueline D Bailey, Lecturer - Computing & IT, School of Information and Physical Sciences, The University of Newcastle',
   'Chris Chapman, Director of Clickk Pty Ltd',
   'Liam, CCO of SAPHI Engineering',
   'Thomas Deane, Head Teacher of Well Being, Newcastle High School',
