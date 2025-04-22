@@ -100,6 +100,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('logo').src = 'assets/images/pride/pride_logo.svg';
     document.getElementById('logo_footer').src = 'assets/images/pride/pride_logo.svg';
   }
+  if ((month == 4 && day == 27) || (month == 4 && day == 28) || (month == 4 && day == 29) || (month == 4 && day == 30) || (month == 5 && day == 1) || (month == 5 && day == 2) || (month == 5 && day == 3) || (month == 5 && day == 3) ) {
+    document.getElementById('logo').src = 'assets/images/aboriginal/aboriginal.svg';
+    if (month == 5 && day == 3) {
+        document.getElementById('bannerSubText').innerHTML = 'In celebration of Mabo Day';
+      } else  {
+        document.getElementById('bannerSubText').innerHTML = 'In celebration of Reconciliation Day';  
+      } 
+    document.getElementById('logo_footer').src = 'assets/images/aboriginal/aboriginal.svg';
+  }
+  if ((month == 6 && day == 3) || (month == 6 && day == 4) || (month == 6 && day == 5) || (month == 6 && day == 6) || (month == 6 && day == 7) || (month == 6 && day == 8) || (month == 6 && day == 9) || (month == 6 && day == 10) ) {
+    document.getElementById('logo').src = 'assets/images/aboriginal/aboriginal.svg';
+    document.getElementById('bannerSubText').innerHTML = 'In celebration of NAIDOC Week'; 
+    document.getElementById('logo_footer').src = 'assets/images/aboriginal/aboriginal.svg';
+  }
+  
 });
 
   window.addEventListener("load", () => {
