@@ -88,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const timeFromAnniversary = (date.getFullYear() - anniversary.getFullYear());
       document.getElementById('bannerSubText').innerHTML = '♥ Happy ' + timeFromAnniversary + ' Year Anniversary My Love of My Life ♥';
     }
+    document.getElementById('shortcut_favicon').src = 'assets/images/valentinesDay/logo.svg';
+    document.getElementById('apple_favicon').src = 'assets/images/valentinesDay/logo.svg';
     document.getElementById('header').style.backgroundImage = 'url(assets/images/valentinesDay/banner.png)';
     document.getElementById('projects').style.backgroundImage = 'url(assets/images/valentinesDay/projects_section.png)';
     document.getElementById('experience').style.backgroundImage = 'url(assets/images/valentinesDay/experience.png)';
@@ -99,6 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('logo').src = 'assets/images/pride/pride_logo.svg';
     document.getElementById('logo_footer').src = 'assets/images/pride/pride_logo.svg';
+    document.getElementById('shortcut_favicon').src = 'assets/images/pride/pride_logo.svg';
+    document.getElementById('apple_favicon').src = 'assets/images/pride/pride_logo.svg';
   }
   if ((month == 4 && day == 27) || (month == 4 && day == 28) || (month == 4 && day == 29) || (month == 4 && day == 30) || (month == 5 && day == 1) || (month == 5 && day == 2) || (month == 5 && day == 3) || (month == 5 && day == 3) ) {
     document.getElementById('logo').src = 'assets/images/aboriginal/aboriginal.svg';
@@ -113,6 +117,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('logo').src = 'assets/images/aboriginal/aboriginal.svg';
     document.getElementById('bannerSubText').innerHTML = 'In celebration of NAIDOC Week'; 
     document.getElementById('logo_footer').src = 'assets/images/aboriginal/aboriginal.svg';
+    document.getElementById('shortcut_favicon').src = 'assets/images/aboriginal/aboriginal.svg';
+    document.getElementById('apple_favicon').src = 'assets/images/aboriginal/aboriginal.svg';
+    
   }
   
 });
