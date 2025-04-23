@@ -76,6 +76,38 @@ date = new Date();
 month = date.getMonth();
 day = date.getDate();
 
+function changeAllFavicons(newIconUrl) {
+    const head = document.head;
+    const selectors = [
+      "link[rel='icon']",
+      "link[rel='shortcut icon']",
+      "link[rel='apple-touch-icon']",
+      "link[rel='mask-icon']"
+    ];
+  
+    // Remove existing favicons
+    selectors.forEach(selector => {
+      const links = document.querySelectorAll(selector);
+      links.forEach(link => head.removeChild(link));
+    });
+  
+    // Create and add new favicons
+    const iconTypes = [
+      { rel: 'icon', type: 'image/png' },
+      { rel: 'shortcut icon', type: 'image/x-icon' },
+      { rel: 'apple-touch-icon', type: 'image/png' },
+      { rel: 'mask-icon', type: 'image/svg+xml' }
+    ];
+  
+    iconTypes.forEach(icon => {
+      const link = document.createElement('link');
+      link.rel = icon.rel;
+      link.type = icon.type;
+      link.href = newIconUrl;
+      head.appendChild(link);
+    });
+  }
+
 document.addEventListener('DOMContentLoaded', function() {
   if ((month == 1 && day == 14) || (month == 9 && day == 13) || (month == 5 && day == 2)) {
     document.getElementById('logo').src = 'assets/images/valentinesDay/logo.svg';
@@ -88,38 +120,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const timeFromAnniversary = (date.getFullYear() - anniversary.getFullYear());
       document.getElementById('bannerSubText').innerHTML = '♥ Happy ' + timeFromAnniversary + ' Year Anniversary My Love of My Life ♥';
     }
-    document.getElementById('shortcut_favicon').src = 'assets/images/valentinesDay/logo.svg';
-    document.getElementById('apple_favicon').src = 'assets/images/valentinesDay/logo.svg';
     document.getElementById('header').style.backgroundImage = 'url(assets/images/valentinesDay/banner.png)';
     document.getElementById('projects').style.backgroundImage = 'url(assets/images/valentinesDay/projects_section.png)';
     document.getElementById('experience').style.backgroundImage = 'url(assets/images/valentinesDay/experience.png)';
     document.getElementById('logo_footer').src = 'assets/images/valentinesDay/logo.svg';
     document.documentElement.style.setProperty('--primary-color', '#90a2d4');
     document.documentElement.style.setProperty('--highlight-color', '#c0b8dd');
-  }
+    changeAllFavicons('assets/images/valentinesDay/logo.svg');
+  
+    }
   if (month == 5 && day != 0o2) {
 
     document.getElementById('logo').src = 'assets/images/pride/pride_logo.svg';
     document.getElementById('logo_footer').src = 'assets/images/pride/pride_logo.svg';
-
+    changeAllFavicons('assets/images/pride/pride_logo.svg');
   }
-  if ((month == 4 && day == 27) || (month == 4 && day == 28) || (month == 4 && day == 29) || (month == 4 && day == 30) || (month == 5 && day == 1) || (month == 5 && day == 2) || (month == 5 && day == 3) || (month == 5 && day == 3) ) {
-    document.getElementById('logo').src = 'assets/images/aboriginal/aboriginal.svg';
-    if (month == 5 && day == 3) {
-        document.getElementById('bannerSubText').innerHTML = 'In celebration of Mabo Day';
-      } else  {
-        document.getElementById('bannerSubText').innerHTML = 'In celebration of Reconciliation Day';  
-      } 
-    document.getElementById('logo_footer').src = 'assets/images/aboriginal/aboriginal.svg';
-  }
-  if ((month == 6 && day == 3) || (month == 6 && day == 4) || (month == 6 && day == 5) || (month == 6 && day == 6) || (month == 6 && day == 7) || (month == 6 && day == 8) || (month == 6 && day == 9) || (month == 6 && day == 10) ) {
-    document.getElementById('logo').src = 'assets/images/aboriginal/aboriginal.svg';
-    document.getElementById('bannerSubText').innerHTML = 'In celebration of NAIDOC Week'; 
-    document.getElementById('logo_footer').src = 'assets/images/aboriginal/aboriginal.svg';
-
-    
-  }
-  
 });
 
   window.addEventListener("load", () => {
