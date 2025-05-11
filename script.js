@@ -1,15 +1,24 @@
+// controls
+
+hollow = false;
+
+
 // function to travel to external links
 function travel(link){
     window.location.href = link;
   }
 
+//   function  to auto scroll to location
 function Scroll(Element){
     document.getElementById(Element).scrollIntoView();
 }
 
+// function to go back
 function back() {
   window.location.href="../index.html";
 }
+
+// quotes
 
 const quotes = [
   '"Lucas is a rare kind of student, motivated, innovative, and determined to make a positive impact on the world around him. It is a rare joy to find a student with such focus and drive, I look forward to seeing his education and career prosper."',
@@ -72,6 +81,9 @@ function update() {
   document.getElementById('author').innerText = authors[currentAuthor];
 }
 
+
+// colour scheming / logo / events
+
 date = new Date();
 month = date.getMonth();
 day = date.getDate();
@@ -109,6 +121,7 @@ function changeAllFavicons(newIconUrl) {
   }
 
 document.addEventListener('DOMContentLoaded', function() {
+    
   if ((month == 9 && day == 13)) {
     document.getElementById('logo').src = 'assets/images/events/love/logo.svg';
 if (month == 9 && day == 13) {
@@ -128,6 +141,16 @@ if (month == 9 && day == 13) {
     document.getElementById('logo').src = 'assets/images/events/pride/pride_logo.svg';
     document.getElementById('logo_footer').src = 'assets/images/events/pride/pride_logo.svg';
     changeAllFavicons('assets/images/events/pride/pride_logo.svg');
+  }
+  if (hollow) {
+    document.getElementById('logo').src = 'assets/images/hollow/logo.svg';
+    document.getElementById('header').style.backgroundImage = 'url(assets/images/hollow/banner.png)';
+    document.getElementById('projects').style.backgroundImage = 'url(assets/images/hollow/projects_section.png)';
+    document.getElementById('experience').style.backgroundImage = 'url(assets/images/hollow/experience.png)';
+    document.getElementById('logo_footer').src = 'assets/images/hollow/logo.svg';
+    document.documentElement.style.setProperty('--primary-color', '#b12727');
+    document.documentElement.style.setProperty('--highlight-color', '#871515');
+    changeAllFavicons('assets/images/hollow/logo.svg');
   }
 });
 
