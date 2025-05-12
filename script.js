@@ -122,28 +122,30 @@ function changeAllFavicons(newIconUrl) {
   }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // kylie 
+    
     if ((month == 9 && day == 13 && kylie)) {
-    document.getElementById('logo').src = 'assets/images/events/love/logo.svg';
-    document.getElementById('bannerSubText').innerHTML = "♥ Happy BirthDay Kylie, You will always have a spot in my heart ♥";  
-    document.getElementById('header').style.backgroundImage = 'url(assets/images/events/love/banner.png)';
-    document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/love/projects_section.png)';
-    document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/love/experience.png)';
-    document.getElementById('logo_footer').src = 'assets/images/events/love/logo.svg';
-    document.documentElement.style.setProperty('--primary-color', '#90a2d4');
-    document.documentElement.style.setProperty('--highlight-color', '#c0b8dd');
-    changeAllFavicons('assets/images/events/love/logo.svg');
+        document.getElementById('logo').src = 'assets/images/events/love/logo.svg';
+    
+        document.getElementById('bannerSubText').innerHTML = "♥ Happy BirthDay Kylie, You will always have a spot in my heart ♥";  
+     
+        document.getElementById('header').style.backgroundImage = 'url(assets/images/events/love/banner.png)';
+        document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/love/projects_section.png)';
+        document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/love/experience.png)';
+        document.getElementById('logo_footer').src = 'assets/images/events/love/logo.svg';
+        document.documentElement.style.setProperty('--primary-color', '#90a2d4');
+        document.documentElement.style.setProperty('--highlight-color', '#c0b8dd');
+        changeAllFavicons('assets/images/events/love/logo.svg');
+  
     }
-    // pride
     if (month == 5 && day != 0o2) {
+
         document.getElementById('logo').src = 'assets/images/events/pride/pride_logo.svg';
         document.getElementById('logo_footer').src = 'assets/images/events/pride/pride_logo.svg';
         changeAllFavicons('assets/images/events/pride/pride_logo.svg');
     }
-    // hollow
     if (hollow) {
         document.getElementById('logo').src = 'assets/images/hollow/logo.svg';
-        ocument.getElementById('header').style.backgroundImage = 'url(assets/images/hollow/banner.png)';
+        document.getElementById('header').style.backgroundImage = 'url(assets/images/hollow/banner.png)';
         document.getElementById('projects').style.backgroundImage = 'url(assets/images/hollow/projects_section.png)';
         document.getElementById('experience').style.backgroundImage = 'url(assets/images/hollow/experience.png)';
         document.getElementById('logo_footer').src = 'assets/images/hollow/logo.svg';
