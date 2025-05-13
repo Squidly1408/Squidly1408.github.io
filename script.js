@@ -1,6 +1,6 @@
 // controls
 
-hollow = true;
+hollow = false;
 kylie = true;
 
 
