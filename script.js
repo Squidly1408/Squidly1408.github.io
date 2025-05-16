@@ -3,6 +3,7 @@
 hollow = false;
 kylie = true;
 banana = false;
+watermelon = false;
 
 
 // function to travel to external links
@@ -177,6 +178,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.setProperty('--primary-color', '#7b7303');
         document.documentElement.style.setProperty('--highlight-color', '#f5e510');
         changeAllFavicons('assets/images/events/banana/logo.svg');
+    }
+    if (watermelon) {
+        document.getElementById('logo').src = 'assets/images/events/watermelon/logo.svg';
+        document.getElementById('header').style.backgroundImage = 'url(assets/images/events/watermelon/banner.png)';
+        document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/watermelon/projects_section.png)';
+        document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/watermelon/experience.png)';
+        document.getElementById('logo_footer').src = 'assets/images/events/watermelon/logo.svg';
+        document.documentElement.style.setProperty('--primary-color', '#dd2e44');
+        document.documentElement.style.setProperty('--highlight-color', '#5c913b');
+        changeAllFavicons('assets/images/events/watermelon/logo.svg');
     }
 });
 
