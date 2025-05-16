@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         changeAllFavicons('assets/images/events/love/logo.svg');
   
     }
-    if (month == 5 && day != 0o2) {
+    if (month == 5) {
 
         document.getElementById('logo').src = 'assets/images/events/pride/pride_logo.svg';
         document.getElementById('logo_footer').src = 'assets/images/events/pride/pride_logo.svg';
