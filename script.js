@@ -2,6 +2,7 @@
 
 hollow = false;
 kylie = true;
+banana = false;
 
 
 // function to travel to external links
@@ -25,11 +26,11 @@ const quotes = [
   '"Lucas is a rare kind of student, motivated, innovative, and determined to make a positive impact on the world around him. It is a rare joy to find a student with such focus and drive, I look forward to seeing his education and career prosper."',
   '"Lucas was an absolute pleasure to deal with. He assisted us with some website and graphic design tasks. He performed them to a very high standard. \n\n I have no hesitation in recommending Lucas to any local design or development companies."',
   '“Lucas is a talented future engineer with a bright future ahead. He has a passion for technology and it shows!”',
-  '"As Lucas’s teacher when he began his journey in project-based learning, I had the pleasure of seeing him demonstrate incredible adaptability, a deep thirst for knowledge, and a keen ability to solve problems. What stood out most was his consistent incorporation of social justice into your projects, showcasing not only his intellect but also his commitment to making a positive impact in the world."',
+  '"As Lucas\'s teacher when he began his journey in project-based learning, I had the pleasure of seeing him demonstrate incredible adaptability, a deep thirst for knowledge, and a keen ability to solve problems. What stood out most was his consistent incorporation of social justice into your projects, showcasing not only his intellect but also his commitment to making a positive impact in the world."',
   '"Lucas contributed an interactive javascript module for the Big Picture Learning Australia\'s website. He was a pleasure to work with. He was highly responsive to any feature requests and his code was clean, effective and elegant. Lucas is the kind of student who clearly demonstrates the effectiveness of the Big Picture Learning design to help students thrive and we look forward to working more with him in the future."',
   '"Lucas is very intelligent and self-managed. He is very process driven and provides a high standard of work."',
   '"I met Lucas when he was a high school student conducting a project under the Big Picture program. The goal was to build an Auslan glove, using a Raspberry Pi and an array of sensors - to determine the positions of the hand joints - and then AI techniques to process the data and translate hand movements into language"... "and Lucas has demonstrated deep knowledge of both the hardware and software for the project, as well as lots of enthusiasm and curiosity, which are rare traits in high schoolers."',
-  '"Lucas’s willingness to help and support others, strive for personal excellence and take on feedback make him an excellent learner. It has been a pleasure see his growth in his time at Cooks Hill Campus and I look forward to seeing his next steps."'
+  '"Lucas\'s willingness to help and support others, strive for personal excellence and take on feedback make him an excellent learner. It has been a pleasure see his growth in his time at Cooks Hill Campus and I look forward to seeing his next steps."'
 ]
 
 const authors_images = [
@@ -48,9 +49,9 @@ const authors = [
   'Chris Chapman, Director of Clickk Pty Ltd',
   'Liam, CCO of SAPHI Engineering',
   'Thomas Deane, Head Teacher of Well Being, Newcastle High School',
-  'Joe Wickert. CTO Big Picture Learning Australia',
+  'Joe Wickert, CTO Big Picture Learning Australia',
   'Chris Chapman, Director of Clickk Pty Ltd',
-  'Dr. Alexandre Mendes, Senior Lecturer - Computing & IT, School of Inofrmation and Physical Sciences, The University of Newcastle',
+  'Dr. Alexandre Mendes, Senior Lecturer - Computing & IT, School of Information and Physical Sciences, The University of Newcastle',
   'Nick Willis, Ex Deputy Campus Leader, Cooks Hill Campus, Newcastle High School'
 ]
 
@@ -125,7 +126,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if ((month == 9 && day == 13 && kylie)) {
         document.getElementById('logo').src = 'assets/images/events/love/logo.svg';
-    
+        if (month == 9 && day == 13) {
+            document.getElementById('bannerText').innerHTML = "♥ Happy BirthDay Kylie, You will always have a spot in my heart ♥"; // used to be my love
+        }
+
+        // Anniversary 2/06/2023
+        // if (month == 5 && day == 0o2) {
+        //     anniversary = new Date('2023-06-02');
+        //     const timeFromAnniversary = (date.getFullYear() - anniversary.getFullYear());
+        //     document.getElementById('bannerSubText').innerHTML = '♥ Happy ' + timeFromAnniversary + ' Year Anniversary My Love of My Life ♥';
+        // }
+
+        // Valentines Day
+        // if (month == 1 && day == 14) {
+        //     document.getElementById('bannerSubText').innerHTML = "♥ Happy Valentines Day My Love of My Life ♥";
+        // }
         document.getElementById('bannerSubText').innerHTML = "♥ Happy BirthDay Kylie, You will always have a spot in my heart ♥";  
      
         document.getElementById('header').style.backgroundImage = 'url(assets/images/events/love/banner.png)';
@@ -144,14 +159,24 @@ document.addEventListener('DOMContentLoaded', function() {
         changeAllFavicons('assets/images/events/pride/pride_logo.svg');
     }
     if (hollow) {
-        document.getElementById('logo').src = 'assets/images/hollow/logo.svg';
-        document.getElementById('header').style.backgroundImage = 'url(assets/images/hollow/banner.png)';
-        document.getElementById('projects').style.backgroundImage = 'url(assets/images/hollow/projects_section.png)';
-        document.getElementById('experience').style.backgroundImage = 'url(assets/images/hollow/experience.png)';
-        document.getElementById('logo_footer').src = 'assets/images/hollow/logo.svg';
+        document.getElementById('logo').src = 'assets/images/events/hollow/logo.svg';
+        document.getElementById('header').style.backgroundImage = 'url(assets/images/events/hollow/banner.png)';
+        document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/hollow/projects_section.png)';
+        document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/hollow/experience.png)';
+        document.getElementById('logo_footer').src = 'assets/images/events/hollow/logo.svg';
         document.documentElement.style.setProperty('--primary-color', '#b12727');
         document.documentElement.style.setProperty('--highlight-color', '#871515');
-        changeAllFavicons('assets/images/hollow/logo.svg');
+        changeAllFavicons('assets/images/events/hollow/logo.svg');
+    }
+    if (banana) {
+        document.getElementById('logo').src = 'assets/images/events/banana/logo.svg';
+        document.getElementById('header').style.backgroundImage = 'url(assets/images/events/banana/banner.png)';
+        document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/banana/projects_section.png)';
+        document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/banana/experience.png)';
+        document.getElementById('logo_footer').src = 'assets/images/events/banana/logo.svg';
+        document.documentElement.style.setProperty('--primary-color', '#7b7303');
+        document.documentElement.style.setProperty('--highlight-color', '#f5e510');
+        changeAllFavicons('assets/images/events/banana/logo.svg');
     }
 });
 
