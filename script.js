@@ -179,7 +179,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.setProperty('--highlight-color', '#f5e510');
         changeAllFavicons('assets/images/events/banana/logo.svg');
     }
-    if (watermelon) {
+    if (watermelon || month == 7 && day == 3) {
+        if (month == 7 && day == 3) {
+            document.getElementById('bannerSubText').innerHTML = "🍉 !!! National Watermelon Day !!! 🍉";  
+        }
         document.getElementById('logo').src = 'assets/images/events/watermelon/logo.svg';
         document.getElementById('header').style.backgroundImage = 'url(assets/images/events/watermelon/banner.png)';
         document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/watermelon/projects_section.png)';
