@@ -4,7 +4,7 @@ hollow = false;
 kylie = true;
 banana = false;
 watermelon = false;
-blueberry = true;
+blueberry = false;
 
 
 // function to travel to external links
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
         changeAllFavicons('assets/images/events/watermelon/logo.svg');
     }
     if (blueberry || month == 6 && day == 8) {
-        if (blueberry) {
+        if (month == 6 && day == 8) {
             document.getElementById('bannerSubText').innerHTML = "🫐 !!! National BlueBerry Day !!! 🫐";  
         }
         document.getElementById('logo').src = 'assets/images/events/blueberry/logo.svg';
