@@ -4,6 +4,7 @@ hollow = false;
 kylie = true;
 banana = false;
 watermelon = false;
+blueberry = true;
 
 
 // function to travel to external links
@@ -191,6 +192,19 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.setProperty('--primary-color', '#dd2e44');
         document.documentElement.style.setProperty('--highlight-color', '#5c913b');
         changeAllFavicons('assets/images/events/watermelon/logo.svg');
+    }
+    if (blueberry || month == 6 && day == 8) {
+        if (blueberry) {
+            document.getElementById('bannerSubText').innerHTML = "🫐 !!! National BlueBerry Day !!! 🫐";  
+        }
+        document.getElementById('logo').src = 'assets/images/events/blueberry/logo.svg';
+        document.getElementById('header').style.backgroundImage = 'url(assets/images/events/blueberry/banner.png)';
+        document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/blueberry/projects_section.png)';
+        document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/blueberry/experience.png)';
+        document.getElementById('logo_footer').src = 'assets/images/events/blueberry/logo.svg';
+        document.documentElement.style.setProperty('--primary-color', '#132236');
+        document.documentElement.style.setProperty('--highlight-color', '#083476');
+        changeAllFavicons('assets/images/events/blueberry/logo.svg');
     }
 });
 
