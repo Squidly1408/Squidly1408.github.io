@@ -9,6 +9,7 @@ body {
     margin: 0px;
     padding: 0px;
     overflow-y: scroll;
+    background-color: #171717;
 }
 
 /* fonts */
@@ -29,7 +30,7 @@ a {
 
 /* header including nav links, socials icons and opening text */
 .header {
-    background-image: url(../assets/images/banner.png);
+    
     background-size: 100vw;
     height: 50vw;
 
@@ -96,10 +97,12 @@ a {
     font-size: min(7vw, 70px);
     padding: 0%;
     margin-bottom: 0%;
+    color: #ffffff;
 }
 
 .bannerText p {
     font-family: Bayon;
     font-size: min(2.5vw, 25px);
     margin-top: 0%;
+    color: #ffffff;
 }
