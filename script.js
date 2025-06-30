@@ -126,34 +126,6 @@ function changeAllFavicons(newIconUrl) {
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    if ((month == 9 && day == 13 && kylie)) {
-        document.getElementById('logo').src = 'assets/images/events/love/logo.svg';
-        if (month == 9 && day == 13) {
-            document.getElementById('bannerText').innerHTML = "♥ Happy BirthDay Kylie, You will always have a spot in my heart ♥"; // used to be my love
-        }
-
-        // Anniversary 2/06/2023
-        // if (month == 5 && day == 0o2) {
-        //     anniversary = new Date('2023-06-02');
-        //     const timeFromAnniversary = (date.getFullYear() - anniversary.getFullYear());
-        //     document.getElementById('bannerSubText').innerHTML = '♥ Happy ' + timeFromAnniversary + ' Year Anniversary My Love of My Life ♥';
-        // }
-
-        // Valentines Day
-        // if (month == 1 && day == 14) {
-        //     document.getElementById('bannerSubText').innerHTML = "♥ Happy Valentines Day My Love of My Life ♥";
-        // }
-        document.getElementById('bannerSubText').innerHTML = "♥ Happy BirthDay Kylie, You will always have a spot in my heart ♥";  
-     
-        document.getElementById('header').style.backgroundImage = 'url(assets/images/events/love/banner.png)';
-        document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/love/projects_section.png)';
-        document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/love/experience.png)';
-        document.getElementById('logo_footer').src = 'assets/images/events/love/logo.svg';
-        document.documentElement.style.setProperty('--primary-color', '#90a2d4');
-        document.documentElement.style.setProperty('--highlight-color', '#c0b8dd');
-        changeAllFavicons('assets/images/events/love/logo.svg');
-  
-    }
     if (month == 5) {
 
         document.getElementById('logo').src = 'assets/images/events/pride/pride_logo.svg';
