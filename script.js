@@ -1,8 +1,9 @@
 // controls
 
+jd = false;
 hollow = false;
-kylie = true;
 banana = false;
+grape = false;
 watermelon = false;
 blueberry = false;
 
@@ -132,14 +133,24 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('logo_footer').src = 'assets/images/events/pride/pride_logo.svg';
         changeAllFavicons('assets/images/events/pride/pride_logo.svg');
     }
+    if (jd) {
+        document.getElementById('logo').src = 'assets/images/events/jd/logo_l.svg';
+        document.getElementById('header').style.backgroundImage = 'url(assets/images/events/jd/banner.png)';
+        document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/jd/projects_section.png)';
+        document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/jd/experience.png)';
+        document.getElementById('logo_footer').src = 'assets/images/events/jd/logo_d.svg';
+        document.documentElement.style.setProperty('--primary-color', '#ebc52e'); // dark
+        document.documentElement.style.setProperty('--highlight-color', '#af9117'); // light
+        changeAllFavicons('assets/images/events/jd/logo_l.svg');
+    }
     if (hollow) {
         document.getElementById('logo').src = 'assets/images/events/hollow/logo.svg';
         document.getElementById('header').style.backgroundImage = 'url(assets/images/events/hollow/banner.png)';
         document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/hollow/projects_section.png)';
         document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/hollow/experience.png)';
         document.getElementById('logo_footer').src = 'assets/images/events/hollow/logo.svg';
-        document.documentElement.style.setProperty('--primary-color', '#b12727');
-        document.documentElement.style.setProperty('--highlight-color', '#871515');
+        document.documentElement.style.setProperty('--primary-color', '#b12727'); // dark
+        document.documentElement.style.setProperty('--highlight-color', '#871515'); // light
         changeAllFavicons('assets/images/events/hollow/logo.svg');
     }
     if (banana) {
@@ -148,8 +159,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/banana/projects_section.png)';
         document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/banana/experience.png)';
         document.getElementById('logo_footer').src = 'assets/images/events/banana/logo.svg';
-        document.documentElement.style.setProperty('--primary-color', '#7b7303');
-        document.documentElement.style.setProperty('--highlight-color', '#f5e510');
+        document.documentElement.style.setProperty('--primary-color', '#7b7303'); // dark
+        document.documentElement.style.setProperty('--highlight-color', '#f5e510'); // light
         changeAllFavicons('assets/images/events/banana/logo.svg');
     }
     if (watermelon || month == 7 && day == 3) {
@@ -161,9 +172,22 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/watermelon/projects_section.png)';
         document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/watermelon/experience.png)';
         document.getElementById('logo_footer').src = 'assets/images/events/watermelon/logo.svg';
-        document.documentElement.style.setProperty('--primary-color', '#dd2e44');
-        document.documentElement.style.setProperty('--highlight-color', '#5c913b');
+        document.documentElement.style.setProperty('--primary-color', '#dd2e44'); // dark
+        document.documentElement.style.setProperty('--highlight-color', '#5c913b'); // light
         changeAllFavicons('assets/images/events/watermelon/logo.svg');
+    }
+    if (grape || month == 4 && day == 27) {
+        if (month == 4 && day == 27) {
+            document.getElementById('bannerSubText').innerHTML = "🍇 !!! National Grape Day !!! 🍇";  
+        }
+        document.getElementById('logo').src = 'assets/images/events/grape/logo.svg';
+        document.getElementById('header').style.backgroundImage = 'url(assets/images/events/grape/banner.png)';
+        document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/grape/projects_section.png)';
+        document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/grape/experience.png)';
+        document.getElementById('logo_footer').src = 'assets/images/events/grape/logo.svg';
+        document.documentElement.style.setProperty('--primary-color', '#d088e0'); // dark
+        document.documentElement.style.setProperty('--highlight-color', '#b924d0'); // light
+        changeAllFavicons('assets/images/events/grape/logo.svg');
     }
     if (blueberry || month == 6 && day == 8) {
         if (month == 6 && day == 8) {
@@ -174,8 +198,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('projects').style.backgroundImage = 'url(assets/images/events/blueberry/projects_section.png)';
         document.getElementById('experience').style.backgroundImage = 'url(assets/images/events/blueberry/experience.png)';
         document.getElementById('logo_footer').src = 'assets/images/events/blueberry/logo.svg';
-        document.documentElement.style.setProperty('--primary-color', '#132236');
-        document.documentElement.style.setProperty('--highlight-color', '#083476');
+        document.documentElement.style.setProperty('--primary-color', '#132236'); // dark
+        document.documentElement.style.setProperty('--highlight-color', '#083476'); // light
         changeAllFavicons('assets/images/events/blueberry/logo.svg');
     }
 });
