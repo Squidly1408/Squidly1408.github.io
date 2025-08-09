@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>F1a5hCard5 — Flashcards</title>
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --muted: #94a3b8;
+            --accent: #7c3aed;
+            --glass: rgba(255, 255, 255, 0.04);
+            --radius: 14px;
+            --gap: 14px;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(180deg, #071023 0%, #071a2f 100%);
+            color: #e6eef8
+        }
+
+        .app {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: var(--gap);
+            padding: 20px;
+            min-height: 100vh
+        }
+
+        header {
+            grid-column: 1/-1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: transparent
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo .mark {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700
+        }
+
+        .panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 16px;
+            border-radius: var(--radius);
+            box-shadow: 0 6px 20px rgba(2, 6, 23, 0.7);
+        }
+
+        aside .panel {
+            height: calc(100vh - 130px);
+            overflow: auto
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .select {
+            background: var(--glass);
+            background-color: #071a2f;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 8px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .btn {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 8px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .btn.primary {
+            background: linear-gradient(90deg, var(--accent), #06b6d4);
+            color: #ffffff;
+            font-weight: 700
+        }
+
+        .small {
+            font-size: 13px;
+            padding: 6px 8px
+        }
+
+        .list {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .item {
+            padding: 10px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(0, 0, 0, 0.02));
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        main {
+            padding: 10px
+        }
+
+        .editor {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 16px
+        }
+
+        .card-create {
+            padding: 12px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01))
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            background: transparent;
+            color: inherit
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical
+        }
+
+        .deck {
+            margin-top: 12px
+        }
+
+        .deck .flash {
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--card);
+            min-height: 80px
+        }
+
+        .test-area {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(0, 0, 0, 0.02))
+        }
+
+        .tester {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center
+        }
+
+        .bigcard {
+            width: 100%;
+            max-width: 720px;
+            padding: 22px;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #021026, #06243b);
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .flex {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        .score {
+            display: flex;
+            gap: 10px
+        }
+
+        footer {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 12px;
+            color: var(--muted)
+        }
+
+        @media(max-width:880px) {
+            .app {
+                grid-template-columns: 1fr;
+                padding: 12px
+            }
+
+            .editor {
+                grid-template-columns: 1fr
+            }
+
+            .aside-hide {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <div class="logo">
+                <div class="mark">F5</div>
+                <div>
+                    <div style="font-weight:700">F1a5hCard5</div>
+                    <div class="muted" style="font-size:12px">Create • Study • Track — Mobile friendly</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn" id="importBtn">Import JSON</button>
+                <button class="btn" id="exportBtn">Export JSON</button>
+                <button class="btn primary" id="startTest">Start Test</button>
+            </div>
+        </header>
+
+        <aside>
+            <div class="panel">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <strong>Subjects & Weeks</strong>
+                    <button class="btn small" id="addSubjectBtn">+ Subject</button>
+                </div>
+
+                <div style="margin-top:10px">
+                    <label class="muted">Filter</label>
+                    <select id="filterSubject" class="select">
+                        <option value="">All subjects</option>
+                    </select>
+                    <select id="filterWeek"  class="select">
+                        <option value="">All weeks</option>
+                    </select>
+                    <select id="filterCategory"  class="select">
+                        <option value="">All categories</option>
+                    </select>
+                </div>
+
+                <div class="list" id="subjectList" aria-live="polite"></div>
+
+                <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:12px 0">
+                <div style="display:flex;justify-content:space-between;align-items:center"><strong>Storage</strong>
+                </div>
+                <div class="muted" style="font-size:13px;margin-top:8px">Autosave to your device (localStorage).
+                    Import/Export JSON to share.</div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <button class="btn small" id="clearLocal">Clear Local</button>
+                    <button class="btn small" id="downloadAll">Download .json</button>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="panel">
+                <div class="editor">
+                    <section class="card-create">
+                        <h3>Create / Edit Flashcard</h3>
+                        <div style="display:grid;grid-template-columns:1fr 140px;gap:8px">
+                            <input id="cardFront" placeholder="Front (question)" />
+                            <select id="cardDifficulty"   class="select">
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                        <textarea id="cardBack" placeholder="Back (answer)"></textarea>
+                        <div style="display:grid;grid-template-columns:1fr 120px 120px;gap:8px;margin-top:8px">
+                            <input id="cardCategory" placeholder="Category (e.g. Definitions)" />
+                            <input id="cardSubject" placeholder="Subject (e.g. Math)" />
+                            <input id="cardWeek" placeholder="Week (e.g. Week 3)" />
+                        </div>
+                        <div style="margin-top:8px;display:flex;gap:8px">
+                            <button class="btn primary" id="saveCard">Save Card</button>
+                            <button class="btn" id="clearForm">Clear</button>
+                            <button class="btn" id="addMultiple">Add 5 sample</button>
+                        </div>
+
+                        <div class="deck">
+                            <h4>Deck Preview</h4>
+                            <div id="deckList"></div>
+                        </div>
+                    </section>
+
+                    <aside class="aside-hide">
+                        <div style="display:flex;flex-direction:column;gap:8px">
+                            <div>
+                                <label class="muted">Current selection</label>
+                                <div id="currentSelection" class="muted">No subject selected</div>
+                            </div>
+
+                            <div>
+                                <label class="muted">Test settings</label>
+                                <div style="display:flex;gap:8px;margin-top:6px">
+                                    <select id="testDifficulty"   class="select">
+                                        <option value="">All</option>
+                                        <option value="easy">Easy</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="hard">Hard</option>
+                                    </select>
+                                    <input id="testCount" type="number" min="1" placeholder="# cards"
+                                        style="width:98px" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="muted">Quick actions</label>
+                                <div style="display:flex;gap:8px;margin-top:6px">
+                                    <button class="btn" id="shuffleBtn">Shuffle</button>
+                                    <button class="btn" id="resetScores">Reset Scores</button>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <div class="panel test-area" id="testerPanel" style="display:none">
+                <div class="tester">
+                    <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
+                        <div class="muted">Test Mode • <span id="testMeta"></span></div>
+                        <div class="score muted">Correct: <span id="scoreCorrect">0</span> • Wrong: <span
+                                id="scoreWrong">0</span></div>
+                    </div>
+
+                    <div class="bigcard" id="bigCard">
+                        <div id="bigFront" style="font-size:20px;font-weight:700"></div>
+                        <div id="bigHint" class="muted" style="margin-top:8px">Tap "Show answer" only after you commit
+                            to your answer.</div>
+                    </div>
+
+                    <div style="display:flex;gap:8px">
+                        <button class="btn primary" id="showAnswer">Show answer</button>
+                        <button class="btn" id="markCorrect">I was correct</button>
+                        <button class="btn" id="markWrong">I was wrong</button>
+                        <button class="btn" id="endTest">End Test</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer>F1a5hCard5 — Made for fast studying • Local-only storage by default</footer>
+    </div>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            try {
+                (function () {
+                    const STORAGE_KEY = 'f1a5hcard5_data_v1';
+                    let state = { subjects: [], cards: [] };
+                    let editingId = null;
+                    let testDeck = [];
+                    let testIndex = 0;
+                    let score = { correct: 0, wrong: 0 };
+
+                    // helper to get elements
+                    const el = id => document.getElementById(id);
+
+                    (function () {
+                        const STORAGE_KEY = 'f1a5hcard5_data_v1';
+                        let state = { subjects: [], cards: [] };
+                        let editingId = null;
+                        let testDeck = [];
+                        let testIndex = 0;
+                        let score = { correct: 0, wrong: 0 };
+
+                        // DOM
+                        const el = id => document.getElementById(id);
+                        const subjectList = el('subjectList');
+                        const filterSubject = el('filterSubject');
+                        const filterWeek = el('filterWeek');
+                        const filterCategory = el('filterCategory');
+                        const deckList = el('deckList');
+                        const cardFront = el('cardFront');
+                        const cardBack = el('cardBack');
+                        const cardSubject = el('cardSubject');
+                        const cardWeek = el('cardWeek');
+                        const cardCategory = el('cardCategory');
+                        const cardDifficulty = el('cardDifficulty');
+                        const saveCard = el('saveCard');
+                        const clearForm = el('clearForm');
+                        const addSubjectBtn = el('addSubjectBtn');
+                        const importBtn = el('importBtn');
+                        const exportBtn = el('exportBtn');
+                        const downloadAll = el('downloadAll');
+                        const clearLocal = el('clearLocal');
+                        const startTest = el('startTest');
+                        const testerPanel = el('testerPanel');
+                        const bigFront = el('bigFront');
+                        const showAnswer = el('showAnswer');
+                        const markCorrect = el('markCorrect');
+                        const markWrong = el('markWrong');
+                        const endTest = el('endTest');
+                        const testMeta = el('testMeta');
+                        const scoreCorrect = el('scoreCorrect');
+                        const scoreWrong = el('scoreWrong');
+                        const testCount = el('testCount');
+                        const testDifficulty = el('testDifficulty');
+                        const currentSelection = el('currentSelection');
+                        const filterEls = [filterSubject, filterWeek, filterCategory];
+
+                        // --- storage ---
+                        function load() {
+                            try {
+                                const txt = localStorage.getItem(STORAGE_KEY);
+                                if (txt) { state = JSON.parse(txt); }
+                                else { state = { subjects: [], cards: [] }; }
+                            } catch (e) { state = { subjects: [], cards: [] }; }
+                            renderAll();
+                        }
+                        function save() {
+                            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                            renderAll();
+                        }
+
+                        // --- helpers ---
+                        function uid(prefix = 'id') { return prefix + Math.random().toString(36).slice(2, 9) }
+
+                        function addSubject(name) {
+                            if (!name) return;
+                            if (!state.subjects.includes(name)) state.subjects.push(name);
+                            save();
+                        }
+
+                        function addCard(card) {
+                            card.id = card.id || uid('c');
+                            state.cards.push(card);
+                            addSubject(card.subject);
+                            save();
+                        }
+
+                        function deleteCard(id) { state.cards = state.cards.filter(c => c.id !== id); save(); }
+
+                        function updateCard(card) { const idx = state.cards.findIndex(c => c.id === card.id); if (idx !== -1) { state.cards[idx] = card; save(); } }
+
+                        function resetScores() { state.cards.forEach(c => { c.stats = { correct: 0, wrong: 0 } }); save(); }
+
+                        // --- UI render ---
+                        function renderSubjects() {
+                            subjectList.innerHTML = '';
+                            state.subjects.forEach(sub => {
+                                const div = document.createElement('div'); div.className = 'item';
+                                const left = document.createElement('div'); left.innerHTML = `<div style="font-weight:700">${escapeHtml(sub)}</div><div class="muted">${countCardsFor(sub)} cards</div>`;
+                                const right = document.createElement('div'); right.innerHTML = `<button class="btn small" data-sub="${escapeHtml(sub)}">Select</button>`;
+                                div.appendChild(left); div.appendChild(right);
+                                subjectList.appendChild(div);
+                            });
+
+                            // filters
+                            const weeks = new Set(); const cats = new Set();
+                            state.cards.forEach(c => { if (c.week) weeks.add(c.week); if (c.category) cats.add(c.category); });
+                            populateSelect(filterSubject, ['', 'All subjects', ...state.subjects]);
+                            populateSelect(filterWeek, ['', 'All weeks', ...Array.from(weeks)]);
+                            populateSelect(filterCategory, ['', 'All categories', ...Array.from(cats)]);
+                        }
+
+                        function renderDeck() {
+                            deckList.innerHTML = '';
+                            const filtered = state.cards.filter(filterCard);
+                            if (filtered.length === 0) deckList.innerHTML = '<div class="muted">No cards — create some</div>';
+                            filtered.forEach(c => {
+                                const d = document.createElement('div'); d.className = 'item';
+                                d.innerHTML = `<div><strong>${escapeHtml(c.front)}</strong><div class="muted">${escapeHtml(c.subject || 'No subject')} • ${escapeHtml(c.week || 'No week')} • ${escapeHtml(c.category || 'No cat')} • ${escapeHtml(c.difficulty || '')}</div></div>
+        <div style="display:flex;gap:8px">
+        <button class="btn small" data-edit="${c.id}">Edit</button>
+        <button class="btn small" data-del="${c.id}">Delete</button>
+        </div>`;
+                                deckList.appendChild(d);
+                            });
+                        }
+
+                        function renderAll() { renderSubjects(); renderDeck(); }
+
+                        function populateSelect(sel, items) {
+                            sel.innerHTML = '';
+                            items.forEach((it, i) => {
+                                const opt = document.createElement('option'); opt.value = i === 0 ? '' : (typeof it === 'string' ? it : it);
+                                opt.textContent = i === 0 ? (it || '') : it;
+                                sel.appendChild(opt);
+                            });
+                        }
+
+                        function countCardsFor(subject) { return state.cards.filter(c => c.subject === subject).length; }
+
+                        function filterCard(c) {
+                            const s = filterSubject.value; const w = filterWeek.value; const cat = filterCategory.value;
+                            if (s && c.subject !== s) return false;
+                            if (w && c.week !== w) return false;
+                            if (cat && c.category !== cat) return false;
+                            return true;
+                        }
+
+                        function escapeHtml(s) { if (!s) return ''; return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+                        // --- events ---
+                        saveCard.addEventListener('click', () => {
+                            const front = cardFront.value.trim(); const back = cardBack.value.trim();
+                            if (!front || !back) { alert('Please add front and back text'); return; }
+                            const payload = { front, back, subject: cardSubject.value.trim(), week: cardWeek.value.trim(), category: cardCategory.value.trim(), difficulty: cardDifficulty.value, stats: { correct: 0, wrong: 0 } };
+                            if (editingId) { payload.id = editingId; updateCard(payload); editingId = null; }
+                            else addCard(payload);
+                            clearInputs();
+                        });
+
+                        deckList.addEventListener('click', (e) => {
+                            const id = e.target.getAttribute('data-edit');
+                            const del = e.target.getAttribute('data-del');
+                            if (id) { const card = state.cards.find(c => c.id === id); if (card) { editingId = card.id; cardFront.value = card.front; cardBack.value = card.back; cardSubject.value = card.subject || ''; cardWeek.value = card.week || ''; cardCategory.value = card.category || ''; cardDifficulty.value = card.difficulty || 'easy'; } }
+                            if (del) { if (confirm('Delete this card?')) deleteCard(del); }
+                        });
+
+                        addSubjectBtn.addEventListener('click', () => {
+                            const name = prompt('New subject name'); if (name) addSubject(name.trim());
+                        });
+
+                        clearForm.addEventListener('click', clearInputs);
+                        function clearInputs() { editingId = null; cardFront.value = ''; cardBack.value = ''; cardSubject.value = ''; cardWeek.value = ''; cardCategory.value = ''; cardDifficulty.value = 'easy'; }
+
+                        // import/export
+                        exportBtn.addEventListener('click', () => { const data = JSON.stringify(state, null, 2); const blob = new Blob([data], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'f1a5hcard5_export.json'; a.click(); URL.revokeObjectURL(url); });
+                        downloadAll.addEventListener('click', () => exportBtn.click());
+
+                        importBtn.addEventListener('click', () => {
+                            const input = document.createElement('input'); input.type = 'file'; input.accept = 'application/json'; input.onchange = e => {
+                                const f = e.target.files[0]; if (!f) return; const reader = new FileReader(); reader.onload = ev => {
+                                    try {
+                                        const parsed = JSON.parse(ev.target.result);
+                                        if (parsed.cards && parsed.subjects) { state = parsed; save(); alert('Imported successfully'); } else alert('Invalid file');
+                                    } catch (err) { alert('Could not read file'); }
+                                }; reader.readAsText(f);
+                            }; input.click();
+                        });
+
+                        clearLocal.addEventListener('click', () => { if (confirm('Clear all local data?')) { localStorage.removeItem(STORAGE_KEY); state = { subjects: [], cards: [] }; renderAll(); } });
+
+                        // shuffle
+                        el('shuffleBtn').addEventListener('click', () => { state.cards = shuffle(state.cards); save(); });
+                        el('resetScores').addEventListener('click', () => { if (confirm('Reset all scores?')) { resetScores(); save(); } });
+                        el('addMultiple').addEventListener('click', () => {
+                            for (let i = 0; i < 5; i++) { addCard({ front: 'Sample question ' + (i + 1), back: 'Sample answer ' + (i + 1), subject: 'Sample', week: 'Week 1', category: 'General', difficulty: ['easy', 'medium', 'hard'][i % 3], stats: { correct: 0, wrong: 0 } }); }
+                        });
+
+                        // start test
+                        startTest.addEventListener('click', () => {
+                            const filtered = state.cards.filter(c => {
+                                if (filterSubject.value && c.subject !== filterSubject.value) return false;
+                                if (testDifficulty.value && c.difficulty !== testDifficulty.value) return false;
+                                return true;
+                            });
+                            const count = parseInt(testCount.value) || filtered.length || 10;
+                            if (filtered.length === 0) { alert('No cards to test with based on your filters'); return; }
+                            testDeck = shuffle(filtered).slice(0, count);
+                            testIndex = 0; score = { correct: 0, wrong: 0 }; updateScoreUI(); openTester(); showCurrent();
+                        });
+
+                        function openTester() { testerPanel.style.display = 'block'; testMeta.textContent = `${testDeck.length} cards • ${filterSubject.value || 'All subjects'}`; }
+                        function closeTester() { testerPanel.style.display = 'none'; }
+
+                        function showCurrent() { const c = testDeck[testIndex]; if (!c) { bigFront.textContent = 'No more cards'; return; } bigFront.textContent = c.front; el('bigHint').textContent = 'Tap "Show answer" only after you commit to your answer.'; showAnswer.disabled = false; }
+
+                        showAnswer.addEventListener('click', () => {
+                            const c = testDeck[testIndex]; if (!c) return; el('bigHint').innerHTML = `<div style="font-weight:700">${c.back}</div><div class='muted' style='margin-top:8px'>Difficulty: ${c.difficulty || 'n/a'}</div>`; showAnswer.disabled = true;
+                        });
+                        markCorrect.addEventListener('click', () => { const c = testDeck[testIndex]; if (!c) return; score.correct++; c.stats = c.stats || { correct: 0, wrong: 0 }; c.stats.correct++; updateScoreUI(); nextCard(); save(); });
+                        markWrong.addEventListener('click', () => { const c = testDeck[testIndex]; if (!c) return; score.wrong++; c.stats = c.stats || { correct: 0, wrong: 0 }; c.stats.wrong++; updateScoreUI(); nextCard(); save(); });
+
+                        function updateScoreUI() { scoreCorrect.textContent = score.correct; scoreWrong.textContent = score.wrong; }
+                        function nextCard() { testIndex++; if (testIndex >= testDeck.length) { alert('Test complete — Correct: ' + score.correct + ' Wrong: ' + score.wrong); closeTester(); } else showCurrent(); }
+                        endTest.addEventListener('click', () => { if (confirm('End test early?')) closeTester(); });
+
+                        // filters change
+                        filterEls.forEach(f => f.addEventListener('change', renderDeck));
+
+                        // utilities
+                        function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]] } return a; }
+
+                        // load on start
+                        load();
+
+                        // expose small helper for debugging
+                        window.f1 = { state, save, load };
+                    })();
+
+                })();
+            } catch (err) {
+                console.error("F1a5hCard5 startup error:", err);
+                alert("An error occurred — check the console for details.");
+            }
+        });
+
+    </script>
+</body>
+
+</html>
