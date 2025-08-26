@@ -1,0 +1,191 @@
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    display: none;
+}
+
+/* Color Variables */
+:root {
+    --primary-color: #03767b;
+    --secondary-color: #171717;
+    --tertiary-color: #ffffff;
+    --accent-color: #adadad;
+    --highlight-color: #10d0d6;
+    /* background colours */
+    --background-primary: #ffffff;
+    --background-secondary: #171717;
+    /* text colours */
+    --text-primary: #171717;
+    --text-secondary: #ffffff;
+    --text-tertiary: #adadad;
+}
+
+html body {
+    overscroll-behavior: none;
+
+
+}
+
+/* body */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    background-color: var(--background-secondary);
+}
+
+/* fonts */
+
+@font-face {
+    font-family: Bayon;
+    src: url(assets/fonts/bayon_font.ttf);
+}
+
+@font-face {
+    font-family: AudioWide;
+    src: url(assets/fonts/Audiowide.ttf);
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+/* skills list for experience and projects */
+
+.skills_list {
+    display: grid;
+    grid-template-columns: repeat(5, 4vw);
+}
+
+.skills_list img {
+    width: 100%;
+}
+
+/* Experience section */
+
+.experience {
+    background-size: 100vw;
+    background-color: var(--background-secondary);
+    align-items: center;
+}
+
+/* heading text */
+.experience .heading {
+    display: flex;
+    position: static;
+    justify-content: center;
+    width: 90vw;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: end;
+}
+
+.experience .heading .headingTag {
+    font-size: min(4vw, 2.5rem);
+    font-family: AudioWide;
+    color: var(--primary-color);
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.experience .heading .headingText {
+    font-size: min(4.5vw, 2.8125rem);
+    font-family: AudioWide;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.place_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 45vw);
+    margin: auto;
+    gap: 2vw;
+    width: 100vw;
+    justify-content: center;
+}
+
+/* by project */
+
+.place {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 40vw;
+    cursor: pointer;
+}
+
+/* projects text in general */
+
+.Place_text {
+    display: block;
+    align-items: start;
+    text-align: start;
+    font-family: Bayon;
+    color: var(--text-secondary);
+}
+
+/* projects heading */
+
+.Place_text h4 {
+    margin-bottom: 0;
+    font-size: min(2vw, 1.25rem);
+}
+
+/* project about text */
+
+.Place_text p {
+    margin-top: 0;
+    font-size: min(1.5vw, 0.9375rem);
+}
+
+/* img for the project */
+
+.place_image {
+    width: max(15vw, 1.25rem);
+    height: max(15vw, 1.25rem);
+    padding-left: 0.3rem;
+}
+
+
+/* to change the amount in a row depending on the screen width */
+@media screen and (max-width: 1000px) {
+
+    body {
+        -webkit-text-size-adjust: 100%;
+    }
+
+
+    /* makes the experience vertical */
+    .place {
+        display: inline-block;
+        align-items: center;
+        padding: 2vw;
+        text-align: center;
+        width: 40vw;
+        cursor: pointer;
+    }
+
+    .place_image {
+        width: max(25vw, 2.5rem);
+        height: max(25vw, 2.5rem);
+        padding-left: 0.3125rem;
+    }
+
+    /* makes icons invisible */
+    .icons {
+        display: none !important;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        -webkit-filter: brightness(75%);
+    }
+}
