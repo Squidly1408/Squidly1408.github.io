@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breathing & Music</title>
+<link rel="shortcut icon" href="./assets/images/logo.svg" type="image/x-icon">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .breathing-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #ff6f61;
+    margin: 40px 0;
+    animation: breathe 8s infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+  }
+
+  button {
+    padding: 15px 25px;
+    font-size: 16px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #555;
+  }
+
+  @media (max-width: 600px) {
+    .breathing-circle {
+      width: 120px;
+      height: 120px;
+    }
+
+    button {
+      width: 80%;
+      font-size: 18px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Relax & Breathe</h1>
+
+<div class="breathing-circle"></div>
+
+<button id="playMusic">Play Music</button>
+<button id="pauseMusic">Pause Music</button>
+
+<audio id="backgroundMusic" loop>
+  <source src="./assets/audio/relax.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+const music = document.getElementById('backgroundMusic');
+const playBtn = document.getElementById('playMusic');
+const pauseBtn = document.getElementById('pauseMusic');
+
+playBtn.addEventListener('click', () => {
+  music.play();
+});
+
+pauseBtn.addEventListener('click', () => {
+  music.pause();
+});
+</script>
+
+</body>
+</html>
