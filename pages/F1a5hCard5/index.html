@@ -236,6 +236,15 @@
         }
     </style>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ0V2L33EE"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DJ0V2L33EE');
+</script>
 
 <body>
     <div class="app">
@@ -266,10 +275,10 @@
                     <select id="filterSubject" class="select">
                         <option value="">All subjects</option>
                     </select>
-                    <select id="filterWeek"  class="select">
+                    <select id="filterWeek" class="select">
                         <option value="">All weeks</option>
                     </select>
-                    <select id="filterCategory"  class="select">
+                    <select id="filterCategory" class="select">
                         <option value="">All categories</option>
                     </select>
                 </div>
@@ -295,7 +304,7 @@
                         <h3>Create / Edit Flashcard</h3>
                         <div style="display:grid;grid-template-columns:1fr 140px;gap:8px">
                             <input id="cardFront" placeholder="Front (question)" />
-                            <select id="cardDifficulty"   class="select">
+                            <select id="cardDifficulty" class="select">
                                 <option value="easy">Easy</option>
                                 <option value="medium">Medium</option>
                                 <option value="hard">Hard</option>
@@ -329,7 +338,7 @@
                             <div>
                                 <label class="muted">Test settings</label>
                                 <div style="display:flex;gap:8px;margin-top:6px">
-                                    <select id="testDifficulty"   class="select">
+                                    <select id="testDifficulty" class="select">
                                         <option value="">All</option>
                                         <option value="easy">Easy</option>
                                         <option value="medium">Medium</option>
