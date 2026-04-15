@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drum_beet</title>
+    <link rel="shortcut icon" href="./images/logo.svg" type="image/x-icon">
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --panel: rgba(255, 255, 255, 0.04);
+            --accent: #10cfd5;
+            --text-dim: #8a8a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ambient background */
+        .bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(16, 207, 213, 0.08), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(16, 207, 213, 0.05), transparent 50%);
+            filter: blur(40px);
+        }
+
+        /* layout */
+        .app {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+        }
+
+        /* header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .status {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        /* center */
+        .center {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* beet core */
+        .beet {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #111, #000);
+            position: relative;
+            transition: transform 0.08s ease;
+        }
+
+        /* glow ring */
+        .ring {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            border: 1px solid rgba(16, 207, 213, 0.2);
+            transition: 0.1s;
+        }
+
+        /* pulse animation */
+        .beet.active {
+            transform: scale(1.25);
+        }
+
+        .beet.active .ring {
+            transform: scale(1.3);
+            opacity: 0;
+        }
+
+        /* inner dot */
+        .core {
+            position: absolute;
+            inset: 35%;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.9;
+        }
+
+        /* bottom control panel */
+        .panel {
+            background: var(--panel);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* button */
+        button {
+            background: var(--accent);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            color: black;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        /* bpm section */
+        .bpm-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        input[type="range"] {
+            width: 180px;
+            accent-color: var(--accent);
+        }
+
+        .bpm-text {
+            font-size: 14px;
+            color: var(--text-dim);
+            width: 70px;
+        }
+
+        /* footer hint */
+        .hint {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+
+    <div class="app">
+
+        <div class="header">
+            <div class="logo">drum_<span>beet</span></div>
+            <div class="status" id="status">idle</div>
+        </div>
+
+        <div class="center">
+            <div class="beet" id="beet">
+                <div class="ring"></div>
+                <div class="core"></div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <button id="toggleBtn">Play</button>
+
+            <div class="bpm-control">
+                <input type="range" id="bpmSlider" min="40" max="200" value="90">
+                <div class="bpm-text"><span id="bpmValue">90</span> BPM</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="hint">Coded by Squidly1408</div>
+
+    <script>
+        let audioCtx;
+        let isPlaying = false;
+        let interval;
+        let bpm = 90;
+
+        const beet = document.getElementById("beet");
+        const toggleBtn = document.getElementById("toggleBtn");
+        const slider = document.getElementById("bpmSlider");
+        const bpmValue = document.getElementById("bpmValue");
+        const status = document.getElementById("status");
+
+        // sound
+        function playKick() {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+
+            gain.gain.setValueAtTime(1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.5);
+        }
+
+        // loop
+        function startBeat() {
+            const intervalTime = (60 / bpm) * 1000;
+
+            interval = setInterval(() => {
+                playKick();
+
+                beet.classList.add("active");
+                setTimeout(() => beet.classList.remove("active"), 100);
+
+            }, intervalTime);
+        }
+
+        // toggle
+        toggleBtn.addEventListener("click", () => {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            isPlaying = !isPlaying;
+
+            if (isPlaying) {
+                startBeat();
+                toggleBtn.innerText = "Pause";
+                status.innerText = "playing";
+            } else {
+                clearInterval(interval);
+                toggleBtn.innerText = "Play";
+                status.innerText = "paused";
+            }
+        });
+
+        // bpm
+        slider.addEventListener("input", (e) => {
+            bpm = e.target.value;
+            bpmValue.innerText = bpm;
+
+            if (isPlaying) {
+                clearInterval(interval);
+                startBeat();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
