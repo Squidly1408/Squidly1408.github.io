@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         :root {
             --bg: #05070d;
@@ -344,6 +345,158 @@
                 transform: scale(0.78) rotate(-34deg);
             }
         }
+
+        /* IBPLC Stuff */
+        .container {
+            width: 100%;
+        }
+
+        .ibplc-layout {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            align-items: start;
+        }
+
+        .ibplc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .ibplc-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 30px;
+            border-radius: 30px;
+
+            border: 1px solid var(--line);
+
+            background:
+                linear-gradient(145deg,
+                    rgba(53, 217, 255, 0.08),
+                    rgba(22, 141, 255, 0.03)),
+                rgba(10, 20, 35, 0.72);
+
+            backdrop-filter: blur(18px);
+
+            text-decoration: none;
+            color: var(--white);
+
+            transition: 0.3s ease;
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+        }
+
+        .ibplc-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(120deg,
+                    transparent,
+                    rgba(53, 217, 255, 0.12),
+                    transparent);
+
+            transform: translateX(-100%);
+            transition: 0.7s;
+        }
+
+        .ibplc-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .ibplc-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--glow);
+            border-color: rgba(53, 217, 255, 0.4);
+        }
+
+        .ibplc-icon {
+            width: 68px;
+            height: 68px;
+
+            border-radius: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 22px;
+
+            background: linear-gradient(135deg,
+                    var(--primary),
+                    var(--secondary));
+
+            color: #041018;
+            font-size: 1.4rem;
+
+            box-shadow: var(--glow);
+        }
+
+        .ibplc-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 14px;
+        }
+
+        .ibplc-card p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 26px;
+        }
+
+        .ibplc-link {
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+        .ibplc-chart-card {
+            display: flex;
+            flex-direction: column;
+            align-self: start;
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .ibplc-chart-card .graph-title {
+            font-size: 1.35rem;
+            margin-bottom: 22px;
+        }
+
+        .petal-chart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .petal-legend {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+        }
+
+        @media (max-width: 850px) {
+            .ibplc-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+
+            .petal-legend {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 1300px) {
+            .ibplc-layout {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -354,7 +507,7 @@
     <nav>
         <div class="brand">
             <img src="./assets/logo.svg" alt="Logo" class="logo-mark" />
-            <span>Lucas Newman</span>
+            <span>Lucas Newman / IBPLC</span>
         </div>
         <div class="nav-links">
             <a href="#about">About</a>
@@ -405,7 +558,167 @@
             </div>
         </div>
     </section>
+    <section id="ibplc" class="reveal">
+        <div class="container">
 
+            <div class="eyebrow">Big Picture Education</div>
+
+            <h2 class="section-title">
+                IBPLC <span class="gradient-text">Learning Journey</span>
+            </h2>
+
+            <p class="section-subtitle">
+                The International Big Picture Learning Credential tracks growth through
+                project-based learning, reflection, and real-world experiences.
+                These artefacts represent key milestones throughout my learning journey.
+            </p>
+            <div class="ibplc-layout">
+                <div class="ibplc-card ibplc-chart-card">
+                    <h3 class="graph-title">IBPLC-Flower</h3>
+
+                    <div id="petalChartContainer" class="petal-chart">
+                        <svg viewBox="0 0 232.6640625 232.6640625" width="100%" style="overflow: visible;">
+                            <circle cx="116.33203125" cy="116.33203125" r="23.26640625" fill="transparent" stroke="#aaa"
+                                stroke-width="1px"></circle>
+                            <circle cx="116.33203125" cy="116.33203125" r="46.5328125" fill="transparent" stroke="#aaa"
+                                stroke-width="1px"></circle>
+                            <circle cx="116.33203125" cy="116.33203125" r="69.79921875" fill="transparent" stroke="#aaa"
+                                stroke-width="1px"></circle>
+                            <circle cx="116.33203125" cy="116.33203125" r="93.065625" fill="transparent" stroke="#aaa"
+                                stroke-width="1px"></circle>
+                            <circle cx="116.33203125" cy="116.33203125" r="116.33203125" fill="transparent"
+                                stroke="#aaa" stroke-width="1px"></circle>
+                            <path
+                                d="M0,0 C25.593046875,46.532812500000006 34.899609375,116.33203125  0,116.33203125 -34.899609375,116.33203125 -25.593046875,46.532812500000006 0,0"
+                                fill="#04a28d" transform="translate(116.33203125, 116.33203125) rotate(30) scale(0.8)">
+                            </path>
+
+                            <path
+                                d="M0,0 C25.593046875,46.532812500000006 34.899609375,116.33203125  0,116.33203125 -34.899609375,116.33203125 -25.593046875,46.532812500000006 0,0"
+                                fill="#9966ff" transform="translate(116.33203125, 116.33203125) rotate(90) scale(0.4)">
+                            </path>
+
+                            <path
+                                d="M0,0 C25.593046875,46.532812500000006 34.899609375,116.33203125  0,116.33203125 -34.899609375,116.33203125 -25.593046875,46.532812500000006 0,0"
+                                fill="#ff9f40" transform="translate(116.33203125, 116.33203125) rotate(150) scale(0.8)">
+                            </path>
+
+                            <path
+                                d="M0,0 C25.593046875,46.532812500000006 34.899609375,116.33203125  0,116.33203125 -34.899609375,116.33203125 -25.593046875,46.532812500000006 0,0"
+                                fill="#ff6384"
+                                transform="translate(116.33203125, 116.33203125) rotate(210) scale(0.6000000000000001)">
+                            </path>
+
+                            <path
+                                d="M0,0 C25.593046875,46.532812500000006 34.899609375,116.33203125  0,116.33203125 -34.899609375,116.33203125 -25.593046875,46.532812500000006 0,0"
+                                fill="#36a2eb"
+                                transform="translate(116.33203125, 116.33203125) rotate(270) scale(0.6000000000000001)">
+                            </path>
+
+                            <path
+                                d="M0,0 C25.593046875,46.532812500000006 34.899609375,116.33203125  0,116.33203125 -34.899609375,116.33203125 -25.593046875,46.532812500000006 0,0"
+                                fill="#f2f22a"
+                                transform="translate(116.33203125, 116.33203125) rotate(330) scale(0.6000000000000001)">
+                            </path>
+
+                        </svg>
+
+                    </div>
+                    <div class="petal-legend">
+                        <h3 style="color: #ff9f40;">KHTL: 4</h3>
+                        <h3 style="color: #ff6384;">PQ: 3</h3>
+                        <h3 style="color: #36a2eb;">QR: 3</h3>
+                        <h3 style="color: #f2f22a;">ER: 3</h3>
+                        <h3 style="color: #04a28d;">Comm: 4</h3>
+                        <h3 style="color: #9966ff;">SR: 2</h3>
+                    </div>
+                </div>
+                <div class="ibplc-grid">
+
+                    <a class="ibplc-card"
+                        href="https://github.com/Squidly1408/Squidly1408.github.io/blob/main/assets/Big%20Picture%20Assets/Senior%20Project.md"
+                        target="_blank">
+
+                        <div class="ibplc-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+
+                        <h3>Senior Project</h3>
+
+                        <p>
+                            Final project outcomes, documentation, and reflections developed
+                            through the Big Picture Education framework.
+                        </p>
+
+                        <span class="ibplc-link">
+                            View Artefact →
+                        </span>
+                    </a>
+
+                    <a class="ibplc-card"
+                        href="https://1drv.ms/w/c/f6929fc1ab5f8e55/Efy82lT_vpdLsMLiZCm2LmUBacRHEyxqbxq1iOvoefqwGQ?e=62qTwz"
+                        target="_blank">
+
+                        <div class="ibplc-icon">
+                            <i class="fa-solid fa-road"></i>
+                        </div>
+
+                        <h3>Future Pathway Plan</h3>
+
+                        <p>
+                            Academic, professional, and personal goals outlining
+                            future ambitions and long-term development.
+                        </p>
+
+                        <span class="ibplc-link">
+                            Open Plan →
+                        </span>
+                    </a>
+
+                    <a class="ibplc-card" href="https://youtu.be/qrvu3iDXWKc" target="_blank">
+
+                        <div class="ibplc-icon">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+
+                        <h3>Video Profile</h3>
+
+                        <p>
+                            A short profile video introducing my interests,
+                            projects, engineering mindset, and learning direction.
+                        </p>
+
+                        <span class="ibplc-link">
+                            Watch Video →
+                        </span>
+                    </a>
+
+                    <a class="ibplc-card"
+                        href="https://1drv.ms/w/c/f6929fc1ab5f8e55/EW1Yb_PoObhGl3pfW-w-h3sB6kpTjzxt7jwQJVg3eZrDWA?e=3Rwetp"
+                        target="_blank">
+
+                        <div class="ibplc-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+                        <h3>Autobiography</h3>
+
+                        <p>
+                            Background, experiences, values, and formative moments
+                            that shaped my approach to learning and technology.
+                        </p>
+
+                        <span class="ibplc-link">
+                            Read More →
+                        </span>
+                    </a>
+
+                </div>
+
+
+
+            </div>
+    </section>
     <section id="skills" class="reveal">
         <h2 class="section-title">Skills</h2>
         <p class="section-subtitle">

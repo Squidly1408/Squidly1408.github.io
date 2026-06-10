@@ -6,13 +6,28 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://squidly1408.github.io/old-version/</loc>
+    <loc>https://squidly1408.github.io/pages/experience/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://squidly1408.github.io/404/</loc>
+    <loc>https://squidly1408.github.io/pages/Breathing/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://squidly1408.github.io/pages/Drum_Beet/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://squidly1408.github.io/pages/F1a5hCard5/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://squidly1408.github.io/pages/NuRocketry/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

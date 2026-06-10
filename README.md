@@ -1,39 +1,58 @@
-![Logo](https://raw.githubusercontent.com/Squidly1408/Squidly1408/refs/heads/main/images/Squidly1408%20banner%20(Black%20Button%20Background).png)
+![Banner](https://raw.githubusercontent.com/Squidly1408/Squidly1408/refs/heads/main/images/Squidly1408%20banner%20(Black%20Button%20Background).png)
 
+# Lucas Newman — Portfolio
 
-# My Portfolio v3.4
+Personal portfolio site for Lucas Newman (Squidly1408) — a software engineering student and developer focused on AI systems, Flutter apps, computer vision, embedded technology, and web development.
 
-## Squidly's Explanation
-I'm a Software Developer at SAPHI Engineering, Who loves to code and learn all about software and electronics. I go to my local university and study my Bachelor of Software Engineering (Honours).
+**Live site:** [squidly1408.github.io](https://squidly1408.github.io)
 
-This is my Portfolio, a place where you can learn who I am, my skills, my achievements, my projects, and more.
+---
 
+## Built With
 
-### My Projects
-* [Strocoge](https://github.com/Squidly1408/Strocoge)
-* [Luvium](https://github.com/Squidly1408/fic)
-* [AAC APP](https://github.com/Squidly1408/aaca)
-* [Squidly's Folder Tools](https://github.com/Squidly1408/Squidly-s_Folder_Tools)
-* [My Portfolio](https://github.com/Squidly1408/Squidly1408.github.io)
-* [BPE-Flower](https://github.com/Squidly1408/BPE-Flower)
+Pure HTML, CSS, and JavaScript — no frameworks, no build step, deployed via GitHub Pages.
 
+---
 
-### My Experience
-* [SAPHI Engineering | Software Engineer Level 2](https://saphi.engineering/)
-* [The University of Newcastle | Student Researcher](https://www.newcastle.edu.au/)
-* [Clickk | Intern](https://clickk.com.au/)
-* [NuBots | Shadow Day Intern](https://nubook.nubots.net/)
-* [RedCrow | Shadow Day Intern](https://redcrowdigital.com.au/)
+## Featured Projects
 
+| Project | Description |
+|---|---|
+| [UConSoft](https://github.com/Squidly1408) | University collaboration platform for students, staff, and research visibility |
+| [BPE-Sites](https://github.com/Squidly1408) | Digital portfolio platform for Big Picture Education students |
+| [Red Car Tracker](https://github.com/Squidly1408) | AI camera system for detecting red cars across feeds using YOLO |
+| [DevFlow](https://github.com/Squidly1408) | CLI automation tool for speeding up development workflows |
+| [AAC Communication App](https://github.com/Squidly1408/aaca) | Cross-platform accessibility app with TTS and custom boards |
+| [BPE-Flower](https://github.com/Squidly1408/BPE-Flower) | Interactive educational reflection platform with SVG visual feedback |
+| [AI Detection Systems](https://github.com/Squidly1408) | YOLO-based scripts for object detection, tracking, and dataset preparation |
+| [Minecraft Clock](https://github.com/Squidly1408) | Windows desktop app visualising the Minecraft day-night cycle in real time |
 
-### Portfolio Links
-* [Email](mailto:squidly1408@gmail.com)
-* [LinkedIn](https://www.linkedin.com/in/squidly1408/)
-* [GitHub](https://github.com/Squidly1408)
-* [Discord](https://discord.com/channels/Squidly108)
+---
 
+## Sub-pages
 
-\
-\
-\
-If you have any feedback or just want to reach out, please reach out to me at Squidly1408@Gmail.com
+| Page | URL |
+|---|---|
+| Experience | [/pages/experience/](https://squidly1408.github.io/pages/experience/) |
+| Breathing Tool | [/pages/Breathing/](https://squidly1408.github.io/pages/Breathing/) |
+| Drum Beet | [/pages/Drum_Beet/](https://squidly1408.github.io/pages/Drum_Beet/) |
+| F1a5hCard5 | [/pages/F1a5hCard5/](https://squidly1408.github.io/pages/F1a5hCard5/) |
+| NuRocketry | [/pages/NuRocketry/](https://squidly1408.github.io/pages/NuRocketry/) |
+
+---
+
+## Experience
+
+- **SAPHI Engineering** — Software Engineer L2
+- **University of Newcastle** — Student Researcher
+- **Clickk** — Intern
+- **NuBots** — Shadow Day Intern
+- **RedCrow Digital** — Shadow Day Intern
+
+---
+
+## Contact
+
+- **Email:** [squidly1408@gmail.com](mailto:squidly1408@gmail.com)
+- **GitHub:** [github.com/Squidly1408](https://github.com/Squidly1408)
+- **LinkedIn:** [linkedin.com/in/squidly1408](https://www.linkedin.com/in/squidly1408/)
