@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- room walls (blueprint outline), with an off-center door gap in the bottom wall -->
+  <rect x="4" y="4" width="24" height="3" rx="1" fill="#4f46e5"/>
+  <rect x="4" y="4" width="3" height="24" rx="1" fill="#4f46e5"/>
+  <rect x="25" y="4" width="3" height="24" rx="1" fill="#4f46e5"/>
+  <rect x="4" y="25" width="14" height="3" rx="1" fill="#4f46e5"/>
+  <rect x="22" y="25" width="6" height="3" rx="1" fill="#4f46e5"/>
+
+  <!-- furniture, top-down: a sofa against the left wall + a small side table -->
+  <rect x="8" y="9" width="8" height="14" rx="2.5" fill="#6366f1"/>
+  <rect x="19" y="9" width="5" height="5" rx="1.5" fill="#6366f1"/>
+</svg>
