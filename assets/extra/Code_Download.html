@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Squidly1408 was here | Lucas Newman</title>
+    <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #05070d;
+            --bg-2: #09111f;
+            --card: rgba(10, 20, 35, 0.72);
+            --cyan: #35d9ff;
+            --blue: #168dff;
+            --white: #eafbff;
+            --muted: #8ca8b8;
+            --line: rgba(53, 217, 255, 0.24);
+            --glow: 0 0 30px rgba(53, 217, 255, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: Inter, sans-serif;
+            background:
+                radial-gradient(circle at top right,
+                    rgba(22, 141, 255, 0.18),
+                    transparent 32%),
+                radial-gradient(circle at bottom left,
+                    rgba(53, 217, 255, 0.12),
+                    transparent 30%),
+                var(--bg);
+
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        canvas {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .container {
+            width: min(900px, 92%);
+            padding: 60px;
+            border: 1px solid var(--line);
+            border-radius: 36px;
+            background: var(--card);
+            backdrop-filter: blur(18px);
+            box-shadow:
+                0 20px 70px rgba(0, 0, 0, 0.35),
+                var(--glow);
+
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(120deg,
+                    transparent,
+                    rgba(53, 217, 255, 0.08),
+                    transparent);
+
+            transform: translateX(-100%);
+            animation: shine 7s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        .small-text {
+            color: var(--cyan);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+
+
+
+
+        .floating-ring {
+            position: absolute;
+            border: 1px solid rgba(53, 217, 255, 0.18);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .ring-1 {
+            width: 420px;
+            height: 420px;
+            top: -160px;
+            right: -120px;
+        }
+
+        .ring-2 {
+            width: 260px;
+            height: 260px;
+            bottom: -100px;
+            left: -70px;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(18px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="stars"></canvas>
+
+    <div class="floating-ring ring-1"></div>
+    <div class="floating-ring ring-2"></div>
+
+    <div style="flex-direction: column; align-items: center; display: flex; ">
+        <img src="https://squidly1408.github.io/assets/logo.svg" alt="Logo"
+            style="width: 100px; height: 100px; margin-bottom: 20px;">
+        <div class="small-text">Squidly1408 Coded Here</div>
+    </div>
+
+
+
+    <script>
+        const canvas = document.getElementById("stars");
+        const ctx = canvas.getContext("2d");
+
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            createStars();
+        }
+
+        function createStars() {
+            const amount = Math.floor(
+                (canvas.width * canvas.height) / 9000
+            );
+
+            stars = Array.from({ length: amount }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.5 + 0.2,
+                speed: Math.random() * 0.35 + 0.08,
+                alpha: Math.random() * 0.7 + 0.2
+            }));
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (const star of stars) {
+
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+
+                ctx.fillStyle =
+                    "rgba(180,240,255,${star.alpha})";
+
+                ctx.fill();
+
+                star.y += star.speed;
+                star.x += star.speed * 0.15;
+
+                if (star.y > canvas.height) {
+                    star.y = -5;
+                    star.x = Math.random() * canvas.width;
+                }
+            }
+
+            requestAnimationFrame(drawStars);
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+
+        resizeCanvas();
+        drawStars();
+    </script>
+
+</body>
+
+</html>
