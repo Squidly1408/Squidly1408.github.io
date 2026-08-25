@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://squidly1408.github.io/pages/TraceBoard/sitemap.xml
