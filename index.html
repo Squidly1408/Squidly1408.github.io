@@ -309,6 +309,21 @@
             }
         }
 
+        .project-link,
+        .project-link:link,
+        .project-link:visited,
+        .project-link:hover,
+        .project-link:active {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .project-link .card {
+            height: 100%;
+            cursor: pointer;
+        }
+
         @media (max-width: 680px) {
             nav {
                 padding: 16px 5%;
@@ -468,91 +483,142 @@
     <section id="projects" class="reveal">
         <h2 class="section-title">Projects</h2>
         <p class="section-subtitle">
-            Featured projects that show my interest in software engineering, intelligent systems, and useful developer
-            tools.
+            Featured projects that show my interest in software engineering, intelligent systems, education technology,
+            accessibility, and useful developer tools.
         </p>
 
         <div class="grid">
-            <div class="card">
-                <h3>UConSoft</h3>
-                <p>A university collaboration platform for students, staff, academics, projects, and research
-                    visibility.</p>
-                <div class="tag-row"><span class="tag">Web App</span><span class="tag">Collaboration</span><span
-                        class="tag">UX</span></div>
-            </div>
-            <div class="card">
-                <h3>BPLIO</h3>
-                <p>A web platform for Big Picture Education students to showcase projects, learning, internships, and
-                    personal growth through digital portfolio websites.</p>
-                <div class="tag-row"><span class="tag">Web App</span><span class="tag">Portfolio Management</span><span
-                        class="tag">EduTech</span></div>
-            </div>
-            <div class="card">
-                <h3>BPE-Flower</h3>
-                <p>An interactive educational reflection platform based on the Big Picture Education framework with
-                    dynamic visual feedback and goal tracking.</p>
-                <div class="tag-row"><span class="tag">JavaScript</span><span class="tag">SVG</span><span
-                        class="tag">CSS</span></div>
-            </div>
-            <div class="card">
-                <h3>Furni4</h3>
-                <p>Furni4 is a browser-based 2D and 3D room planning application that enables users to accurately design
-                    rooms to real-world scale. While running completely client-side.</p>
-                <div class="tag-row"><span class="tag">Web App</span><span class="tag">2D Modeling</span><span
-                        class="tag">3D Modeling</span></div>
-            </div>
-            <div class="card">
-                <h3>SQDLC-CAD</h3>
-                <p>SQDLC-CAD is a modern browser-based 3D modelling and CAD application that provides an intuitive
-                    environment for creating, editing, and visualising precise three-dimensional models.</p>
-                <div class="tag-row"><span class="tag">CAD</span><span class="tag">3D Modeling</span><span
-                        class="tag">Web Devlopment</span></div>
-            </div>
-            <div class="card">
-                <h3>Bindary</h3>
-                <p>Turn completed tasks into short poems, saved to a private Firebase-backed library. React + Vite.</p>
-                <div class="tag-row"><span class="tag">React.js</span><span class="tag">firebase</span><span
-                        class="tag">Firebase Authentication</span></div>
-            </div>
-            <div class="card">
-                <h3>Traceboard</h3>
-                <p>Traceboard is a browser-based vector graphics application that converts images into clean, editable
-                    SVG artwork using precision tracing tools, automatic vectorisation, and offline-first Progressive
-                    Web App technology.</p>
-                <div class="tag-row"><span class="tag">Web App</span><span class="tag">SVG</span><span class="tag">Data
-                        Progressive Web Apps (PWA)</span></div>
-            </div>
-            <div class="card">
-                <h3>Red Car Tracker</h3>
-                <p>An AI camera-based system designed to detect red cars across camera feeds.</p>
-                <div class="tag-row"><span class="tag">AI</span><span class="tag">Computer Vision</span><span
-                        class="tag">Python</span></div>
-            </div>
-            <div class="card">
-                <h3>DevFlow</h3>
-                <p>A command-line automation tool for speeding up development workflows.</p>
-                <div class="tag-row"><span class="tag">PowerShell</span><span class="tag">CLI</span><span
-                        class="tag">Automation</span></div>
-            </div>
-            <div class="card">
-                <h3>Minecraft Clock</h3>
-                <p>A lightweight Windows desktop app that visualises the Minecraft day-night cycle using real time.</p>
-                <div class="tag-row"><span class="tag">Python</span><span class="tag">Desktop</span><span
-                        class="tag">UI</span></div>
-            </div>
-            <div class="card">
-                <h3>AAC Communication App</h3>
-                <p>A cross-platform accessibility app concept with text-to-speech, custom boards, and personalised UI.
-                </p>
-                <div class="tag-row"><span class="tag">Flutter</span><span class="tag">Accessibility</span><span
-                        class="tag">TTS</span></div>
-            </div>
-            <div class="card">
-                <h3>AI Detection Systems</h3>
-                <p>YOLO-based scripts for object detection, counting, tracking, and dataset preparation.</p>
-                <div class="tag-row"><span class="tag">YOLO</span><span class="tag">OpenCV</span><span
-                        class="tag">Data</span></div>
-            </div>
+
+            <a href="https://youtu.be/1aO_-rDJqW4" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>BPLIO</h3>
+                    <p>A centralised education portfolio platform for managing student work, moderation, administration,
+                        security, and portfolio publishing across Big Picture schools.</p>
+                    <div class="tag-row">
+                        <span class="tag">Full-Stack Development</span>
+                        <span class="tag">Authentication</span>
+                        <span class="tag">EduTech</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/0sRIl39ioxk" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>Bindary</h3>
+                    <p>A gamified university productivity app that rewards completed tasks with procedurally generated
+                        collectible books and poems.</p>
+                    <div class="tag-row">
+                        <span class="tag">React.js</span>
+                        <span class="tag">Gamification</span>
+                        <span class="tag">Procedural Generation</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/yOc5Qmen83A" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>SQDLC-CAD</h3>
+                    <p>A free browser-based CAD application for creating, editing, and visualising 3D models through an
+                        accessible web interface.</p>
+                    <div class="tag-row">
+                        <span class="tag">3D Modelling</span>
+                        <span class="tag">Interactive Graphics</span>
+                        <span class="tag">Web Development</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/vlkh-b1KmuE" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>Traceboard</h3>
+                    <p>A browser-based vector tracing tool that turns reference images into clean, editable SVG artwork
+                        using precision and automatic tracing tools.</p>
+                    <div class="tag-row">
+                        <span class="tag">SVG</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">PWA</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/your_video_id" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>BPE-Flower</h3>
+                    <p>An interactive digital version of the IBPLC graph that allows Big Picture Education students to
+                        visually track, edit, and present their learning progress.</p>
+                    <div class="tag-row">
+                        <span class="tag">SVG Manipulation</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">EduTech</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/pFhiWvCw5aU" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>Furni4</h3>
+                    <p>A fully client-side 2D and 3D room planner for designing spaces to real-world scale and testing
+                        furniture layouts before using them in real life.</p>
+                    <div class="tag-row">
+                        <span class="tag">2D/3D Visualisation</span>
+                        <span class="tag">Coordinate Systems</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/yZVEDrDuBUg" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>Red Car Counter</h3>
+                    <p>A distributed computer-vision system that detects, classifies, and counts red vehicles across
+                        multiple video feeds while aggregating results in real time.</p>
+                    <div class="tag-row">
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Distributed Computing</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/cRZzSxMHpBs" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>Flutter CLI</h3>
+                    <p>A command-line developer toolkit designed to automate repetitive Flutter development tasks and
+                        simplify common project workflows.</p>
+                    <div class="tag-row">
+                        <span class="tag">Developer Tooling</span>
+                        <span class="tag">Automation</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/m1rAp8qKUaw" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>Luvium</h3>
+                    <p>A collaborative social platform designed to help students discover projects, share knowledge, and
+                        connect with others working on similar interests.</p>
+                    <div class="tag-row">
+                        <span class="tag">Social Platform</span>
+                        <span class="tag">Collaboration</span>
+                        <span class="tag">Full-Stack Development</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://youtu.be/vCFSp7htgdQ" target="_blank" rel="noopener noreferrer" class="project-link">
+                <div class="card">
+                    <h3>Strocoge</h3>
+                    <p>A wearable communication-glove prototype that interprets hand positioning and movement and
+                        converts
+                        detected gestures into verbal communication.</p>
+                    <div class="tag-row">
+                        <span class="tag">Embedded Systems</span>
+                        <span class="tag">Sensors & Hardware</span>
+                        <span class="tag">Assistive Technology</span>
+                    </div>
+                </div>
+            </a>
 
         </div>
     </section>
