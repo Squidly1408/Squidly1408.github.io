@@ -282,10 +282,16 @@
             flex-wrap: wrap;
         }
 
-        .footer a {
+        .footer a,
+        footer a {
             color: var(--muted);
             text-decoration: none;
             transition: 0.25s;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 12px var(--primary);
         }
 
         .reveal {

@@ -283,10 +283,16 @@
             flex-wrap: wrap;
         }
 
-        .footer a {
+        .footer a,
+        footer a {
             color: var(--muted);
             text-decoration: none;
             transition: 0.25s;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 12px var(--primary);
         }
 
         .reveal {
@@ -975,7 +981,7 @@
     <footer>
         <p>© <span id="year"></span> Lucas Newman / Squidly1408.</p>
         <p>Software Engineering • AI • Embedded Systems</p>
-        <p><a href="./privacy.html">Privacy Policy</a></p>
+        <p><a href="../privacy.html">Privacy Policy</a></p>
     </footer>
 
     <script>
