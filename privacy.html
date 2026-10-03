@@ -2,196 +2,283 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy - Lucas Newman Portfolio</title>
-  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Privacy Policy · Squidly1408</title>
+    <meta name="description" content="Privacy policy for squidly1408.github.io, the portfolio of Lucas Newman.">
+    <link rel="icon" type="image/svg+xml" href="./assets/logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+    <style>
+        :root {
+            color-scheme: dark;
+            --ground: #131516;
+            --tile: #1b1b1b;
+            --raise: #202324;
+            --line: #2b2f31;
+            --ink: #eef3f4;
+            --muted: #98a6a9;
+            --faint: #5d6a6d;
+            --cyan: #22e6f2;
+            --cyan-deep: #1b8e90;
+            --cyan-wash: rgba(34, 230, 242, .08);
+            --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+            --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+            --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            --wrap: 760px;
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+        * {
+            box-sizing: border-box
+        }
 
-  <style>
-    :root {
-      --bg: #05070d;
-      --bg-2: #09111f;
-      --card: rgba(10, 20, 35, 0.72);
-      /* Strong Cyan */
-      --primary: #10CFD5;
-      /* Stormy Teal */
-      --secondary: #03767B;
-      --white: #eafbff;
-      --muted: #8ca8b8;
-      --line: rgba(53, 217, 255, 0.24);
-      --glow: 0 0 30px rgba(53, 217, 255, 0.35);
-    }
+        body {
+            margin: 0;
+            background: var(--ground);
+            color: var(--ink);
+            font: 400 16.5px/1.6 var(--body);
+            -webkit-font-smoothing: antialiased;
+            padding-inline: 20px;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        a {
+            color: inherit
+        }
 
-    html {
-      scroll-behavior: smooth;
-    }
+        ::selection {
+            background: var(--cyan);
+            color: #061214
+        }
 
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top right, rgba(22, 141, 255, 0.18), transparent 32%),
-        radial-gradient(circle at bottom left, rgba(53, 217, 255, 0.12), transparent 30%),
-        var(--bg);
-      color: var(--white);
-      font-family: Inter, sans-serif;
-      overflow-x: hidden;
-    }
+        :focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 3px;
+            border-radius: 4px
+        }
 
-    main {
-      width: min(760px, 92%);
-      margin: 0 auto;
-      padding: 90px 0 70px;
-    }
+        .wrap {
+            max-width: var(--wrap);
+            margin-inline: auto
+        }
 
-    .back {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 2.2rem;
-      padding: 10px 18px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(53, 217, 255, 0.08);
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
-      transition: 0.25s;
-    }
+        /* ---------- nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            margin-inline: -20px;
+            padding: 12px 20px;
+            background: rgba(19, 21, 22, .82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+        }
 
-    .back:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--glow);
-      color: var(--primary);
-    }
+        .nav .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px
+        }
 
-    .card {
-      padding: clamp(28px, 5vw, 48px);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: var(--card);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25);
-    }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font: 700 17px/1 var(--display);
+            letter-spacing: -.01em
+        }
 
-    h1 {
-      font-family: Audiowide, sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      line-height: 1.15;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, #fff, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+        .brand img {
+            width: 38px;
+            height: 38px
+        }
 
-    .updated {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 2.2rem;
-    }
+        .brand b {
+            color: var(--cyan);
+            font-weight: 700
+        }
 
-    h2 {
-      font-family: Audiowide, sans-serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.5px;
-      color: var(--primary);
-      margin-top: 2.4rem;
-      margin-bottom: 0.9rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--line);
-    }
+        .back {
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--muted);
+            font: 500 13.5px/1 var(--mono)
+        }
 
-    h2:first-of-type {
-      margin-top: 0;
-    }
+        .back:hover {
+            color: var(--ink);
+            background: var(--raise)
+        }
 
-    p {
-      line-height: 1.75;
-      color: var(--white);
-    }
+        /* ---------- document ---------- */
+        main {
+            padding-block: 72px 8px
+        }
 
-    p+p {
-      margin-top: 0.9rem;
-    }
+        .open,
+        .close {
+            font: 500 15px/1 var(--mono);
+            color: var(--cyan)
+        }
 
-    a {
-      color: var(--primary);
-      text-decoration: none;
-      border-bottom: 1px solid var(--line);
-      transition: 0.25s;
-    }
+        .open span,
+        .close {
+            color: var(--faint)
+        }
 
-    a:hover {
-      color: var(--white);
-      text-shadow: 0 0 12px var(--primary);
-    }
+        .close {
+            margin-top: 44px
+        }
 
-    code {
-      background: rgba(53, 217, 255, 0.1);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 0.1rem 0.4rem;
-      font-size: 0.9em;
-    }
+        .inset {
+            padding-left: clamp(0px, 3vw, 28px);
+            border-left: 1px dashed var(--line)
+        }
 
-    strong {
-      color: var(--primary);
-    }
+        h1 {
+            font: 800 clamp(36px, 5.6vw, 56px)/1.05 var(--display);
+            letter-spacing: -.035em;
+            margin: 0;
+            padding-top: 14px
+        }
 
-    footer {
-      width: min(760px, 92%);
-      margin: 0 auto;
-      padding: 42px 0;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-align: center;
-    }
-  </style>
+        .updated {
+            font: 400 13px/1.6 var(--mono);
+            color: var(--faint);
+            margin: 12px 0 40px
+        }
+
+        .doc section {
+            padding: 24px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        .doc section:last-child {
+            border-bottom: 1px solid var(--line)
+        }
+
+        h2 {
+            font: 700 21px/1.25 var(--display);
+            letter-spacing: -.01em;
+            margin: 0 0 8px
+        }
+
+        h2::before {
+            content: "// ";
+            font: 500 15px var(--mono);
+            color: var(--cyan-deep)
+        }
+
+        .doc p {
+            margin: 0;
+            color: #cfd8da;
+            max-width: 64ch
+        }
+
+        .doc a {
+            color: var(--cyan);
+            text-underline-offset: 3px
+        }
+
+        .doc a:hover {
+            color: #5ff0f7
+        }
+
+        code {
+            font: 500 .88em var(--mono);
+            padding: 2px 6px;
+            border-radius: 5px;
+            background: var(--cyan-wash);
+            color: #aef6fa
+        }
+
+        strong {
+            color: var(--ink);
+            font-weight: 600
+        }
+
+        footer.site {
+            padding-block: 72px 40px;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            color: var(--faint);
+            font: 400 13.5px/1.5 var(--mono)
+        }
+
+        footer.site b {
+            color: var(--cyan);
+            font-weight: 400
+        }
+
+        @media (max-width:620px) {
+            body {
+                font-size: 16px
+            }
+
+            main {
+                padding-top: 48px
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <main>
-    <a class="back" href="./index.html">&larr; Back to portfolio</a>
-    <div class="card">
-      <h1>Privacy Policy</h1>
-      <p class="updated">Lucas Newman Portfolio (squidly1408.github.io) &middot; Last updated 31 August 2026</p>
 
-      <h2>What this site collects</h2>
-      <p>This portfolio site is static and does not use analytics, advertising, or tracking cookies, and it does not
-        ask you to create an account or submit personal information. Your browser may send standard technical
-        information (like your IP address and browser type) to GitHub Pages, which hosts this site, as part of
-        normal web hosting - see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
-          target="_blank" rel="noopener">GitHub's own privacy statement</a> for how they handle that.</p>
+    <nav class="nav" aria-label="Main">
+        <div class="wrap">
+            <a class="brand" href="./index.html"><img src="./assets/logo.svg" alt="" width="38"
+                    height="38"><span>Squidly<b>1408</b></span></a>
+            <a class="back" href="./index.html">← portfolio</a>
+        </div>
+    </nav>
 
-      <h2>Apps hosted under /apps/</h2>
-      <p>Some individual project demos are hosted under this site's <code>/apps/</code> path. Where a project
-        collects its own data (for example, an app with accounts or cloud storage), that project links to its own
-        separate Privacy Policy - check the project itself for details.</p>
+    <main class="wrap">
+        <div class="open">privacy <span>{</span></div>
+        <div class="inset">
+            <h1>Privacy Policy</h1>
+            <p class="updated">Lucas Newman Portfolio (squidly1408.github.io) · Last updated 31 August 2026</p>
 
-      <h2>Contact</h2>
-      <p>Questions? Email <strong>Squidly1408@gmail.com</strong>.</p>
-    </div>
-  </main>
+            <div class="doc">
+                <section>
+                    <h2>What this site collects</h2>
+                    <p>This portfolio site is static and does not use analytics, advertising, or tracking cookies, and
+                        it does not ask you to create an account or submit personal information. Your browser may send
+                        standard technical information (like your IP address and browser type) to GitHub Pages, which
+                        hosts this site, as part of normal web hosting - see <a
+                            href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+                            target="_blank" rel="noopener">GitHub's own privacy statement</a> for how they handle that.
+                    </p>
+                </section>
+                <section>
+                    <h2>Apps hosted under /apps/</h2>
+                    <p>Some individual project demos are hosted under this site's <code>/apps/</code> path. Where a
+                        project collects its own data (for example, an app with accounts or cloud storage), that project
+                        links to its own separate Privacy Policy - check the project itself for details.</p>
+                </section>
+                <section>
+                    <h2>Contact</h2>
+                    <p>Questions? Email <a href="mailto:squidly1408@gmail.com">Squidly1408@gmail.com</a>.</p>
+                </section>
+            </div>
+        </div>
+        <div class="close">}</div>
 
-  <footer>
-    <p>&copy; <span id="year"></span> Lucas Newman / Squidly1408.</p>
-  </footer>
+        <footer class="site">
+            <span>© <span id="yr">2026</span> Lucas Newman / Squidly1408</span>
+            <span>Made with <b>{ }</b> in Newcastle, AU</span>
+        </footer>
+    </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    <script>
+        document.getElementById('yr').textContent = new Date().getFullYear();
+    </script>
 </body>
 
 </html>

@@ -1,220 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 — Page Not Found | Lucas Newman</title>
-    <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>404 · Squidly1408</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
     <style>
         :root {
-            --bg: #05070d;
-            --bg-2: #09111f;
-            --card: rgba(10, 20, 35, 0.72);
-            --cyan: #35d9ff;
-            --blue: #168dff;
-            --white: #eafbff;
-            --muted: #8ca8b8;
-            --line: rgba(53, 217, 255, 0.24);
-            --glow: 0 0 30px rgba(53, 217, 255, 0.35);
+            color-scheme: dark;
+            --ground: #131516;
+            --tile: #1b1b1b;
+            --raise: #202324;
+            --line: #2b2f31;
+            --ink: #eef3f4;
+            --muted: #98a6a9;
+            --faint: #5d6a6d;
+            --cyan: #22e6f2;
+            --cyan-deep: #1b8e90;
+            --cyan-wash: rgba(34, 230, 242, .08);
+            --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+            --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+            --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            --wrap: 1120px;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box
         }
 
         body {
+            margin: 0;
             min-height: 100vh;
-            overflow: hidden;
-            font-family: Inter, sans-serif;
-            background:
-                radial-gradient(circle at top right,
-                    rgba(22, 141, 255, 0.18),
-                    transparent 32%),
-                radial-gradient(circle at bottom left,
-                    rgba(53, 217, 255, 0.12),
-                    transparent 30%),
-                var(--bg);
-
-            color: var(--white);
-
+            min-height: 100dvh;
             display: flex;
+            flex-direction: column;
+            background: var(--ground);
+            color: var(--ink);
+            font: 400 16.5px/1.6 var(--body);
+            -webkit-font-smoothing: antialiased;
+            padding-inline: 20px;
+        }
+
+        a {
+            color: inherit
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        ::selection {
+            background: var(--cyan);
+            color: #061214
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 3px;
+            border-radius: 4px
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: var(--wrap);
+            margin-inline: auto
+        }
+
+        /* ---------- nav ---------- */
+        .nav {
+            margin-inline: -20px;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
+            gap: 10px;
+            text-decoration: none;
+            font: 700 17px/1 var(--display);
+            letter-spacing: -.01em
         }
 
-        canvas {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
+        .brand img {
+            width: 38px;
+            height: 38px
         }
 
-        .container {
-            width: min(900px, 92%);
-            padding: 60px;
-            border: 1px solid var(--line);
-            border-radius: 36px;
-            background: var(--card);
-            backdrop-filter: blur(18px);
-            box-shadow:
-                0 20px 70px rgba(0, 0, 0, 0.35),
-                var(--glow);
-
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .container::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(120deg,
-                    transparent,
-                    rgba(53, 217, 255, 0.08),
-                    transparent);
-
-            transform: translateX(-100%);
-            animation: shine 7s linear infinite;
-        }
-
-        @keyframes shine {
-            to {
-                transform: translateX(100%);
-            }
-        }
-
-        .small-text {
+        .brand b {
             color: var(--cyan);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-size: 0.78rem;
-            font-weight: 800;
-            margin-bottom: 18px;
+            font-weight: 700
         }
 
-        .error-code {
-            font-family: Audiowide, sans-serif;
-            font-size: clamp(5rem, 18vw, 11rem);
-            line-height: 1;
-            margin-bottom: 18px;
+        .brand .sub {
+            color: var(--faint);
+            font-weight: 500
+        }
 
-            background:
-                linear-gradient(90deg,
-                    #ffffff,
-                    var(--cyan),
-                    var(--blue));
+        /* ---------- error ---------- */
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 48px;
+            align-items: center;
+            padding-block: 64px
+        }
 
-            -webkit-background-clip: text;
-            color: transparent;
+        .eyebrow {
+            font: 500 13px/1.5 var(--mono);
+            color: var(--cyan);
+            letter-spacing: .02em
+        }
 
-            text-shadow: 0 0 30px rgba(53, 217, 255, 0.18);
+        .eyebrow .dot {
+            display: inline-block;
+            vertical-align: 1px;
+            margin-right: 10px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 0 4px var(--cyan-wash)
         }
 
         h1 {
-            font-size: clamp(1.6rem, 4vw, 3rem);
-            margin-bottom: 18px;
+            font: 800 clamp(72px, 14vw, 160px)/.95 var(--display);
+            letter-spacing: -.045em;
+            margin: 18px 0 10px;
+            font-variant-numeric: tabular-nums
         }
 
-        p {
-            max-width: 620px;
-            margin: 0 auto 36px;
+        h1 .br {
+            font-family: var(--mono);
+            font-weight: 400;
+            color: var(--cyan);
+            font-size: .82em;
+            letter-spacing: -.06em
+        }
+
+        h2 {
+            font: 700 clamp(24px, 3vw, 32px)/1.15 var(--display);
+            letter-spacing: -.02em;
+            margin: 0 0 14px
+        }
+
+        .lede {
+            font-size: 18px;
             color: var(--muted);
-            line-height: 1.8;
-            font-size: 1.05rem;
+            max-width: 50ch;
+            margin: 0 0 28px
         }
 
-        .buttons {
+        .lede code {
+            font: 500 .85em var(--mono);
+            padding: 2px 6px;
+            border-radius: 5px;
+            background: var(--cyan-wash);
+            color: #aef6fa;
+            word-break: break-all
+        }
+
+        .actions {
             display: flex;
-            justify-content: center;
-            gap: 16px;
             flex-wrap: wrap;
+            gap: 12px
         }
 
         .btn {
-            padding: 14px 24px;
-            border-radius: 999px;
-            border: 1px solid var(--line);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font: 600 15px/1 var(--body);
             text-decoration: none;
-            font-weight: 700;
-            transition: 0.25s;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg,
-                    var(--cyan),
-                    var(--blue));
-
-            color: #021019;
-        }
-
-        .btn-secondary {
-            background: rgba(53, 217, 255, 0.08);
-            color: var(--white);
+            border: 1px solid var(--line);
+            color: var(--ink);
+            background: var(--tile);
+            cursor: pointer;
+            transition: border-color .15s, transform .15s;
         }
 
         .btn:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--glow);
+            border-color: var(--cyan-deep);
+            transform: translateY(-1px)
         }
 
-        .floating-ring {
-            position: absolute;
-            border: 1px solid rgba(53, 217, 255, 0.18);
-            border-radius: 50%;
-            animation: float 10s ease-in-out infinite;
+        .btn.primary {
+            background: var(--cyan);
+            border-color: var(--cyan);
+            color: #061214
         }
 
-        .ring-1 {
-            width: 420px;
-            height: 420px;
-            top: -160px;
-            right: -120px;
+        .btn.primary:hover {
+            background: #5ff0f7
         }
 
-        .ring-2 {
-            width: 260px;
-            height: 260px;
-            bottom: -100px;
-            left: -70px;
-            animation-delay: -4s;
+        .perch {
+            display: grid;
+            place-items: center
         }
 
-        @keyframes float {
+        .perch img {
+            width: min(100%, 360px);
+            filter: drop-shadow(0 30px 60px rgba(34, 230, 242, .14));
+            animation: bob 5s ease-in-out infinite
+        }
 
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
+        @keyframes bob {
             50% {
-                transform: translateY(18px);
+                transform: translateY(-8px)
             }
         }
 
-        @media (max-width: 700px) {
-            .container {
-                padding: 40px 24px;
-                border-radius: 26px;
+        footer.site {
+            padding-block: 24px 40px;
+            color: var(--faint);
+            font: 400 13.5px/1.5 var(--mono)
+        }
+
+        footer.site b {
+            color: var(--cyan);
+            font-weight: 400
+        }
+
+        @media (max-width:900px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding-top: 40px
             }
 
-            .buttons {
-                flex-direction: column;
+            .perch {
+                order: -1;
+                justify-items: start
             }
 
-            .btn {
-                width: 100%;
+            .perch img {
+                width: 140px
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
             }
         }
     </style>
@@ -222,91 +261,41 @@
 
 <body>
 
-    <canvas id="stars"></canvas>
-
-    <div class="floating-ring ring-1"></div>
-    <div class="floating-ring ring-2"></div>
-
-    <div class="container">
-
-        <div class="small-text">System Error</div>
-
-        <div class="error-code">404</div>
-
-        <h1>Page Not Found</h1>
-
-        <p>
-            The page you were trying to access either no longer exists,
-            was moved, or never existed in the first place.
-            Try returning to the homepage or navigating elsewhere.
-        </p>
-
-        <div class="buttons">
-            <a href="/" class="btn btn-primary">Return Home</a>
-            <a href="javascript:history.back()" class="btn btn-secondary">
-                Go Back
-            </a>
+    <nav class="nav" aria-label="Main">
+        <div class="wrap">
+            <a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="38"
+                    height="38"><span>Squidly<b>1408</b></span></a>
         </div>
+    </nav>
 
+    <main class="wrap">
+        <div>
+            <div class="eyebrow"><span class="dot"></span>error · page not found</div>
+            <h1><span class="br">{</span>404<span class="br">}</span></h1>
+            <h2>Nothing lives at this address.</h2>
+            <p class="lede">The page at <code id="path">this URL</code> was moved, renamed or never existed. Head back
+                to the portfolio, or step back to where you came from.</p>
+            <div class="actions">
+                <a class="btn primary" href="/">Back to portfolio</a>
+                <a class="btn" href="/#projects">See projects</a>
+                <button class="btn" type="button" id="backBtn">← Go back</button>
+            </div>
+        </div>
+        <div class="perch"><img src="/assets/logo.svg" alt="Squidly1408 logo" width="360" height="360"></div>
+    </main>
+
+    <div class="wrap">
+        <footer class="site">© <span id="yr">2026</span> Lucas Newman / Squidly1408 · Made with <b>{ }</b> in
+            Newcastle, AU</footer>
     </div>
 
     <script>
-        const canvas = document.getElementById("stars");
-        const ctx = canvas.getContext("2d");
-
-        let stars = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            createStars();
-        }
-
-        function createStars() {
-            const amount = Math.floor(
-                (canvas.width * canvas.height) / 9000
-            );
-
-            stars = Array.from({ length: amount }, () => ({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 1.5 + 0.2,
-                speed: Math.random() * 0.35 + 0.08,
-                alpha: Math.random() * 0.7 + 0.2
-            }));
-        }
-
-        function drawStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            for (const star of stars) {
-
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-
-                ctx.fillStyle =
-                    `rgba(180,240,255,${star.alpha})`;
-
-                ctx.fill();
-
-                star.y += star.speed;
-                star.x += star.speed * 0.15;
-
-                if (star.y > canvas.height) {
-                    star.y = -5;
-                    star.x = Math.random() * canvas.width;
-                }
-            }
-
-            requestAnimationFrame(drawStars);
-        }
-
-        window.addEventListener("resize", resizeCanvas);
-
-        resizeCanvas();
-        drawStars();
+        document.getElementById('path').textContent = location.pathname;
+        document.getElementById('backBtn').addEventListener('click', function () {
+            if (history.length > 1) history.back(); else location.href = '/';
+        });
+        document.getElementById('yr').textContent = new Date().getFullYear();
     </script>
-
 </body>
 
 </html>
