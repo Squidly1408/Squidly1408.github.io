@@ -13,17 +13,29 @@
 html,body{height:100%}
 body{background:var(--choc);color:var(--cream);font-family:var(--body)}
 .stage{min-height:100%;display:grid;place-items:center;padding-inline:16px;padding-block:16px}
-.frame{position:relative;width:min(100%, calc((100vh - 32px) * 16 / 9));max-width:100%}
+.frame{position:relative;width:min(100%, calc((100vh - 100px) * 16 / 9));max-width:100%;display:flex;flex-direction:column;gap:14px}
+.vid{position:relative}
 canvas{display:block;width:100%;aspect-ratio:16/9;height:auto;border-radius:16px;background:var(--choc);box-shadow:0 0 0 3px var(--frost),0 0 0 9px var(--choc-3);cursor:pointer}
 .play{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);font:800 clamp(14px,2.2vw,20px) var(--body);background:var(--frost);color:var(--choc);border:0;border-radius:999px;padding:.7em 1.6em;cursor:pointer;display:inline-flex;align-items:center;gap:.5em;box-shadow:0 4px 0 var(--berry)}
 .play:active{transform:translate(-50%,2px);box-shadow:0 2px 0 var(--berry)}
-.play:focus-visible{outline:3px solid var(--flame);outline-offset:3px}
+.play:focus-visible,.ctl button:focus-visible,#seek:focus-visible{outline:3px solid var(--flame);outline-offset:3px}
+.ctl{display:flex;align-items:center;gap:12px;background:var(--choc-3);border-radius:999px;padding:8px 16px 8px 8px}
+.ctl button{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--frost);color:var(--choc);font:800 15px var(--body);cursor:pointer;display:grid;place-items:center}
+.time{flex:none;font:600 13px var(--body);font-variant-numeric:tabular-nums;color:var(--cream);min-width:84px}
+#seek{flex:1 1 auto;min-width:0;accent-color:var(--frost);height:24px;cursor:pointer}
 </style>
 
 <div class="stage">
   <div class="frame">
-    <canvas id="screen" width="1280" height="720" aria-label="UNC Status music video for Ethan"></canvas>
-    <button class="play" id="playBtn" type="button"><span id="playIcon">▶</span><span id="playLabel">Play</span></button>
+    <div class="vid">
+      <canvas id="screen" width="1280" height="720" aria-label="UNC Status music video for Ethan"></canvas>
+      <button class="play" id="playBtn" type="button"><span id="playIcon">▶</span><span id="playLabel">Play</span></button>
+    </div>
+    <div class="ctl">
+      <button id="ppBtn" type="button" aria-label="Play">▶</button>
+      <span class="time" id="time">0:00 / 0:00</span>
+      <input type="range" id="seek" min="0" max="100" step="0.1" value="0" aria-label="Scrub through the song">
+    </div>
   </div>
 </div>
 
@@ -203,12 +215,23 @@ function seek(time){time=Math.max(0,Math.min(DURATION-.1,time));if(playing){paus
 
 /* ---------- UI ---------- */
 const $=id=>document.getElementById(id);
-const playBtn=$('playBtn');const seekEl={value:0},timeEl={textContent:''};
+const playBtn=$('playBtn'),ppBtn=$('ppBtn'),seekEl=$('seek'),timeEl=$('time');
+seekEl.max=DURATION.toFixed(1);
 const fmt=s=>{s=Math.max(0,Math.min(s,DURATION));return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0')};
-function ui(){playBtn.hidden=playing;const end=!playing&&pausedAt>=DURATION;$('playIcon').textContent=playing?'❚❚':(end?'↺':'▶');$('playLabel').textContent=playing?'Pause':(end?'Play again':(pausedAt>0?'Resume':'Play'))}
+function ui(){playBtn.hidden=playing||pausedAt>0;ppBtn.textContent=playing?'❚❚':'▶';ppBtn.setAttribute('aria-label',playing?'Pause':'Play');const end=!playing&&pausedAt>=DURATION;$('playIcon').textContent=playing?'❚❚':(end?'↺':'▶');$('playLabel').textContent=playing?'Pause':(end?'Play again':(pausedAt>0?'Resume':'Play'))}
 playBtn.addEventListener('click',()=>playing?pause():play());
 let dragging=false;
 $('screen').addEventListener('click',()=>playing?pause():play());
+ppBtn.addEventListener('click',()=>playing?pause():play());
+let wasPlaying=false;
+const scrubStart=()=>{if(dragging)return;dragging=true;wasPlaying=playing;if(playing)pause()};
+seekEl.addEventListener('pointerdown',scrubStart);
+seekEl.addEventListener('keydown',scrubStart);
+seekEl.addEventListener('input',()=>{if(!dragging)scrubStart();pausedAt=Math.min(+seekEl.value,DURATION-.1);started=true;timeEl.textContent=fmt(pausedAt)+' / '+fmt(DURATION)});
+const scrubEnd=()=>{if(!dragging)return;dragging=false;const t=Math.min(+seekEl.value,DURATION-.1);pausedAt=t;started=true;if(wasPlaying)play(t);else ui()};
+seekEl.addEventListener('change',scrubEnd);
+seekEl.addEventListener('pointerup',scrubEnd);
+seekEl.addEventListener('keyup',scrubEnd);
 document.addEventListener('keydown',e=>{if(e.code==='Space'&&e.target===document.body){e.preventDefault();playing?pause():play()}});
 
 const lineEls=[];
