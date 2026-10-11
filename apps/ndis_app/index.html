@@ -1,0 +1,1318 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Handover Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: app shell — sidebar on wide screens, bottom tab bar on phones; content is lists of records, not cards everywhere */
+:root{
+  --bg:#F2F5F1;--surface:#FFFFFF;--surface-2:#E7ECE6;--ink:#15201A;--muted:#56645C;--line:#D3DBD2;
+  --accent:#2A6954;--accent-ink:#FFFFFF;--accent-soft:#DAEAE2;
+  --jac:#5C48AD;--jac-soft:#E6E1F6;
+  --ok:#24784A;--ok-soft:#DCEFE2;--warn:#965A00;--warn-soft:#FAEACB;--bad:#AE251D;--bad-soft:#F8DDDA;
+  --scrim:rgba(14,22,18,.45);--shadow:0 1px 2px rgba(21,32,26,.05),0 10px 30px rgba(21,32,26,.10);
+  --f-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;
+  --f-body:'Atkinson Hyperlegible',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1512;--surface:#171F1B;--surface-2:#202A25;--ink:#E4ECE7;--muted:#98A69F;--line:#2C3832;
+  --accent:#73C2A2;--accent-ink:#0B1712;--accent-soft:#1C3a2F;
+  --jac:#A897E8;--jac-soft:#2A2445;
+  --ok:#6FC490;--ok-soft:#173325;--warn:#E6A84D;--warn-soft:#3A2A10;--bad:#F18B80;--bad-soft:#3D1B18;
+  --scrim:rgba(0,0,0,.6);--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.45);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1512;--surface:#171F1B;--surface-2:#202A25;--ink:#E4ECE7;--muted:#98A69F;--line:#2C3832;
+  --accent:#73C2A2;--accent-ink:#0B1712;--accent-soft:#1C3a2F;
+  --jac:#A897E8;--jac-soft:#2A2445;
+  --ok:#6FC490;--ok-soft:#173325;--warn:#E6A84D;--warn-soft:#3A2A10;--bad:#F18B80;--bad-soft:#3D1B18;
+  --scrim:rgba(0,0,0,.6);--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.45);color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:1.75rem}h2{font-size:1.25rem}h3{font-size:1.08rem}h4{font-size:.95rem}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.muted{color:var(--muted)}.small{font-size:.85rem}
+.mono{font-family:var(--f-mono);font-size:.86em}
+.tab-n{font-variant-numeric:tabular-nums}
+
+/* shell */
+.app{min-height:100%;display:grid;grid-template-rows:auto 1fr}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;margin-right:auto}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;flex:none}
+.brand b{font-family:var(--f-display);font-size:1.12rem;display:block;line-height:1.1}
+.brand span{font-size:.78rem;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewas{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:6px 12px;border-radius:999px;cursor:pointer;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12);font-weight:700}
+.viewas select{max-width:200px;padding:6px 10px;border-radius:999px;font-size:.85rem}
+.body{display:grid;grid-template-columns:1fr;min-width:0}
+.side{display:none}
+main{min-width:0;padding-inline:16px;padding-block:20px 110px;max-width:1080px;width:100%;margin:0 auto}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px))}
+.tabbar button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;font-size:.7rem;color:var(--muted);cursor:pointer;border-radius:8px;position:relative}
+.tabbar button[aria-current="page"]{color:var(--accent);font-weight:700}
+.ico{width:22px;height:22px;flex:none}
+.dot-badge{position:absolute;top:3px;left:calc(50% + 6px);min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--bad);color:#fff;font-size:.66rem;line-height:16px;font-weight:700}
+@media (min-width:960px){
+  .body{grid-template-columns:236px 1fr}
+  .side{display:flex;flex-direction:column;gap:2px;padding:16px 10px;border-right:1px solid var(--line);background:var(--surface);position:sticky;top:61px;height:calc(100vh - 61px);overflow:auto}
+  .side button{border:0;background:none;display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;text-align:left;cursor:pointer;color:var(--muted);position:relative}
+  .side button:hover{background:var(--surface-2);color:var(--ink)}
+  .side button[aria-current="page"]{background:var(--accent-soft);color:var(--ink);font-weight:700}
+  .side .count{margin-left:auto;background:var(--bad);color:#fff;border-radius:10px;font-size:.72rem;padding:0 7px;font-weight:700}
+  .side .sidefoot{margin-top:auto;padding:12px;font-size:.78rem;color:var(--muted)}
+  .tabbar{display:none}
+  main{padding-block:28px 48px;padding-inline:32px}
+}
+
+/* page header */
+.ph{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;margin-bottom:20px}
+.ph .t{margin-right:auto;min-width:0}
+.eyebrow{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.stack{display:flex;flex-direction:column;gap:12px}
+.section{margin-top:28px}
+.section>.sh{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.section>.sh h2{margin-right:auto}
+.cols{display:grid;gap:24px;grid-template-columns:1fr}
+@media (min-width:900px){.cols{grid-template-columns:1fr 1fr}.cols>*{min-width:0}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700;font-size:.9rem;white-space:nowrap}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.ghost{background:none;border-color:transparent}
+.btn.ghost:hover{background:var(--surface-2)}
+.btn.danger{color:var(--bad);border-color:var(--bad-soft)}
+.btn.sm{padding:5px 10px;font-size:.82rem}
+.btn .ico{width:17px;height:17px}
+.icon-btn{border:0;background:none;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.4rem;line-height:1;color:var(--muted)}
+.icon-btn:hover{background:var(--surface-2);color:var(--ink)}
+
+/* lists */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.list>*+*{border-top:1px solid var(--line)}
+.item{display:flex;gap:12px;align-items:center;padding:12px 14px;width:100%;background:none;border:0;text-align:left;cursor:pointer}
+.item:hover{background:var(--surface-2)}
+.item .main{flex:1;min-width:0}
+.item .title{font-weight:700;display:block;overflow-wrap:anywhere}
+.item .sub{font-size:.85rem;color:var(--muted);display:block;overflow-wrap:anywhere}
+.static{cursor:default}.static:hover{background:none}
+.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;flex:none;background:var(--accent-soft);color:var(--accent)}
+.avatar.w{background:var(--jac-soft);color:var(--jac)}
+.sh-time{display:flex;flex-direction:column;min-width:62px;font-variant-numeric:tabular-nums;font-size:.85rem;color:var(--muted);line-height:1.25}
+.sh-time b{color:var(--ink);font-size:.95rem}
+.sh-date{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;background:var(--surface-2);color:var(--muted)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.acc{background:var(--accent-soft);color:var(--accent)}
+.pill.jac{background:var(--jac-soft);color:var(--jac)}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.bad{border-color:var(--bad);color:var(--bad)}
+
+/* callouts / alerts */
+.callout{padding:12px 14px;border-radius:8px;background:var(--surface-2);font-size:.9rem}
+.callout ul{margin:6px 0 0;padding-left:18px}
+.callout.warn{background:var(--warn-soft);color:var(--ink);border-left:3px solid var(--warn)}
+.callout.bad{background:var(--bad-soft);color:var(--ink);border-left:3px solid var(--bad)}
+.callout.ok{background:var(--ok-soft);border-left:3px solid var(--ok)}
+.alerts{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:9px;background:var(--surface);border:1px solid var(--line);text-align:left;cursor:pointer;width:100%}
+.alert:hover{border-color:var(--muted)}
+.alert .sev{width:8px;height:8px;border-radius:50%;margin-top:7px;flex:none;background:var(--muted)}
+.alert.bad .sev{background:var(--bad)}.alert.warn .sev{background:var(--warn)}
+.alert b{display:block}
+.alert span{font-size:.83rem;color:var(--muted)}
+
+.strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.strip>div{padding:12px 14px}
+.strip>div+div{border-left:1px solid var(--line)}
+.strip b{font-family:var(--f-display);font-size:1.6rem;display:block;font-variant-numeric:tabular-nums;line-height:1.1}
+.strip span{font-size:.8rem;color:var(--muted)}
+
+.empty{padding:28px 18px;text-align:center;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
+.empty h3{color:var(--ink)}
+.empty p{max-width:44ch}
+
+.setup{padding:22px;display:grid;gap:16px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+.steps li{display:flex;gap:12px;align-items:center;counter-increment:s;padding:12px;border-radius:9px;background:var(--surface-2)}
+.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-weight:700;flex:none;font-family:var(--f-display)}
+.steps li.done::before{content:"✓";background:var(--ok);color:#fff}
+.steps li .main{flex:1;min-width:0}
+
+/* tabs */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:18px;overflow-x:auto;scrollbar-width:none}
+.tabs button{border:0;background:none;padding:10px 12px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;font-weight:700;font-size:.9rem}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+
+/* definition blocks */
+.dl{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:8px 14px;padding:14px}
+.dl dt{color:var(--muted);font-size:.85rem}
+.dl dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
+.card-h{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.card-h h3{margin-right:auto}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:14px 1fr;gap:12px;padding-bottom:16px;position:relative}
+.tl li::before{content:"";position:absolute;left:6px;top:16px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl .nd{width:14px;height:14px;border-radius:50%;margin-top:3px;border:3px solid var(--surface);background:var(--muted);box-shadow:0 0 0 1px var(--line)}
+.tl .nd.note{background:var(--accent)}.tl .nd.med{background:var(--jac)}.tl .nd.visit{background:var(--ok)}.tl .nd.inc{background:var(--bad)}.tl .nd.req{background:var(--warn)}
+.tl .meta{font-size:.8rem;color:var(--muted)}
+.tl .txt{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:2px}
+
+.note{padding:14px;display:grid;gap:6px}
+.note .txt{white-space:pre-wrap;overflow-wrap:anywhere}
+.note.handover{border-left:3px solid var(--jac)}
+
+/* calendar */
+.calbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.calbar h2{min-width:150px}
+.grid7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.grid7 .dow{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding:8px 6px;border-bottom:1px solid var(--line);text-align:center}
+.day{min-height:92px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:none;padding:6px;text-align:left;display:flex;flex-direction:column;gap:3px;cursor:pointer;min-width:0}
+.day:nth-child(7n+14){border-right:0}
+.day:hover{background:var(--surface-2)}
+.day .n{font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums;width:24px;height:24px;display:grid;place-items:center;border-radius:50%}
+.day.out .n{color:var(--muted);opacity:.55}
+.day.today .n{background:var(--accent);color:var(--accent-ink)}
+.day.sel{background:var(--accent-soft)}
+.chip{font-size:.72rem;padding:2px 5px;border-radius:4px;background:var(--jac-soft);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.chip.un{background:var(--warn-soft)}
+.chip.done{background:var(--ok-soft)}
+.more{font-size:.7rem;color:var(--muted)}
+.dots{display:none;gap:3px;flex-wrap:wrap}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--jac)}
+.dots i.un{background:var(--warn)}
+@media (max-width:640px){.day{min-height:54px;padding:4px}.chip,.more{display:none}.dots{display:flex}}
+
+/* forms */
+.scrim{position:fixed;inset:0;z-index:50;background:var(--scrim);display:flex;align-items:flex-end;justify-content:center;padding:0}
+.modal{background:var(--surface);width:100%;max-width:620px;max-height:92vh;display:flex;flex-direction:column;border-radius:16px 16px 0 0;box-shadow:var(--shadow);padding-bottom:env(safe-area-inset-bottom,0px)}
+.modal.wide{max-width:780px}
+@media (min-width:700px){.scrim{align-items:center;padding:24px}.modal{border-radius:14px;padding-bottom:0}}
+.mhead{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.mhead h3{margin-right:auto}
+.mbody{padding:16px;overflow:auto;min-height:0}
+.mfoot{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--line)}
+.form .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form .full,.form .grid>.full{grid-column:1/-1}
+@media (max-width:520px){.form .grid{grid-template-columns:1fr}}
+.fld{display:flex;flex-direction:column;gap:5px;min-width:0}
+.fld label,.checks legend{font-size:.85rem;font-weight:700}
+.fld small{color:var(--muted);font-size:.8rem}
+.req{color:var(--bad)}
+input:not([type=checkbox]),select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);min-width:0}
+textarea{resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+.check{display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:.92rem}
+.check input{margin-top:4px;accent-color:var(--accent);width:16px;height:16px;flex:none}
+.checks{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:0;display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.checks legend{padding:0 4px}
+.fhead{margin-top:6px;padding-top:10px;border-top:1px solid var(--line);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.formnote{font-size:.85rem;color:var(--muted)}
+.search{max-width:320px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.photo-btn{align-self:flex-start}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px}
+.thumb{position:relative;width:84px;height:84px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb-x{position:absolute;top:3px;right:3px;width:24px;height:24px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);cursor:pointer;line-height:1;font-size:1rem}
+.mini-thumbs{display:flex;gap:3px;align-items:center;border:0;background:none;padding:0;cursor:pointer}
+.mini-thumbs img{width:30px;height:30px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
+.mini-thumbs span{font-size:.75rem;color:var(--muted)}
+.photo-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.photo-grid figure{margin:0}
+.photo-grid img{width:100%;border-radius:8px;display:block;border:1px solid var(--line)}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;background:var(--surface-2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td{font-variant-numeric:tabular-nums}
+
+/* med round */
+.medrow{display:flex;gap:12px;align-items:center;padding:12px 14px;flex-wrap:wrap}
+.medrow .main{flex:1;min-width:160px}
+.medrow .title{font-weight:700}
+.medrow .sub{font-size:.85rem;color:var(--muted)}
+
+/* legal */
+.legal{display:grid;gap:20px;grid-template-columns:1fr}
+@media (min-width:900px){.legal{grid-template-columns:230px 1fr}}
+.doclist{display:flex;flex-direction:column;gap:2px}
+.doclist button{border:0;background:none;text-align:left;padding:9px 12px;border-radius:8px;cursor:pointer;color:var(--muted)}
+.doclist button[aria-current="true"]{background:var(--accent-soft);color:var(--ink);font-weight:700}
+.doc{padding:22px;min-width:0}
+.doc h2{font-size:1.5rem;margin-bottom:6px}
+.doc h3{margin:22px 0 6px}
+.doc p,.doc li{max-width:68ch}
+.doc p+p{margin-top:8px}
+.doc ul{padding-left:20px;margin:6px 0}
+.doc li+li{margin-top:4px}
+.draft{display:inline-block;margin-bottom:14px;font-size:.78rem;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--warn-soft);color:var(--warn)}
+
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:.88rem;font-weight:700;z-index:60;box-shadow:var(--shadow);animation:pop .2s ease-out}
+@media (min-width:960px){.toast{bottom:28px}}
+@keyframes pop{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.proto{font-size:.74rem;color:var(--warn);background:var(--warn-soft);padding:3px 8px;border-radius:6px;font-weight:700;white-space:nowrap}
+</style>
+
+<div id="app"></div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4);
+const pad=n=>String(n).padStart(2,'0');
+const dkey=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today=()=>dkey(new Date());
+const parseK=k=>{const[y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d)};
+const fmtD=(k,o)=>k?parseK(k).toLocaleDateString('en-AU',o||{weekday:'short',day:'numeric',month:'short'}):'';
+const fmtLong=k=>fmtD(k,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const fmtT=t=>{if(!t)return'';let[h,m]=t.split(':').map(Number);const ap=h>=12?'pm':'am';h=h%12||12;return `${h}:${pad(m)}${ap}`};
+const nowHM=()=>{const d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes())};
+const fmtTs=ts=>ts?new Date(ts).toLocaleString('en-AU',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):'';
+const addDays=(k,n)=>{const d=parseK(k);d.setDate(d.getDate()+n);return dkey(d)};
+const tsOf=(k,t)=>{const d=parseK(k);if(t){const[h,m]=t.split(':').map(Number);d.setHours(h,m)}return d.getTime()};
+const byId=(a,id)=>a.find(x=>x.id===id);
+const initials=s=>String(s||'?').split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?';
+const daysUntil=k=>Math.round((parseK(k)-parseK(today()))/864e5);
+const ICONS={home:'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z',cal:'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4',people:'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21c0-4 3-6 7-6s7 2 7 6M16 4a3.5 3.5 0 0 1 0 7M18 15c2.5.6 4 2.6 4 6',badge:'M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM10 7h4M12 11a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z',pill:'M10.5 3.5a5 5 0 0 1 7 7l-7 7a5 5 0 0 1-7-7zM7 7l7 7',note:'M5 3h10l4 4v14H5zM15 3v4h4M9 12h6M9 16h6',inbox:'M3 13l3-8h12l3 8v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM3 13h5l1 3h6l1-3h5',alert:'M12 3l10 18H2zM12 10v5M12 18v.01',scale:'M12 3v18M6 21h12M4 7h16M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0z',list:'M9 6h12M9 12h12M9 18h12M4 6v.01M4 12v.01M4 18v.01',gear:'M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1',more:'M5 12h.01M12 12h.01M19 12h.01',plus:'M12 5v14M5 12h14',copy:'M8 8h12v12H8zM4 16V4h12'};
+const icon=(n,c='ico')=>`<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICONS[n]}"/></svg>`;
+
+/* ---------- state ---------- */
+const K='handover-care-v1',KU='handover-care-ui-v1';
+const blank=()=>({company:{name:'',abn:'',reg:'',phone:'',email:'',address:'',privacyOfficer:''},clients:[],workers:[],shifts:[],notes:[],meds:[],mar:[],requests:[],incidents:[],consents:[],audit:[]});
+let S=blank();
+try{const r=localStorage.getItem(K);if(r)S=Object.assign(blank(),JSON.parse(r))}catch(e){}
+const now0=new Date();
+let U={role:'company',actor:null,view:'home',param:null,tab:'overview',q:'',showArchived:false,reqFilter:'pending',noteClient:'',medDate:null,legal:'privacy',tlFilter:'all',cal:{y:now0.getFullYear(),m:now0.getMonth(),mode:'month',sel:today(),filter:''}};
+try{const r=localStorage.getItem(KU);if(r){const u=JSON.parse(r);U=Object.assign(U,u,{cal:Object.assign(U.cal,u.cal||{})})}}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const saveU=()=>{try{localStorage.setItem(KU,JSON.stringify(U))}catch(e){}};
+
+const cName=id=>{const c=byId(S.clients,id);return c?`${c.preferred||c.first} ${c.last}`.trim():'Unknown client'};
+const wName=id=>{const w=byId(S.workers,id);return w?`${w.first} ${w.last}`.trim():'Unassigned'};
+const actorLabel=()=>U.role==='company'?(S.company.name?S.company.name+' office':'Office'):U.role==='worker'?wName(U.actor):cName(U.actor);
+function log(action){S.audit.unshift({id:uid(),ts:Date.now(),who:actorLabel(),role:U.role,action});if(S.audit.length>800)S.audit.length=800}
+function toast(msg){const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2400)}
+
+const activeClients=()=>S.clients.filter(c=>!c.archived);
+const activeWorkers=()=>S.workers.filter(w=>!w.archived);
+function myClients(){
+  if(U.role==='company')return activeClients();
+  if(U.role==='client')return S.clients.filter(c=>c.id===U.actor);
+  const ids=new Set(S.shifts.filter(s=>s.workerId===U.actor&&s.status!=='cancelled').map(s=>s.clientId));
+  return activeClients().filter(c=>ids.has(c.id));
+}
+function myShifts(){let a=S.shifts;if(U.role==='worker')a=a.filter(s=>s.workerId===U.actor);if(U.role==='client')a=a.filter(s=>s.clientId===U.actor);return a}
+const bySt=(a,b)=>(a.date+a.start).localeCompare(b.date+b.start);
+const can={
+  schedule:()=>U.role==='company',
+  editClient:id=>U.role==='company'||(U.role==='client'&&U.actor===id),
+  manageMeds:id=>U.role==='company'||(U.role==='client'&&U.actor===id),
+  recordMeds:()=>U.role==='company'||U.role==='worker',
+};
+
+/* ---------- medication logic ---------- */
+const parseTimes=s=>String(s||'').split(/[,\s]+/).map(x=>x.trim()).filter(Boolean).map(x=>{const m=x.match(/^(\d{1,2})[:.]?(\d{2})$/);return m?pad(+m[1])+':'+m[2]:null});
+function medActiveOn(m,k){return m.active!==false&&(!m.start||m.start<=k)&&(!m.end||m.end>=k)}
+function dueList(k,ids){
+  const out=[];
+  S.meds.filter(m=>!m.prn&&ids.has(m.clientId)&&medActiveOn(m,k)).forEach(m=>(m.times||[]).forEach(t=>{
+    const rec=S.mar.find(r=>r.medId===m.id&&r.date===k&&r.scheduled===t);out.push({m,t,rec});
+  }));
+  return out.sort((a,b)=>a.t.localeCompare(b.t)||cName(a.m.clientId).localeCompare(cName(b.m.clientId)));
+}
+function dueState(it,k){
+  if(it.rec)return it.rec.status;
+  const t=today();
+  if(k<t)return 'not recorded';
+  if(k===t){const[h,m]=it.t.split(':').map(Number);const n=new Date();if(n.getHours()*60+n.getMinutes()>h*60+m+60)return 'overdue'}
+  return 'due';
+}
+const MAR_PILL={given:'ok',refused:'warn',withheld:'warn','not available':'warn',missed:'bad',overdue:'bad','not recorded':'bad',due:'acc'};
+
+/* ---------- shift logic ---------- */
+function shiftStatus(s){
+  if(s.status==='cancelled')return['Cancelled',''];
+  if(s.status==='completed')return['Completed','ok'];
+  if(s.status==='in-progress')return['In progress','acc'];
+  if(!s.workerId)return['Unassigned','warn'];
+  if(s.date===today()){const[h,m]=s.start.split(':').map(Number);const n=new Date();if(n.getHours()*60+n.getMinutes()>h*60+m+15)return['Not started','bad']}
+  if(s.date<today())return['Not recorded','bad'];
+  return['Scheduled','jac'];
+}
+const pill=(txt,cls)=>`<span class="pill ${cls||''}">${esc(txt)}</span>`;
+function shiftWarnings(d,id){
+  const w=[];
+  if(!d.workerId)return w;
+  const wk=byId(S.workers,d.workerId),c=byId(S.clients,d.clientId);
+  if(!wk)return w;
+  S.shifts.filter(s=>s.id!==id&&s.workerId===d.workerId&&s.date===d.date&&s.status!=='cancelled'&&s.start<d.end&&d.start<s.end)
+    .forEach(s=>w.push(`${wName(wk.id)} is already booked ${fmtT(s.start)}–${fmtT(s.end)} with ${cName(s.clientId)}.`));
+  if(c&&(c.blockedWorkers||[]).includes(wk.id))w.push(`${cName(c.id)} has asked not to be supported by ${wName(wk.id)}.`);
+  if(!wk.screeningExp)w.push(`No NDIS Worker Screening Check expiry is recorded for ${wName(wk.id)}.`);
+  else if(wk.screeningExp<d.date)w.push(`${wName(wk.id)}'s NDIS Worker Screening Check expires before this visit.`);
+  if(c&&S.meds.some(m=>m.clientId===c.id&&m.active!==false)&&!wk.medsTrained)w.push(`${cName(c.id)} takes medication and ${wName(wk.id)} has no medication training recorded.`);
+  (S.requests||[]).filter(r=>r.type==='leave'&&r.status==='approved'&&r.workerId===wk.id&&r.date<=d.date&&(r.dateTo||r.date)>=d.date).forEach(()=>w.push(`${wName(wk.id)} has approved leave on this date.`));
+  return w;
+}
+
+/* ---------- modal + forms ---------- */
+let MODAL=null,PENDING=null;
+function openModal({title,body,foot,onMount,wide}){
+  closeModal();
+  const el=document.createElement('div');el.className='scrim';
+  el.innerHTML=`<div class="modal${wide?' wide':''}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header class="mhead"><h3>${esc(title)}</h3><button class="icon-btn" type="button" data-act="closeModal" aria-label="Close">×</button></header><div class="mbody">${body}</div>${foot?`<footer class="mfoot">${foot}</footer>`:''}</div>`;
+  document.body.appendChild(el);MODAL=el;
+  el.addEventListener('mousedown',e=>{if(e.target===el)closeModal()});
+  onMount&&onMount(el);
+  const f=el.querySelector('.mbody input,.mbody select,.mbody textarea');if(f&&window.innerWidth>700)f.focus();
+}
+function closeModal(){if(MODAL){MODAL.remove();MODAL=null}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+function field(f,v){
+  const id='f_'+f.k,val=v!==undefined&&v!==null?v:(f.def!==undefined?f.def:''),req=f.req?' required':'';
+  let inp;
+  switch(f.type){
+    case 'heading':return `<h4 class="fhead full">${esc(f.label)}</h4>`;
+    case 'note':return `<p class="formnote full">${f.html}</p>`;
+    case 'photos':return `<div class="fld full photos" data-photos="${f.k}" data-min="${f.min||0}"><label for="${id}">${esc(f.label)}${f.min?' <span class="req">*</span>':''}</label>${f.help?`<small>${esc(f.help)}</small>`:''}<label class="btn photo-btn" for="${id}">${icon('plus')}Take or add photo</label><input id="${id}" type="file" accept="image/*" capture="environment" multiple class="sr-only"><div class="thumbs" aria-live="polite"></div><small class="pcount"></small></div>`;
+    case 'checkbox':return `<label class="check full"><input type="checkbox" id="${id}" name="${f.k}"${val?' checked':''}><span>${esc(f.label)}</span></label>`;
+    case 'checks':return `<fieldset class="full checks"><legend>${esc(f.label)}</legend>${f.options.length?f.options.map(o=>`<label class="check"><input type="checkbox" name="${f.k}" value="${esc(o[0])}"${(val||[]).includes(o[0])?' checked':''}><span>${esc(o[1])}</span></label>`).join(''):`<p class="muted small">${esc(f.empty||'Nothing to choose yet')}</p>`}</fieldset>`;
+    case 'textarea':inp=`<textarea id="${id}" name="${f.k}" rows="${f.rows||3}"${req}${f.ph?` placeholder="${esc(f.ph)}"`:''}>${esc(val)}</textarea>`;break;
+    case 'select':inp=`<select id="${id}" name="${f.k}"${req}>${f.blank===false?'':`<option value="">${esc(f.blankLabel||'Select…')}</option>`}${f.options.map(o=>`<option value="${esc(o[0])}"${String(o[0])===String(val)?' selected':''}>${esc(o[1])}</option>`).join('')}</select>`;break;
+    default:inp=`<input id="${id}" name="${f.k}" type="${f.type||'text'}" value="${esc(val)}"${req}${f.ph?` placeholder="${esc(f.ph)}"`:''}${f.type==='number'?' inputmode="decimal" step="any" min="0"':''}>`;
+  }
+  return `<div class="fld${f.full||f.type==='textarea'?' full':''}"><label for="${id}">${esc(f.label)}${f.req?' <span class="req">*</span>':''}</label>${inp}${f.help?`<small>${esc(f.help)}</small>`:''}</div>`;
+}
+function readForm(form,fields){
+  const o={};
+  fields.forEach(f=>{if(!f.k||f.type==='heading'||f.type==='note')return;
+    if(f.type==='photos'){const w=form.querySelector(`[data-photos="${f.k}"]`);o[f.k]=(w&&w._photos)||[]}
+    else if(f.type==='checkbox')o[f.k]=form.elements[f.k].checked;
+    else if(f.type==='checks')o[f.k]=[...form.querySelectorAll(`input[name="${f.k}"]:checked`)].map(i=>i.value);
+    else if(form.elements[f.k])o[f.k]=form.elements[f.k].value.trim();});
+  return o;
+}
+function openForm(o){
+  let confirmed=false;
+  openModal({title:o.title,wide:o.wide,
+    body:`<form id="mform" class="form" novalidate>${o.intro?`<div class="callout" style="margin-bottom:14px">${o.intro}</div>`:''}<div class="grid">${o.fields.map(f=>field(f,o.values?o.values[f.k]:undefined)).join('')}</div><div id="mwarn" style="margin-top:14px"></div></form>`,
+    foot:`<button class="btn ghost" type="button" data-act="closeModal">Cancel</button><button class="btn primary" type="submit" form="mform" id="msubmit">${esc(o.submit||'Save')}</button>`,
+    onMount(el){
+      const form=el.querySelector('#mform'),box=el.querySelector('#mwarn');
+      form.addEventListener('input',()=>{if(confirmed){confirmed=false;box.innerHTML='';el.querySelector('#msubmit').textContent=o.submit||'Save'}});
+      form.addEventListener('submit',e=>{
+        e.preventDefault();
+        const d=readForm(form,o.fields);
+        const miss=o.fields.filter(f=>f.req&&(f.type==='checks'?!(d[f.k]||[]).length:!d[f.k])).map(f=>f.label);
+        if(miss.length){box.innerHTML=`<div class="callout bad">Fill in: ${esc(miss.join(', '))}.</div>`;return}
+        const err=o.validate&&o.validate(d);
+        if(err){box.innerHTML=`<div class="callout bad">${esc(err)}</div>`;return}
+        const w=o.warn?o.warn(d):[];
+        if(w.length&&!confirmed){confirmed=true;box.innerHTML=`<div class="callout warn"><strong>Check before saving</strong><ul>${w.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;el.querySelector('#msubmit').textContent='Save anyway';return}
+        const r=o.onSave(d);
+        if(r!==false){if(!r||r!=='keep')closeModal();save();render();if(o.done)toast(o.done)}
+      });
+      form.querySelectorAll('[data-photos]').forEach(w=>{w._photos=((o.photoPreset||{})[w.dataset.photos]||[]).slice();setupPhotos(w)});
+      o.onMount&&o.onMount(el);
+    }});
+}
+function shrinkImage(file){
+  return new Promise((res,rej)=>{const fr=new FileReader();fr.onerror=rej;fr.onload=()=>{const img=new Image();img.onerror=rej;img.onload=()=>{const M=720,s=Math.min(1,M/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.6))};img.src=fr.result};fr.readAsDataURL(file)});
+}
+function setupPhotos(w){
+  w._photos=w._photos||[];
+  const inp=w.querySelector('input[type=file]'),th=w.querySelector('.thumbs'),cnt=w.querySelector('.pcount'),min=+w.dataset.min||0;
+  const draw=()=>{th.innerHTML=w._photos.map((p,i)=>`<span class="thumb"><img src="${p.src}" alt="Photo ${i+1}, taken ${esc(fmtTs(p.ts))}"><button type="button" class="thumb-x" data-i="${i}" aria-label="Remove photo ${i+1}">×</button></span>`).join('');cnt.textContent=min?`${w._photos.length} of ${min} required`:(w._photos.length?`${w._photos.length} added`:'');cnt.style.color=min&&w._photos.length<min?'var(--warn)':'var(--ok)'};
+  th.addEventListener('click',e=>{const b=e.target.closest('.thumb-x');if(b){w._photos.splice(+b.dataset.i,1);draw()}});
+  inp.addEventListener('change',async()=>{for(const f of [...inp.files]){try{w._photos.push({src:await shrinkImage(f),ts:Date.now()})}catch(e){toast('That photo couldn’t be read')}}inp.value='';draw()});
+  draw();
+}
+function confirmBox(title,msg,label,fn,danger){
+  PENDING=fn;
+  openModal({title,body:`<p>${msg}</p>`,foot:`<button class="btn ghost" type="button" data-act="closeModal">Keep it</button><button class="btn ${danger?'danger':'primary'}" type="button" data-act="confirmYes">${esc(label)}</button>`});
+}
+function copyText(text,label){
+  const fallback=()=>openModal({title:label||'Copy',body:`<p class="muted small" style="margin-bottom:8px">Select the text below and copy it.</p><textarea rows="14" readonly style="font-family:var(--f-mono);font-size:.8rem">${esc(text)}</textarea>`,onMount(el){const t=el.querySelector('textarea');t.focus();t.select()}});
+  try{navigator.clipboard.writeText(text).then(()=>toast('Copied to clipboard'),fallback)}catch(e){fallback()}
+}
+
+/* ---------- option helpers ---------- */
+const clientOpts=list=>(list||myClients()).map(c=>[c.id,`${cName(c.id)}${c.ndis?' · '+c.ndis:''}`]);
+const workerOpts=list=>(list||activeWorkers()).map(w=>[w.id,wName(w.id)]);
+const SUPPORT_TYPES=['Personal care','Community access','Domestic assistance','Meal preparation','Transport','Medication support','Social & recreation','Therapy support','Overnight (sleepover)','Overnight (active)','Respite','Skill building','Other'];
+const MOODS=['Happy','Settled','Tired','Unwell','Anxious','Upset','Agitated'];
+
+/* ---------- client CRUD ---------- */
+function clientFields(){
+  return[
+    {type:'heading',label:'Personal details'},
+    {k:'first',label:'First name',req:1},{k:'last',label:'Last name',req:1},
+    {k:'preferred',label:'Preferred name'},{k:'pronouns',label:'Pronouns'},
+    {k:'dob',label:'Date of birth',type:'date'},{k:'phone',label:'Phone',type:'tel'},
+    {k:'email',label:'Email',type:'email'},{k:'language',label:'Preferred language / interpreter'},
+    {k:'address',label:'Home address',full:1},
+    {type:'heading',label:'NDIS plan'},
+    {k:'ndis',label:'NDIS number',ph:'9 digits'},
+    {k:'planType',label:'Plan management',type:'select',options:[['NDIA-managed','NDIA-managed'],['Plan-managed','Plan-managed'],['Self-managed','Self-managed'],['Combination','Combination']]},
+    {k:'planStart',label:'Plan start',type:'date'},{k:'planEnd',label:'Plan end',type:'date'},
+    {k:'planManager',label:'Plan manager'},{k:'coordinator',label:'Support coordinator'},
+    {k:'nominee',label:'Nominee / guardian',help:'Who can make decisions or receive information'},{k:'nomineePhone',label:'Nominee phone',type:'tel'},
+    {type:'heading',label:'Health'},
+    {k:'allergies',label:'Allergies & alerts',type:'textarea',rows:2,help:'Shown in red wherever this person appears'},
+    {k:'conditions',label:'Diagnoses & health conditions',type:'textarea',rows:2},
+    {k:'gp',label:'GP / doctor'},{k:'gpPhone',label:'GP phone',type:'tel'},
+    {k:'pharmacy',label:'Pharmacy'},{k:'medicare',label:'Medicare number'},
+    {k:'behaviourPlan',label:'Has a behaviour support plan',type:'checkbox'},
+    {type:'heading',label:'Support'},
+    {k:'communication',label:'Communication preferences',type:'textarea',rows:2},
+    {k:'supportNeeds',label:'Support needs & routines',type:'textarea',rows:3},
+    {k:'goals',label:'Goals',type:'textarea',rows:2},
+    {k:'access',label:'Home access & safety (keys, pets, parking)',type:'textarea',rows:2},
+    {type:'heading',label:'Emergency contacts'},
+    {k:'ec1n',label:'Contact 1 name'},{k:'ec1p',label:'Contact 1 phone',type:'tel'},{k:'ec1r',label:'Relationship',full:1},
+    {k:'ec2n',label:'Contact 2 name'},{k:'ec2p',label:'Contact 2 phone',type:'tel'},
+    {type:'heading',label:'Support worker preferences'},
+    {k:'preferredWorkers',label:'Preferred support workers',type:'checks',options:workerOpts(),empty:'No support workers added yet'},
+    {k:'blockedWorkers',label:'Not to be rostered',type:'checks',options:workerOpts(),empty:'No support workers added yet'},
+  ];
+}
+function editClient(id){
+  const c=id?byId(S.clients,id):null;
+  openForm({title:c?`Edit ${cName(id)}`:'Add client',wide:1,fields:clientFields(),values:c||{},submit:c?'Save changes':'Add client',done:c?'Client updated':'Client added',
+    validate:d=>{if(d.ndis&&!/^\d{9}$/.test(d.ndis.replace(/\s/g,'')))return'NDIS numbers are 9 digits.';if(d.planStart&&d.planEnd&&d.planEnd<d.planStart)return'Plan end must be after plan start.';const both=(d.preferredWorkers||[]).filter(x=>(d.blockedWorkers||[]).includes(x));if(both.length)return`${wName(both[0])} can't be both preferred and not rostered.`},
+    onSave(d){
+      d.ndis=(d.ndis||'').replace(/\s/g,'');
+      if(c){Object.assign(c,d);log(`Updated client record for ${cName(c.id)}`)}
+      else{const n=Object.assign({id:uid(),created:Date.now(),archived:false},d);S.clients.push(n);log(`Added client ${cName(n.id)}`);if(U.role==='company'){U.view='client';U.param=n.id;U.tab='overview'}}
+    }});
+}
+
+/* ---------- worker CRUD ---------- */
+function editWorker(id){
+  const w=id?byId(S.workers,id):null;
+  openForm({title:w?`Edit ${wName(id)}`:'Add support worker',wide:1,submit:w?'Save changes':'Add worker',done:w?'Worker updated':'Worker added',values:w||{},
+    fields:[
+      {k:'first',label:'First name',req:1},{k:'last',label:'Last name',req:1},
+      {k:'phone',label:'Mobile',type:'tel'},{k:'email',label:'Email',type:'email'},
+      {k:'role',label:'Role',type:'select',options:[['Support worker','Support worker'],['Senior support worker','Senior support worker'],['Team leader','Team leader'],['Registered nurse','Registered nurse'],['Coordinator','Coordinator']]},
+      {k:'employment',label:'Employment',type:'select',options:[['Full time','Full time'],['Part time','Part time'],['Casual','Casual'],['Contractor','Contractor']]},
+      {type:'heading',label:'Checks & training'},
+      {k:'screening',label:'NDIS Worker Screening Check ID'},{k:'screeningExp',label:'Screening expiry',type:'date'},
+      {k:'wwcc',label:'Working With Children Check (NSW)',help:'Needed if supporting under-18s'},{k:'wwccExp',label:'WWCC expiry',type:'date'},
+      {k:'firstAidExp',label:'First aid expiry',type:'date'},{k:'cprExp',label:'CPR expiry',type:'date'},
+      {k:'licenceExp',label:'Driver licence expiry',type:'date'},{k:'orientation',label:'NDIS Worker Orientation completed',type:'checkbox'},
+      {k:'medsTrained',label:'Medication assistance training completed',type:'checkbox'},
+      {k:'skills',label:'Skills, languages & experience',type:'textarea',rows:2},
+      {k:'availability',label:'Usual availability',type:'textarea',rows:2,ph:'e.g. Weekdays 7am–3pm'},
+    ],
+    onSave(d){
+      if(w){Object.assign(w,d);log(`Updated support worker ${wName(w.id)}`)}
+      else{const n=Object.assign({id:uid(),created:Date.now(),archived:false},d);S.workers.push(n);log(`Added support worker ${wName(n.id)}`)}
+    }});
+}
+function checkPill(k,label){
+  if(!k)return pill(`${label}: not recorded`,'warn');
+  const n=daysUntil(k);
+  if(n<0)return pill(`${label} expired`,'bad');
+  if(n<=30)return pill(`${label} expires in ${n}d`,'warn');
+  return pill(`${label} ok`,'ok');
+}
+function openWorker(id){
+  const w=byId(S.workers,id);if(!w)return;
+  const up=S.shifts.filter(s=>s.workerId===id&&s.date>=today()&&s.status!=='cancelled').sort(bySt).slice(0,8);
+  const blocked=S.clients.filter(c=>(c.blockedWorkers||[]).includes(id)),pref=S.clients.filter(c=>(c.preferredWorkers||[]).includes(id));
+  openModal({title:wName(id),wide:1,body:`
+    <div class="row" style="margin-bottom:14px">${checkPill(w.screeningExp,'Screening')}${checkPill(w.firstAidExp,'First aid')}${w.medsTrained?pill('Medication trained','ok'):pill('No medication training','warn')}${w.orientation?pill('Orientation done','ok'):''}</div>
+    <dl class="dl panel" style="margin-bottom:16px">
+      <dt>Role</dt><dd>${esc(w.role||'—')} ${w.employment?'· '+esc(w.employment):''}</dd>
+      <dt>Mobile</dt><dd>${esc(w.phone||'—')}</dd><dt>Email</dt><dd>${esc(w.email||'—')}</dd>
+      <dt>Screening ID</dt><dd class="mono">${esc(w.screening||'—')}</dd><dt>Screening expiry</dt><dd>${w.screeningExp?fmtD(w.screeningExp,{day:'numeric',month:'short',year:'numeric'}):'—'}</dd>
+      <dt>Availability</dt><dd>${esc(w.availability||'—')}</dd><dt>Skills</dt><dd>${esc(w.skills||'—')}</dd>
+      <dt>Preferred by</dt><dd>${pref.length?pref.map(c=>esc(cName(c.id))).join(', '):'—'}</dd>
+      <dt>Not to roster for</dt><dd>${blocked.length?blocked.map(c=>`<span class="tag bad">${esc(cName(c.id))}</span>`).join(' '):'—'}</dd>
+    </dl>
+    <h4 style="margin-bottom:8px">Upcoming visits</h4>
+    ${up.length?`<div class="list">${up.map(s=>shiftItem(s,{date:1,who:'client'})).join('')}</div>`:'<p class="muted">No upcoming visits.</p>'}`,
+    foot:`${w.archived?`<button class="btn" data-act="restoreWorker" data-id="${id}">Restore</button>`:`<button class="btn danger" data-act="archiveWorker" data-id="${id}">Remove worker</button>`}<button class="btn primary" data-act="editWorker" data-id="${id}">Edit</button>`});
+}
+
+/* ---------- shifts ---------- */
+function editShift(id,preset){
+  const s=id?byId(S.shifts,id):null;
+  const v=s?Object.assign({},s,{tasks:s.tasks||''}):Object.assign({date:U.cal.sel||today(),start:'09:00',end:'12:00'},preset||{});
+  if(!s&&v.clientId&&!v.location){const c=byId(S.clients,v.clientId);if(c&&c.address)v.location=c.address}
+  openForm({title:s?'Edit visit':'Schedule a visit',submit:s?'Save visit':'Schedule visit',done:s?'Visit updated':'Visit scheduled',values:v,
+    fields:[
+      {k:'clientId',label:'Client',type:'select',options:clientOpts(activeClients()),req:1},
+      {k:'workerId',label:'Support worker',type:'select',options:workerOpts(),blankLabel:'Leave unassigned'},
+      {k:'date',label:'Date',type:'date',req:1},
+      {k:'type',label:'Support type',type:'select',options:SUPPORT_TYPES.map(x=>[x,x])},
+      {k:'start',label:'Start',type:'time',req:1},{k:'end',label:'Finish',type:'time',req:1},
+      {k:'location',label:'Where',full:1,ph:'Address or meeting point'},
+      {k:'tasks',label:'Tasks for this visit',type:'textarea',rows:3,ph:'One task per line',help:'Workers tick these off when they finish the visit'},
+      ...(s?[]:[{k:'repeat',label:'Repeat weekly',type:'select',blank:false,options:[['0','Does not repeat'],['2','For 2 weeks'],['4','For 4 weeks'],['8','For 8 weeks'],['12','For 12 weeks']]}]),
+    ],
+    validate:d=>d.end<=d.start?'Finish time must be after start time (split overnight visits at midnight).':null,
+    warn:d=>shiftWarnings(d,id),
+    onSave(d){
+      const rep=+d.repeat||1;delete d.repeat;
+      if(s){Object.assign(s,d);log(`Edited visit for ${cName(s.clientId)} on ${fmtD(s.date)}`)}
+      else{for(let i=0;i<rep;i++){S.shifts.push(Object.assign({id:uid(),status:'scheduled',created:Date.now()},d,{date:addDays(d.date,i*7)}))}
+        log(`Scheduled ${rep>1?rep+' weekly visits':'a visit'} for ${cName(d.clientId)} from ${fmtD(d.date)}`)}
+      U.cal.sel=d.date;
+    }});
+}
+function shiftItem(s,o={}){
+  const[st,cls]=shiftStatus(s);
+  const who=o.who||(U.role==='client'?'worker':U.role==='worker'?'client':'both');
+  const title=who==='worker'?(s.workerId?wName(s.workerId):'Worker to be confirmed'):cName(s.clientId);
+  const sub=[who==='both'?(s.workerId?wName(s.workerId):'Unassigned'):null,s.type,s.location].filter(Boolean).map(esc).join(' · ');
+  return `<button class="item" data-act="openShift" data-id="${s.id}"><span class="sh-time">${o.date?`<span class="sh-date">${esc(fmtD(s.date))}</span>`:''}<b>${fmtT(s.start)}</b><span>${fmtT(s.end)}</span></span><span class="main"><span class="title">${esc(title)}</span><span class="sub">${sub||'&nbsp;'}</span></span>${pill(st,cls)}</button>`;
+}
+function openShift(id){
+  const s=byId(S.shifts,id);if(!s)return;
+  const c=byId(S.clients,s.clientId);const[st,cls]=shiftStatus(s);
+  const tasks=String(s.tasks||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  const notes=S.notes.filter(n=>n.shiftId===id);
+  const mine=U.role==='worker'&&s.workerId===U.actor;
+  let actions='';
+  if(U.role==='company'){actions=`<button class="btn danger" data-act="deleteShift" data-id="${id}">Delete</button>${s.status==='scheduled'?`<button class="btn" data-act="cancelShift" data-id="${id}">Cancel visit</button>`:''}<button class="btn primary" data-act="editShift" data-id="${id}">Edit</button>`}
+  else if(mine){
+    if(s.status==='scheduled')actions=`<button class="btn" data-act="newRequest" data-type="handback" data-shift="${id}">Hand back</button><button class="btn primary" data-act="startShift" data-id="${id}">Start visit</button>`;
+    else if(s.status==='in-progress')actions=`<button class="btn" data-act="goClientMeds" data-id="${s.clientId}">Medication</button><button class="btn primary" data-act="endShift" data-id="${id}">Finish visit</button>`;
+    else actions=`<button class="btn" data-act="addNote" data-client="${s.clientId}" data-shift="${id}">Add note</button>`;
+  }
+  else if(U.role==='client'&&s.status==='scheduled'){actions=`<button class="btn" data-act="newRequest" data-type="cancel_shift" data-shift="${id}">Ask to cancel</button><button class="btn primary" data-act="newRequest" data-type="change_shift" data-shift="${id}">Ask for a change</button>`}
+  else if(U.role==='worker'&&!s.workerId&&s.date>=today()){actions=`<button class="btn primary" data-act="newRequest" data-type="pickup" data-shift="${id}">Offer to take this shift</button>`}
+  openModal({title:`${fmtD(s.date)} · ${fmtT(s.start)}–${fmtT(s.end)}`,body:`
+    <div class="row" style="margin-bottom:12px">${pill(st,cls)}${c&&c.allergies?`<span class="tag bad">Allergies: ${esc(c.allergies)}</span>`:''}</div>
+    <dl class="dl panel">
+      <dt>Client</dt><dd>${esc(cName(s.clientId))}</dd>
+      <dt>Support worker</dt><dd>${esc(s.workerId?wName(s.workerId):'Not assigned yet')}</dd>
+      <dt>Support type</dt><dd>${esc(s.type||'—')}</dd>
+      <dt>Where</dt><dd>${esc(s.location||'—')}</dd>
+      ${s.checkIn?`<dt>Started</dt><dd>${fmtTs(s.checkIn)}</dd>`:''}${s.checkOut?`<dt>Finished</dt><dd>${fmtTs(s.checkOut)}</dd>`:''}
+      ${s.km?`<dt>Travel with client</dt><dd>${esc(s.km)} km</dd>`:''}
+      ${c&&c.access&&U.role!=='client'?`<dt>Access & safety</dt><dd>${esc(c.access)}</dd>`:''}
+    </dl>
+    ${tasks.length?`<h4 style="margin:16px 0 8px">Tasks</h4><ul style="margin:0;padding-left:20px">${tasks.map(t=>`<li>${(s.tasksDone||[]).includes(t)?'✓ ':''}${esc(t)}</li>`).join('')}</ul>`:''}
+    ${notes.length?`<h4 style="margin:16px 0 8px">Notes from this visit</h4><div class="list">${notes.map(noteBlock).join('')}</div>`:''}`,foot:actions});
+}
+function endShift(id){
+  const s=byId(S.shifts,id);if(!s)return;
+  const tasks=String(s.tasks||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  openForm({title:`Finish visit with ${cName(s.clientId)}`,submit:'Finish visit',done:'Visit finished and notes saved',
+    fields:[
+      ...(tasks.length?[{k:'tasksDone',label:'Tasks completed',type:'checks',options:tasks.map(t=>[t,t])}]:[]),
+      {k:'progress',label:'Progress note',type:'textarea',rows:5,req:1,help:'What you did, how the person was, anything notable. Stick to facts.'},
+      {k:'mood',label:'How they seemed',type:'select',options:MOODS.map(m=>[m,m])},
+      {k:'km',label:'Km travelled with client',type:'number'},
+      {k:'handover',label:'Handover for the next support worker',type:'textarea',rows:3,ph:'Things the next person needs to know or follow up'},
+      {k:'incident',label:'Something happened that needs an incident report',type:'checkbox'},
+    ],
+    onSave(d){
+      s.status='completed';s.checkOut=Date.now();if(!s.checkIn)s.checkIn=tsOf(s.date,s.start);s.tasksDone=d.tasksDone||[];s.km=d.km||'';
+      const base={clientId:s.clientId,shiftId:s.id,authorRole:U.role,authorId:U.actor,author:actorLabel(),ack:[]};
+      S.notes.push(Object.assign({id:uid(),ts:Date.now(),kind:'progress',text:d.progress,mood:d.mood,tasksDone:s.tasksDone},base));
+      if(d.handover)S.notes.push(Object.assign({id:uid(),ts:Date.now()+1,kind:'handover',text:d.handover},base));
+      log(`Finished visit with ${cName(s.clientId)} and wrote a progress note`);
+      if(d.incident){save();setTimeout(()=>addIncident(s.clientId),50)}
+    }});
+}
+
+/* ---------- medication ---------- */
+function editMed(clientId,id){
+  const m=id?byId(S.meds,id):null;
+  const v=m?Object.assign({},m,{times:(m.times||[]).join(', ')}):{clientId,start:today(),route:'Oral'};
+  openForm({title:m?`Edit ${m.name}`:'Add medication',submit:m?'Save':'Add medication',done:m?'Medication updated':'Medication added',values:v,
+    intro:'Copy details exactly from the pharmacy label or the prescriber’s instructions.',
+    fields:[
+      {k:'clientId',label:'Client',type:'select',options:clientOpts(U.role==='client'?myClients():activeClients()),req:1},
+      {k:'name',label:'Medication name',req:1,ph:'Brand or generic name'},
+      {k:'strength',label:'Strength',ph:'e.g. 500 mg'},{k:'dose',label:'Dose',req:1,ph:'e.g. 1 tablet'},
+      {k:'route',label:'Route',type:'select',options:['Oral','Sublingual','Topical','Inhaled','Eye drops','Ear drops','Nasal','Patch','Injection','Rectal','PEG / enteral','Other'].map(x=>[x,x])},
+      {k:'form',label:'Packaging',type:'select',options:['Webster-pak / blister pack','Original box/bottle','Dose administration aid','Other'].map(x=>[x,x])},
+      {k:'prn',label:'PRN (only when needed)',type:'checkbox'},
+      {k:'times',label:'Scheduled times (24-hour)',ph:'08:00, 20:00',help:'Leave blank for PRN medication'},
+      {k:'prnReason',label:'PRN: when to give and maximum dose',type:'textarea',rows:2},
+      {k:'instructions',label:'Instructions',type:'textarea',rows:2,ph:'e.g. With food. Do not crush.'},
+      {k:'purpose',label:'What it is for'},{k:'prescriber',label:'Prescriber'},
+      {k:'start',label:'Start date',type:'date'},{k:'end',label:'End date',type:'date',help:'Leave blank if ongoing'},
+      {k:'sideEffects',label:'Side effects to watch for',type:'textarea',rows:2},
+      ...(U.role==='company'?[
+        {type:'heading',label:'Photo evidence (set by the office)'},
+        {k:'photosRequired',label:'Photos required each time it’s given',type:'select',blank:false,options:[['0','No photos needed'],['1','1 photo'],['2','2 photos'],['3','3 photos'],['4','4 photos'],['5','5 photos']]},
+        {k:'photoNote',label:'What to photograph',ph:'e.g. Blister pack slot, then dose in hand'},
+      ]:[]),
+    ],
+    validate:d=>{if(!d.prn){const t=parseTimes(d.times);if(!t.length)return'Add at least one scheduled time, or tick PRN.';if(t.includes(null))return'Write times as 24-hour HH:MM, separated by commas.'}else if(d.times&&parseTimes(d.times).includes(null))return'Write times as 24-hour HH:MM.';if(d.start&&d.end&&d.end<d.start)return'End date must be after start date.'},
+    onSave(d){
+      d.times=d.prn?[]:[...new Set(parseTimes(d.times))].sort();
+      if('photosRequired' in d)d.photosRequired=+d.photosRequired||0;
+      if(m){const was=m.photosRequired||0;Object.assign(m,d);log(`Updated medication ${m.name} for ${cName(m.clientId)}${'photosRequired' in d&&was!==d.photosRequired?` — photos required: ${d.photosRequired}`:''}`)}
+      else{S.meds.push(Object.assign({id:uid(),active:true,added:Date.now(),addedBy:actorLabel()},d));log(`Added medication ${d.name} for ${cName(d.clientId)}`)}
+    }});
+}
+function recordDose(medId,t,k){
+  const m=byId(S.meds,medId);if(!m)return;
+  const date=k||today();
+  const ex=t?S.mar.find(r=>r.medId===medId&&r.date===date&&r.scheduled===t):null;
+  const wk=U.role==='worker'?byId(S.workers,U.actor):null;
+  openForm({title:`${m.prn?'Record PRN dose':'Record'} · ${m.name}`,submit:'Save record',done:'Medication record saved',
+    values:ex||{status:'given',time:t&&date===today()?nowHM():(t||nowHM()),doseGiven:m.dose,date},
+    intro:`<strong>${esc(cName(m.clientId))}</strong> · ${esc([m.strength,m.dose,m.route].filter(Boolean).join(' · '))}${t?` · due ${fmtT(t)} ${date!==today()?fmtD(date):''}`:''}${m.instructions?`<br>${esc(m.instructions)}`:''}${(byId(S.clients,m.clientId)||{}).allergies?`<br><span style="color:var(--bad);font-weight:700">Allergies: ${esc(byId(S.clients,m.clientId).allergies)}</span>`:''}`,
+    fields:[
+      {k:'status',label:'Outcome',type:'select',blank:false,options:[['given','Given'],['refused','Refused'],['withheld','Withheld (on instruction)'],['missed','Missed'],['not available','Not available']]},
+      {k:'time',label:'Time',type:'time',req:1},
+      ...(m.prn?[{k:'date',label:'Date',type:'date',req:1}]:[]),
+      {k:'doseGiven',label:'Dose given'},
+      ...(m.prn?[{k:'reason',label:'Reason PRN was needed',type:'textarea',rows:2,req:1},{k:'effect',label:'Effect (follow up later)',type:'textarea',rows:2}]:[]),
+      {k:'note',label:'Notes',type:'textarea',rows:2,ph:'Required if refused, withheld or missed'},
+      {k:'witness',label:'Second person / witness (if required)'},
+      {k:'photos',type:'photos',min:+m.photosRequired||0,label:m.photosRequired?`Photos — ${m.photosRequired} required when given`:'Photos (optional)',help:m.photoNote?`Photograph: ${m.photoNote}`:(m.photosRequired?'Required by the office for this medication.':'')},
+    ],
+    photoPreset:ex&&ex.photos?{photos:ex.photos}:null,
+    validate:d=>{if(d.status!=='given'&&!d.note)return'Add a note explaining why it was not given.';const need=+m.photosRequired||0;if(d.status==='given'&&d.photos.length<need)return`This medication needs ${need} photo${need>1?'s':''} before it can be recorded as given. You’ve added ${d.photos.length}.`},
+    warn:()=>{const w=[];if(wk&&!wk.medsTrained)w.push('Your medication training is not recorded. Check with the office before assisting.');if(m.prn&&m.prnReason)w.push(`PRN protocol: ${m.prnReason}`);return w},
+    onSave(d){
+      const dd=m.prn?d.date:date;
+      const rec={medId,clientId:m.clientId,medName:m.name,dose:d.doseGiven,date:dd,scheduled:t||null,time:d.time,ts:tsOf(dd,d.time),status:d.status,note:d.note,reason:d.reason||'',effect:d.effect||'',witness:d.witness,photos:d.photos||[],photosRequired:+m.photosRequired||0,by:actorLabel(),byRole:U.role,recorded:Date.now()};
+      if(ex)Object.assign(ex,rec);else S.mar.push(Object.assign({id:uid()},rec));
+      log(`Recorded ${m.name} as ${d.status} for ${cName(m.clientId)}${t?` (${fmtT(t)} dose)`:' (PRN)'}${rec.photos.length?` with ${rec.photos.length} photo${rec.photos.length>1?'s':''}`:''}`);
+      try{localStorage.setItem(K,JSON.stringify(S))}catch(e){toast('Browser storage is full — photos may not be kept');}
+    }});
+}
+
+/* ---------- notes ---------- */
+function addNote(clientId,shiftId,kind){
+  openForm({title:'Add a note',submit:'Save note',done:'Note saved',values:{clientId:clientId||'',kind:kind||(U.role==='client'?'general':'progress')},
+    fields:[
+      {k:'clientId',label:'Client',type:'select',options:clientOpts(),req:1},
+      {k:'kind',label:'Type of note',type:'select',blank:false,options:U.role==='client'?[['general','Note for my support team'],['handover','Something my next worker should know']]:[['progress','Progress note'],['handover','Handover for the next worker'],['general','General note'],['contact','Contact with family / health professional']]},
+      {k:'text',label:'Note',type:'textarea',rows:6,req:1},
+      ...(U.role!=='client'?[{k:'mood',label:'How they seemed',type:'select',options:MOODS.map(m=>[m,m])}]:[]),
+    ],
+    onSave(d){S.notes.push({id:uid(),ts:Date.now(),clientId:d.clientId,shiftId:shiftId||null,kind:d.kind,text:d.text,mood:d.mood||'',authorRole:U.role,authorId:U.actor,author:actorLabel(),ack:[]});log(`Added a ${d.kind} note for ${cName(d.clientId)}`)}});
+}
+const KIND={progress:['Progress note','acc'],handover:['Handover','jac'],general:['Note',''],contact:['Contact log','']};
+function noteBlock(n){
+  const[k,cls]=KIND[n.kind]||KIND.general;
+  const acked=(n.ack||[]).length;
+  const canAck=U.role==='worker'&&n.kind==='handover'&&n.authorId!==U.actor&&!(n.ack||[]).includes(U.actor);
+  return `<div class="note${n.kind==='handover'?' handover':''}"><div class="row">${pill(k,cls)}<span class="small muted">${esc(cName(n.clientId))} · ${esc(n.author)} · ${fmtTs(n.ts)}</span></div><div class="txt">${esc(n.text)}</div>${n.mood?`<div class="small muted">Seemed: ${esc(n.mood)}</div>`:''}${(n.tasksDone||[]).length?`<div class="small muted">Tasks done: ${n.tasksDone.map(esc).join(', ')}</div>`:''}${n.kind==='handover'?`<div class="row small muted">${acked?`Read by ${n.ack.map(id=>esc(wName(id))).join(', ')}`:'Not read yet'}${canAck?`<button class="btn sm" data-act="ackNote" data-id="${n.id}">Mark as read</button>`:''}</div>`:''}</div>`;
+}
+
+/* ---------- requests ---------- */
+const REQ={
+  remove_worker:{label:'Stop a support worker from visiting',roles:['client','company'],f:['client','worker','reason']},
+  request_worker:{label:'Ask for a particular support worker',roles:['client','company'],f:['client','worker','date','start','end','location','details']},
+  new_support:{label:'Book extra support',roles:['client','company'],f:['client','date','start','end','location','stype','details']},
+  change_shift:{label:'Change a visit',roles:['client','worker','company'],f:['shift','details']},
+  cancel_shift:{label:'Cancel a visit',roles:['client','company'],f:['shift','reason']},
+  handback:{label:'Hand back a shift',roles:['worker'],f:['shift','reason']},
+  pickup:{label:'Offer to take an open shift',roles:['worker'],f:['openshift','details']},
+  leave:{label:'Unavailable dates / leave',roles:['worker'],f:['date','dateTo','details']},
+  info:{label:'Update my information',roles:['client','worker'],f:['client','details']},
+  other:{label:'Something else',roles:['client','worker','company'],f:['client','details']},
+};
+function newRequest(type,shiftId,clientId){
+  if(!type){
+    const types=Object.entries(REQ).filter(([,r])=>r.roles.includes(U.role));
+    openModal({title:'New request',body:`<div class="list">${types.map(([k,r])=>`<button class="item" data-act="newRequest" data-type="${k}"><span class="main"><span class="title">${esc(r.label)}</span></span><span class="muted">›</span></button>`).join('')}</div>`});
+    return;
+  }
+  const R=REQ[type];
+  const scope=myShifts().filter(s=>s.status==='scheduled'&&s.date>=today()).sort(bySt);
+  const shiftOpt=s=>[s.id,`${fmtD(s.date)} ${fmtT(s.start)}–${fmtT(s.end)} · ${U.role==='client'?(s.workerId?wName(s.workerId):'TBC'):cName(s.clientId)}`];
+  const open=S.shifts.filter(s=>!s.workerId&&s.status==='scheduled'&&s.date>=today()).sort(bySt);
+  const workersForClient=()=>{if(U.role!=='client')return activeWorkers();const ids=new Set(S.shifts.filter(s=>s.clientId===U.actor).map(s=>s.workerId));const seen=activeWorkers().filter(w=>ids.has(w.id));return seen.length&&type==='remove_worker'?seen:activeWorkers()};
+  const F={
+    client:U.role==='client'?null:{k:'clientId',label:type==='other'||type==='info'?'About which client (optional)':'Client',type:'select',options:clientOpts(),req:type!=='other'&&type!=='info'&&U.role!=='worker'},
+    worker:{k:'workerId',label:'Support worker',type:'select',options:workerOpts(workersForClient()),req:1},
+    date:{k:'date',label:type==='leave'?'From':'Date',type:'date',req:type==='leave'},
+    dateTo:{k:'dateTo',label:'To',type:'date'},
+    start:{k:'start',label:'Start',type:'time'},end:{k:'end',label:'Finish',type:'time'},
+    location:{k:'location',label:'Where',full:1},
+    stype:{k:'stype',label:'Support type',type:'select',options:SUPPORT_TYPES.map(x=>[x,x])},
+    shift:{k:'shiftId',label:'Which visit',type:'select',options:scope.map(shiftOpt),req:1},
+    openshift:{k:'shiftId',label:'Open shift',type:'select',options:open.map(s=>[s.id,`${fmtD(s.date)} ${fmtT(s.start)}–${fmtT(s.end)} · ${cName(s.clientId)}`]),req:1},
+    reason:{k:'reason',label:'Reason',type:'textarea',rows:3,req:type==='remove_worker'||type==='handback',help:type==='remove_worker'?'This is kept confidential and reviewed by the office.':''},
+    details:{k:'details',label:'Details',type:'textarea',rows:3,req:type==='other'||type==='change_shift'||type==='info'},
+  };
+  const fields=R.f.map(k=>F[k]).filter(Boolean);
+  openForm({title:R.label,submit:'Send request',done:'Request sent to the office',values:{shiftId:shiftId||'',clientId:clientId||'',location:clientId&&byId(S.clients,clientId)?byId(S.clients,clientId).address:''},fields,
+    intro:type==='remove_worker'?'You can ask for any support worker to stop visiting. You do not have to give a detailed reason, and asking will not affect your services.':type==='pickup'&&!open.length?'There are no open shifts right now.':null,
+    validate:d=>{if(d.start&&d.end&&d.end<=d.start)return'Finish must be after start.';if(d.dateTo&&d.date&&d.dateTo<d.date)return'End date must be after start date.'},
+    onSave(d){
+      const r=Object.assign({id:uid(),type,ts:Date.now(),status:'pending',byRole:U.role,byId:U.actor,by:actorLabel()},d);
+      if(U.role==='client')r.clientId=U.actor;
+      if(U.role==='worker'&&['handback','pickup','leave'].includes(type))r.workerId=U.actor;
+      if(r.shiftId){const s=byId(S.shifts,r.shiftId);if(s){r.clientId=r.clientId||s.clientId;if(!r.workerId&&type!=='pickup')r.workerId=s.workerId}}
+      S.requests.push(r);log(`Sent request: ${R.label}${r.clientId?' for '+cName(r.clientId):''}`);
+    }});
+}
+function reqSummary(r){
+  const s=r.shiftId?byId(S.shifts,r.shiftId):null;
+  const bits=[];
+  if(r.clientId)bits.push(cName(r.clientId));
+  if(r.workerId&&r.type!=='leave')bits.push((r.type==='remove_worker'?'Remove: ':r.type==='request_worker'?'Wants: ':'')+wName(r.workerId));
+  if(s)bits.push(`${fmtD(s.date)} ${fmtT(s.start)}`);
+  if(r.date&&!s)bits.push(fmtD(r.date)+(r.dateTo&&r.dateTo!==r.date?' – '+fmtD(r.dateTo):'')+(r.start?` ${fmtT(r.start)}–${fmtT(r.end)}`:''));
+  if(r.location)bits.push(r.location);
+  return bits.map(esc).join(' · ');
+}
+function reqItem(r){
+  const st={pending:['Waiting','warn'],approved:['Approved','ok'],declined:['Declined','bad'],withdrawn:['Withdrawn','']}[r.status];
+  const mine=r.byRole===U.role&&(r.byId||null)===(U.actor||null);
+  return `<div class="note"><div class="row"><b style="margin-right:auto">${esc(REQ[r.type]?REQ[r.type].label:r.type)}</b>${pill(st[0],st[1])}</div>
+    <div class="small muted">${reqSummary(r)}</div>
+    ${r.reason||r.details?`<div class="txt">${esc(r.reason||'')}${r.reason&&r.details?'\n':''}${esc(r.details||'')}</div>`:''}
+    <div class="small muted">From ${esc(r.by)} · ${fmtTs(r.ts)}</div>
+    ${r.response||r.decidedTs?`<div class="callout small"><b>Office reply${r.decidedTs?' · '+fmtTs(r.decidedTs):''}:</b> ${esc(r.response||'No message')}${r.effect?`<br><span class="muted">${esc(r.effect)}</span>`:''}</div>`:''}
+    ${r.status==='pending'?`<div class="row">${U.role==='company'?`<button class="btn sm primary" data-act="decide" data-id="${r.id}" data-d="approved">Approve</button><button class="btn sm" data-act="decide" data-id="${r.id}" data-d="declined">Decline</button>`:''}${mine?`<button class="btn sm ghost" data-act="withdraw" data-id="${r.id}">Withdraw</button>`:''}</div>`:''}</div>`;
+}
+function applyRequest(r){
+  const fx=[];const c=r.clientId?byId(S.clients,r.clientId):null;const s=r.shiftId?byId(S.shifts,r.shiftId):null;
+  switch(r.type){
+    case 'remove_worker':if(c){c.blockedWorkers=[...new Set([...(c.blockedWorkers||[]),r.workerId])];c.preferredWorkers=(c.preferredWorkers||[]).filter(x=>x!==r.workerId);
+      const fut=S.shifts.filter(x=>x.clientId===c.id&&x.workerId===r.workerId&&x.status==='scheduled'&&x.date>=today());fut.forEach(x=>x.workerId='');
+      fx.push(`${wName(r.workerId)} marked as not to be rostered.`);if(fut.length)fx.push(`${fut.length} upcoming visit${fut.length>1?'s are':' is'} now unassigned.`)}break;
+    case 'request_worker':if(c){c.preferredWorkers=[...new Set([...(c.preferredWorkers||[]),r.workerId])];fx.push(`${wName(r.workerId)} added as a preferred worker.`)}
+      if(r.date&&r.start&&r.end){S.shifts.push({id:uid(),clientId:r.clientId,workerId:r.workerId,date:r.date,start:r.start,end:r.end,location:r.location||'',type:'',tasks:r.details||'',status:'scheduled',created:Date.now()});fx.push('Visit added to the calendar.')}break;
+    case 'new_support':if(r.date&&r.start&&r.end){S.shifts.push({id:uid(),clientId:r.clientId,workerId:'',date:r.date,start:r.start,end:r.end,location:r.location||'',type:r.stype||'',tasks:r.details||'',status:'scheduled',created:Date.now()});fx.push('Unassigned visit added to the calendar.')}break;
+    case 'cancel_shift':if(s){s.status='cancelled';fx.push('Visit cancelled.')}break;
+    case 'handback':if(s){s.workerId='';fx.push('Shift is now open for another worker.')}break;
+    case 'pickup':if(s){s.workerId=r.workerId;fx.push(`Shift assigned to ${wName(r.workerId)}.`)}break;
+    case 'leave':{const aff=S.shifts.filter(x=>x.workerId===r.workerId&&x.status==='scheduled'&&x.date>=r.date&&x.date<=(r.dateTo||r.date));aff.forEach(x=>x.workerId='');if(aff.length)fx.push(`${aff.length} visit${aff.length>1?'s':''} unassigned during leave.`)}break;
+    case 'change_shift':fx.push('Edit the visit to make the change.');break;
+  }
+  return fx.join(' ');
+}
+
+/* ---------- incidents ---------- */
+const INC_TYPES=['Injury or fall','Medication error','Behaviour of concern','Allegation of abuse or neglect','Unauthorised restrictive practice','Missing person','Property damage','Illness / hospital','Near miss','Complaint','Other'];
+function addIncident(clientId){
+  openForm({title:'Report an incident',submit:'Submit report',done:'Incident reported',wide:1,values:{clientId:clientId||'',date:today(),time:nowHM(),severity:'Medium'},
+    intro:'<b>If someone is in danger, call 000 first.</b> Write what you saw and did, not opinions. Tell the office straight away about anything serious.',
+    fields:[
+      {k:'clientId',label:'Client involved',type:'select',options:clientOpts(),req:1},
+      {k:'type',label:'Type',type:'select',options:INC_TYPES.map(x=>[x,x]),req:1},
+      {k:'date',label:'Date',type:'date',req:1},{k:'time',label:'Time',type:'time',req:1},
+      {k:'location',label:'Where it happened',full:1},
+      {k:'severity',label:'Severity',type:'select',blank:false,options:[['Low','Low'],['Medium','Medium'],['High','High'],['Critical','Critical']]},
+      {k:'witnesses',label:'Witnesses / others involved'},
+      {k:'desc',label:'What happened',type:'textarea',rows:4,req:1},
+      {k:'actions',label:'What was done straight away',type:'textarea',rows:3,req:1},
+      {k:'notified',label:'Who has been told (family, GP, police, office)',type:'textarea',rows:2},
+      {k:'reportable',label:'This may be a reportable incident to the NDIS Quality and Safeguards Commission',type:'checkbox'},
+      {type:'note',html:'Reportable incidents include a death, serious injury, abuse or neglect, unlawful sexual or physical contact, sexual misconduct, and use of an unauthorised restrictive practice. See Policies › Incident management.'},
+    ],
+    onSave(d){const i=Object.assign({id:uid(),ts:Date.now(),status:'open',by:actorLabel(),byRole:U.role},d);S.incidents.push(i);log(`Reported incident (${d.type}) for ${cName(d.clientId)}${d.reportable?' — flagged as possibly reportable':''}`)}});
+}
+function closeIncident(id){
+  const i=byId(S.incidents,id);if(!i)return;
+  openForm({title:'Close incident',submit:'Close incident',done:'Incident closed',values:{},
+    fields:[{k:'outcome',label:'Outcome and follow-up actions',type:'textarea',rows:4,req:1},{k:'commission',label:'NDIS Commission notified (if reportable)',type:'checkbox'},{k:'commissionRef',label:'Commission reference number'}],
+    onSave(d){Object.assign(i,d,{status:'closed',closedTs:Date.now(),closedBy:actorLabel()});log(`Closed incident for ${cName(i.clientId)}`)}});
+}
+
+/* ---------- summary copy ---------- */
+function clientSummary(id){
+  const c=byId(S.clients,id);if(!c)return'';
+  const meds=S.meds.filter(m=>m.clientId===id&&m.active!==false);
+  const L=[`${cName(id)} (${c.first} ${c.last})`,`NDIS: ${c.ndis||'—'}   DOB: ${c.dob?fmtD(c.dob,{day:'numeric',month:'short',year:'numeric'}):'—'}`,`Address: ${c.address||'—'}`,`Phone: ${c.phone||'—'}`,'',`ALLERGIES: ${c.allergies||'None recorded'}`,`Conditions: ${c.conditions||'—'}`,`GP: ${c.gp||'—'} ${c.gpPhone||''}`,'','Medication:'];
+  meds.forEach(m=>L.push(` - ${m.name} ${m.strength||''} ${m.dose} ${m.route||''} ${m.prn?'PRN':(m.times||[]).map(fmtT).join(', ')}`));
+  if(!meds.length)L.push(' - none recorded');
+  L.push('',`Communication: ${c.communication||'—'}`,`Support needs: ${c.supportNeeds||'—'}`,'',`Emergency contact: ${c.ec1n||'—'} ${c.ec1r?'('+c.ec1r+')':''} ${c.ec1p||''}`);
+  if(c.ec2n)L.push(`Emergency contact 2: ${c.ec2n} ${c.ec2p||''}`);
+  L.push('',`Generated ${new Date().toLocaleString('en-AU')} — confidential health information.`);
+  return L.join('\n');
+}
+
+/* ---------- views ---------- */
+const V={};
+function pageHead(title,eyebrow,actions){return `<div class="ph"><div class="t">${eyebrow?`<div class="eyebrow">${eyebrow}</div>`:''}<h1>${title}</h1></div>${actions?`<div class="row">${actions}</div>`:''}</div>`}
+const emptyBox=(title,text,btn)=>`<div class="panel empty"><h3>${title}</h3><p>${text}</p>${btn||''}</div>`;
+function noActor(){
+  const isW=U.role==='worker';
+  return pageHead(isW?'Support worker view':'Client view','Prototype')+emptyBox(isW?'No support workers yet':'No clients yet',`Switch to the Company view and add ${isW?'a support worker':'a client'} first. You can then see the app the way they would.`,`<button class="btn primary" data-act="role" data-r="company">Go to Company view</button>`);
+}
+function needsActor(){return U.role!=='company'&&!U.actor}
+
+function companyAlerts(){
+  const a=[],t=today();
+  const pend=S.requests.filter(r=>r.status==='pending').length;
+  if(pend)a.push(['warn',`${pend} request${pend>1?'s':''} waiting`,'Clients and workers are waiting for a reply','requests']);
+  const un=S.shifts.filter(s=>!s.workerId&&s.status==='scheduled'&&s.date>=t&&s.date<=addDays(t,14)).length;
+  if(un)a.push(['warn',`${un} unassigned visit${un>1?'s':''}`,'In the next 14 days','calendar:u']);
+  const od=dueList(t,new Set(activeClients().map(c=>c.id))).filter(it=>dueState(it,t)==='overdue').length;
+  if(od)a.push(['bad',`${od} medication dose${od>1?'s':''} overdue`,'More than an hour past due with no record','meds']);
+  const late=S.shifts.filter(s=>s.date<=t&&s.status==='scheduled'&&s.workerId&&shiftStatus(s)[1]==='bad').length;
+  if(late)a.push(['bad',`${late} visit${late>1?'s':''} not started`,'Past the start time with no check-in','calendar']);
+  const inc=S.incidents.filter(i=>i.status==='open');
+  if(inc.length)a.push([inc.some(i=>i.reportable)?'bad':'warn',`${inc.length} open incident${inc.length>1?'s':''}`,inc.some(i=>i.reportable)?'Includes possibly reportable incidents':'Review and close out','incidents']);
+  activeWorkers().forEach(w=>{const k=w.screeningExp;if(!k)a.push(['warn',`${wName(w.id)}: screening not recorded`,'NDIS Worker Screening Check','worker:'+w.id]);else{const n=daysUntil(k);if(n<0)a.push(['bad',`${wName(w.id)}: screening expired`,fmtD(k,{day:'numeric',month:'short',year:'numeric'}),'worker:'+w.id]);else if(n<=30)a.push(['warn',`${wName(w.id)}: screening expires soon`,`In ${n} days`,'worker:'+w.id])}});
+  activeClients().forEach(c=>{if(!S.consents.some(x=>x.clientId===c.id&&!x.withdrawn))a.push(['warn',`${cName(c.id)}: no consent recorded`,'Consent to collect and share information','consent']);if(c.planEnd){const n=daysUntil(c.planEnd);if(n>=0&&n<=60)a.push(['warn',`${cName(c.id)}: plan ends in ${n} days`,'Check plan review is booked','client:'+c.id])}});
+  return a;
+}
+V.home=()=>{
+  if(needsActor())return noActor();
+  const t=today(),cl=myClients(),ids=new Set(cl.map(c=>c.id));
+  const greet=U.role==='company'?(S.company.name||'Your organisation'):U.role==='worker'?`Hi ${(byId(S.workers,U.actor)||{}).first||''}`:`Hi ${(byId(S.clients,U.actor)||{}).preferred||(byId(S.clients,U.actor)||{}).first||''}`;
+  let h=pageHead(esc(greet),esc(fmtLong(t)));
+  if(U.role==='company'&&(!S.workers.length||!S.clients.length||!S.shifts.length||!S.company.name)){
+    h+=`<div class="panel setup"><div><h2>Set up your organisation</h2><p class="muted">The app starts empty. Work through these to see it in action.</p></div><ol class="steps">
+      <li class="${S.company.name?'done':''}"><span class="main"><b>Organisation details</b><br><span class="small muted">Used in your policies and on reports</span></span><button class="btn sm" data-act="go" data-v="settings">Open</button></li>
+      <li class="${S.workers.length?'done':''}"><span class="main"><b>Add support workers</b><br><span class="small muted">With screening and training dates</span></span><button class="btn sm" data-act="editWorker">Add</button></li>
+      <li class="${S.clients.length?'done':''}"><span class="main"><b>Add clients</b><br><span class="small muted">Plan, health, contacts and preferences</span></span><button class="btn sm" data-act="editClient">Add</button></li>
+      <li class="${S.shifts.length?'done':''}"><span class="main"><b>Schedule visits</b><br><span class="small muted">Who goes where and when</span></span><button class="btn sm" data-act="editShift"${S.clients.length?'':' disabled'}>Schedule</button></li>
+    </ol><p class="small muted">Then use “Viewing as” at the top to see the app as a support worker or client.</p></div>`;
+  }
+  const sh=myShifts().filter(s=>s.date===t&&s.status!=='cancelled').sort(bySt);
+  const due=dueList(t,ids);
+  const pendCount=S.requests.filter(r=>r.status==='pending'&&(U.role==='company'||(r.byRole===U.role&&r.byId===U.actor))).length;
+  if(S.clients.length){
+    h+=`<div class="strip" style="margin-top:${U.role==='company'&&!S.shifts.length?'20px':'0'}"><div><b>${sh.length}</b><span>Visit${sh.length===1?'':'s'} today</span></div><div><b>${due.filter(x=>!x.rec).length}</b><span>Doses still to record</span></div><div><b>${pendCount}</b><span>${U.role==='company'?'Requests waiting':'Your open requests'}</span></div></div>`;
+  }
+  if(U.role==='company'){const al=companyAlerts();if(al.length)h+=`<div class="section"><div class="sh"><h2>Needs attention</h2></div><div class="alerts">${al.slice(0,9).map(([lv,b,s,go])=>`<button class="alert ${lv}" data-act="alertGo" data-go="${esc(go)}"><span class="sev"></span><span><b>${esc(b)}</b><span>${esc(s)}</span></span></button>`).join('')}</div></div>`}
+  if(U.role==='client'){const c=byId(S.clients,U.actor);if(c&&c.allergies)h+=`<div class="callout bad" style="margin-top:16px"><b>Allergies on file:</b> ${esc(c.allergies)}</div>`}
+  const visitsTitle=U.role==='client'?'Your visits today':U.role==='worker'?'Your shifts today':'Visits today';
+  const nextUp=U.role!=='company'?myShifts().filter(s=>s.date>t&&s.status!=='cancelled').sort(bySt).slice(0,4):[];
+  h+=`<div class="cols"><div>
+    <div class="section"><div class="sh"><h2>${visitsTitle}</h2><button class="btn sm ghost" data-act="go" data-v="calendar">Calendar</button></div>
+    ${sh.length?`<div class="list">${sh.map(s=>shiftItem(s)).join('')}</div>`:`<div class="panel empty"><p>Nothing scheduled today.</p>${U.role==='company'&&S.clients.length?`<button class="btn sm" data-act="editShift">Schedule a visit</button>`:''}${U.role==='client'?`<button class="btn sm" data-act="newRequest" data-type="new_support">Request support</button>`:''}</div>`}</div>
+    ${nextUp.length?`<div class="section"><div class="sh"><h2>Coming up</h2></div><div class="list">${nextUp.map(s=>shiftItem(s,{date:1})).join('')}</div></div>`:''}
+  </div><div>
+    <div class="section"><div class="sh"><h2>Medication today</h2><button class="btn sm ghost" data-act="go" data-v="meds">All</button></div>
+    ${due.length?`<div class="list">${due.slice(0,8).map(it=>medRow(it,t)).join('')}</div>${due.length>8?`<p class="small muted" style="margin-top:6px">+${due.length-8} more</p>`:''}`:`<div class="panel empty"><p>No scheduled doses today.</p></div>`}</div>
+    ${homeNotes()}
+  </div></div>`;
+  return h;
+};
+function homeNotes(){
+  const ids=new Set(myClients().map(c=>c.id));
+  let notes=S.notes.filter(n=>ids.has(n.clientId)).sort((a,b)=>b.ts-a.ts);
+  let title='Latest notes';
+  if(U.role==='worker'){notes=notes.filter(n=>n.kind==='handover'&&n.authorId!==U.actor&&!(n.ack||[]).includes(U.actor));title='Handover notes for you'}
+  notes=notes.slice(0,4);
+  return `<div class="section"><div class="sh"><h2>${title}</h2><button class="btn sm ghost" data-act="go" data-v="notes">All notes</button></div>${notes.length?`<div class="list">${notes.map(noteBlock).join('')}</div>`:`<div class="panel empty"><p>${U.role==='worker'?'You’re up to date.':'No notes yet.'}</p></div>`}</div>`;
+}
+function medRow(it,k,withClient=true){
+  const st=dueState(it,k);const m=it.m;
+  const btn=can.recordMeds()?`<button class="btn sm${it.rec?'':' primary'}" data-act="recordDose" data-id="${m.id}" data-t="${it.t}" data-k="${k}">${it.rec?'Edit':'Record'}</button>`:'';
+  return `<div class="medrow"><span class="sh-time"><b>${fmtT(it.t)}</b></span><span class="main"><span class="title">${esc(m.name)} ${m.strength?`<span class="muted" style="font-weight:400">${esc(m.strength)}</span>`:''}</span><br><span class="sub">${withClient?esc(cName(m.clientId))+' · ':''}${esc(m.dose)}${m.route?' · '+esc(m.route):''}${it.rec?` · ${esc(it.rec.by)} at ${fmtT(it.rec.time)}${(it.rec.photos||[]).length?` · ${it.rec.photos.length} photo${it.rec.photos.length>1?'s':''}`:''}`:m.photosRequired?` · <b style="color:var(--warn)">${m.photosRequired} photo${m.photosRequired>1?'s':''} needed</b>`:''}</span></span>${pill(st[0].toUpperCase()+st.slice(1),MAR_PILL[st])}${btn}</div>`;
+}
+
+/* calendar */
+V.calendar=()=>{
+  if(needsActor())return noActor();
+  const c=U.cal;
+  let sh=myShifts().filter(s=>s.status!=='cancelled');
+  if(U.role==='company'&&c.filter){const[t,id]=c.filter.split(':');sh=sh.filter(s=>t==='w'?s.workerId===id:t==='c'?s.clientId===id:!s.workerId)}
+  const byDay={};sh.forEach(s=>(byDay[s.date]=byDay[s.date]||[]).push(s));Object.values(byDay).forEach(a=>a.sort(bySt));
+  const filt=U.role==='company'?`<select data-ch="calFilter" aria-label="Filter calendar" style="max-width:220px"><option value="">Everyone</option><option value="u:"${c.filter==='u:'?' selected':''}>Unassigned visits</option>${activeWorkers().length?`<optgroup label="Support workers">${activeWorkers().map(w=>`<option value="w:${w.id}"${c.filter==='w:'+w.id?' selected':''}>${esc(wName(w.id))}</option>`).join('')}</optgroup>`:''}${activeClients().length?`<optgroup label="Clients">${activeClients().map(x=>`<option value="c:${x.id}"${c.filter==='c:'+x.id?' selected':''}>${esc(cName(x.id))}</option>`).join('')}</optgroup>`:''}</select>`:'';
+  const addBtn=U.role==='company'?`<button class="btn primary" data-act="editShift"${activeClients().length?'':' disabled'}>${icon('plus')}Schedule visit</button>`:U.role==='client'?`<button class="btn primary" data-act="newRequest" data-type="new_support">${icon('plus')}Request support</button>`:'';
+  let h=pageHead('Calendar',U.role==='company'?'All visits':U.role==='worker'?'Your roster':'Who is coming and when',addBtn);
+  const title=c.mode==='month'?new Date(c.y,c.m,1).toLocaleDateString('en-AU',{month:'long',year:'numeric'}):`Week of ${fmtD(weekStart(c.sel),{day:'numeric',month:'short'})}`;
+  h+=`<div class="calbar"><button class="btn sm" data-act="calNav" data-d="-1" aria-label="Previous">‹</button><button class="btn sm" data-act="calNav" data-d="1" aria-label="Next">›</button><h2>${esc(title)}</h2><button class="btn sm ghost" data-act="calToday">Today</button><span style="flex:1"></span>${filt}<div class="seg" role="group" aria-label="View"><button data-act="calMode" data-m="month" aria-pressed="${c.mode==='month'}">Month</button><button data-act="calMode" data-m="week" aria-pressed="${c.mode==='week'}">Week</button></div></div>`;
+  if(c.mode==='month'){
+    const first=new Date(c.y,c.m,1);const off=(first.getDay()+6)%7;const start=addDays(dkey(first),-off);
+    const dim=new Date(c.y,c.m+1,0).getDate();const cells=Math.ceil((off+dim)/7)*7;
+    h+=`<div class="grid7">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="dow">${d}</div>`).join('')}`;
+    for(let i=0;i<cells;i++){const k=addDays(start,i);const d=parseK(k);const list=byDay[k]||[];
+      const cls=['day',d.getMonth()!==c.m?'out':'',k===today()?'today':'',k===c.sel?'sel':''].join(' ');
+      h+=`<button class="${cls}" data-act="calSel" data-k="${k}" aria-label="${esc(fmtLong(k))}, ${list.length} visits"><span class="n">${d.getDate()}</span>${list.slice(0,3).map(s=>`<span class="chip${!s.workerId?' un':s.status==='completed'?' done':''}">${fmtT(s.start)} ${esc(U.role==='client'?(s.workerId?wName(s.workerId).split(' ')[0]:'TBC'):cName(s.clientId).split(' ')[0])}</span>`).join('')}${list.length>3?`<span class="more">+${list.length-3} more</span>`:''}<span class="dots">${list.slice(0,4).map(s=>`<i class="${s.workerId?'':'un'}"></i>`).join('')}</span></button>`}
+    h+=`</div>`;
+    const list=byDay[c.sel]||[];
+    h+=`<div class="section"><div class="sh"><h2>${esc(fmtLong(c.sel))}</h2>${U.role==='company'&&activeClients().length?`<button class="btn sm" data-act="editShift" data-k="${c.sel}">Add visit</button>`:''}</div>${list.length?`<div class="list">${list.map(s=>shiftItem(s)).join('')}</div>`:`<div class="panel empty"><p>No visits on this day.</p></div>`}</div>`;
+  }else{
+    const ws=weekStart(c.sel);
+    for(let i=0;i<7;i++){const k=addDays(ws,i);const list=byDay[k]||[];
+      h+=`<div class="section" style="margin-top:${i?18:0}px"><div class="sh"><h3>${esc(fmtD(k,{weekday:'long',day:'numeric',month:'short'}))}${k===today()?' · Today':''}</h3>${U.role==='company'&&activeClients().length?`<button class="btn sm ghost" data-act="editShift" data-k="${k}">Add</button>`:''}</div>${list.length?`<div class="list">${list.map(s=>shiftItem(s)).join('')}</div>`:'<p class="small muted">No visits</p>'}</div>`}
+  }
+  return h;
+};
+function weekStart(k){const d=parseK(k);return addDays(k,-((d.getDay()+6)%7))}
+
+/* clients */
+V.clients=()=>{
+  if(needsActor())return noActor();
+  const q=U.q.toLowerCase();
+  let list=U.role==='company'&&U.showArchived?S.clients.filter(c=>c.archived):myClients();
+  if(q)list=list.filter(c=>[c.first,c.last,c.preferred,c.ndis,c.address].join(' ').toLowerCase().includes(q));
+  list=list.slice().sort((a,b)=>cName(a.id).localeCompare(cName(b.id)));
+  let h=pageHead(U.role==='worker'?'My clients':'Clients',U.role==='worker'?'People you are rostered to support':`${activeClients().length} active`,U.role==='company'?`<button class="btn primary" data-act="editClient">${icon('plus')}Add client</button>`:'');
+  h+=`<div class="row" style="margin-bottom:12px"><input class="search" type="search" id="q" data-in="q" placeholder="Search name, NDIS number or suburb" value="${esc(U.q)}" aria-label="Search clients">${U.role==='company'?`<div class="seg"><button data-act="toggleArchived" data-v="0" aria-pressed="${!U.showArchived}">Active</button><button data-act="toggleArchived" data-v="1" aria-pressed="${U.showArchived}">Removed</button></div>`:''}</div>`;
+  if(!list.length)return h+(q?emptyBox('No matches','Try a different name or number.'):U.showArchived?emptyBox('No removed clients','Clients you remove are kept here so their records are retained.'):U.role==='worker'?emptyBox('No clients yet','Clients appear here once the office rosters you on a visit.'):emptyBox('No clients yet','Add your first client to start recording support, medication and notes.',`<button class="btn primary" data-act="editClient">Add client</button>`));
+  h+=`<div class="list">${list.map(c=>{const next=S.shifts.filter(s=>s.clientId===c.id&&s.date>=today()&&s.status==='scheduled').sort(bySt)[0];const mc=S.meds.filter(m=>m.clientId===c.id&&m.active!==false).length;
+    return `<button class="item" data-act="openClient" data-id="${c.id}"><span class="avatar">${esc(initials(cName(c.id)))}</span><span class="main"><span class="title">${esc(cName(c.id))}</span><span class="sub">${c.ndis?`NDIS <span class="mono">${esc(c.ndis)}</span> · `:''}${next?`Next: ${esc(fmtD(next.date))} ${fmtT(next.start)}`:'No upcoming visits'}${mc?` · ${mc} med${mc>1?'s':''}`:''}</span></span>${c.allergies?'<span class="tag bad">Allergies</span>':''}${c.behaviourPlan?'<span class="tag">BSP</span>':''}</button>`}).join('')}</div>`;
+  return h;
+};
+V.profile=()=>needsActor()?noActor():clientView(U.actor);
+V.client=()=>clientView(U.param);
+function clientView(id){
+  const c=byId(S.clients,id);
+  if(!c)return emptyBox('Client not found','They may have been removed.',`<button class="btn" data-act="go" data-v="clients">Back to clients</button>`);
+  const tabs=[['overview','Overview'],['meds','Medication'],['timeline','Notes & history'],['visits','Visits'],['requests','Requests']];
+  const self=U.role==='client';
+  const acts=[`<button class="btn" data-act="copySummary" data-id="${id}">${icon('copy')}Copy summary</button>`];
+  if(can.editClient(id))acts.push(`<button class="btn" data-act="editClient" data-id="${id}">Edit</button>`);
+  if(U.role==='company')acts.push(c.archived?`<button class="btn" data-act="restoreClient" data-id="${id}">Restore</button>`:`<button class="btn danger" data-act="archiveClient" data-id="${id}">Remove</button>`);
+  let h=`${!self?`<button class="btn ghost sm" data-act="go" data-v="clients" style="margin-bottom:8px">‹ ${U.role==='worker'?'My clients':'Clients'}</button>`:''}`;
+  h+=pageHead(esc(cName(id))+(c.archived?' <span class="pill">Removed</span>':''),c.ndis?`NDIS <span class="mono">${esc(c.ndis)}</span>`:(self?'My details':'Client'),acts.join(''));
+  if(c.allergies)h+=`<div class="callout bad" style="margin-bottom:16px"><b>Allergies & alerts:</b> ${esc(c.allergies)}</div>`;
+  h+=`<div class="tabs" role="tablist">${tabs.map(([k,l])=>`<button role="tab" aria-selected="${U.tab===k}" data-act="tab" data-t="${k}">${l}</button>`).join('')}</div>`;
+  h+=({overview:clientOverview,meds:clientMeds,timeline:clientTimeline,visits:clientVisits,requests:clientRequests}[U.tab]||clientOverview)(c);
+  return h;
+}
+const dlRow=(k,v)=>`<dt>${k}</dt><dd>${v?esc(v):'<span class="muted">—</span>'}</dd>`;
+function clientOverview(c){
+  const consent=S.consents.filter(x=>x.clientId===c.id&&!x.withdrawn).sort((a,b)=>b.ts-a.ts)[0];
+  const age=c.dob?Math.floor((Date.now()-parseK(c.dob))/31557600000):null;
+  const box=(t,body,extra)=>`<div class="panel"><div class="card-h"><h3>${t}</h3>${extra||''}</div>${body}</div>`;
+  return `<div class="cols">
+    <div class="stack">
+      ${box('Personal',`<dl class="dl">${dlRow('Full name',`${c.first} ${c.last}`)}${dlRow('Pronouns',c.pronouns)}${dlRow('Date of birth',c.dob?fmtD(c.dob,{day:'numeric',month:'long',year:'numeric'})+(age!==null?` (${age})`:''):'')}${dlRow('Phone',c.phone)}${dlRow('Email',c.email)}${dlRow('Address',c.address)}${dlRow('Language',c.language)}</dl>`)}
+      ${box('NDIS plan',`<dl class="dl">${dlRow('NDIS number',c.ndis)}${dlRow('Management',c.planType)}${dlRow('Plan dates',c.planStart||c.planEnd?`${c.planStart?fmtD(c.planStart,{day:'numeric',month:'short',year:'numeric'}):'?'} – ${c.planEnd?fmtD(c.planEnd,{day:'numeric',month:'short',year:'numeric'}):'?'}`:'')}${dlRow('Plan manager',c.planManager)}${dlRow('Support coordinator',c.coordinator)}${dlRow('Nominee / guardian',[c.nominee,c.nomineePhone].filter(Boolean).join(' · '))}</dl>`)}
+      ${box('Emergency contacts',`<dl class="dl">${dlRow(esc(c.ec1r||'Contact 1'),[c.ec1n,c.ec1p].filter(Boolean).join(' · '))}${dlRow('Contact 2',[c.ec2n,c.ec2p].filter(Boolean).join(' · '))}</dl>`)}
+    </div>
+    <div class="stack">
+      ${box('Health',`<dl class="dl">${dlRow('Conditions',c.conditions)}${dlRow('GP',[c.gp,c.gpPhone].filter(Boolean).join(' · '))}${dlRow('Pharmacy',c.pharmacy)}${dlRow('Medicare',c.medicare)}${dlRow('Behaviour support plan',c.behaviourPlan?'Yes — follow the plan':'No')}</dl>`)}
+      ${box('Support',`<dl class="dl">${dlRow('Communication',c.communication)}${dlRow('Needs & routines',c.supportNeeds)}${dlRow('Goals',c.goals)}${U.role!=='client'||true?dlRow('Access & safety',c.access):''}</dl>`)}
+      ${box('Support workers',`<dl class="dl"><dt>Preferred</dt><dd>${(c.preferredWorkers||[]).length?c.preferredWorkers.map(id=>`<span class="pill jac">${esc(wName(id))}</span>`).join(' '):'<span class="muted">—</span>'}</dd>${U.role!=='worker'?`<dt>Not to roster</dt><dd>${(c.blockedWorkers||[]).length?c.blockedWorkers.map(id=>`<span class="tag bad">${esc(wName(id))}</span>`).join(' '):'<span class="muted">—</span>'}</dd>`:''}</dl>`,U.role==='client'?`<button class="btn sm" data-act="newRequest">Make a request</button>`:'')}
+      ${box('Consent',consent?`<dl class="dl">${dlRow('Recorded',fmtTs(consent.ts))}${dlRow('Given by',consent.givenBy)}${dlRow('Sharing with',consent.scope.join(', '))}${dlRow('Review by',consent.review?fmtD(consent.review,{day:'numeric',month:'short',year:'numeric'}):'')}</dl>`:`<div style="padding:14px" class="small"><span class="pill warn">Not recorded</span><p class="muted" style="margin-top:6px">Record consent before sharing information with the support team.</p></div>`,U.role!=='worker'?`<button class="btn sm" data-act="recordConsent" data-id="${c.id}">${consent?'Update':'Record consent'}</button>`:'')}
+    </div></div>`;
+}
+function clientMeds(c){
+  const t=today(),k=U.medDate||t;
+  const meds=S.meds.filter(m=>m.clientId===c.id);
+  const active=meds.filter(m=>m.active!==false),stopped=meds.filter(m=>m.active===false);
+  const due=dueList(k,new Set([c.id]));
+  const hist=S.mar.filter(r=>r.clientId===c.id).sort((a,b)=>b.ts-a.ts).slice(0,30);
+  const medCard=m=>`<div class="medrow"><span class="main"><span class="title">${esc(m.name)} ${m.strength?`<span class="muted" style="font-weight:400">${esc(m.strength)}</span>`:''}</span> ${m.prn?pill('PRN','jac'):''}${m.photosRequired?pill(`${m.photosRequired} photo${m.photosRequired>1?'s':''} required`,'warn'):''}${m.active===false?pill('Stopped',''):''}<br><span class="sub">${esc(m.dose)}${m.route?' · '+esc(m.route):''} · ${m.prn?esc(m.prnReason||'As needed'):(m.times||[]).map(fmtT).join(', ')}</span>${m.instructions?`<br><span class="sub">${esc(m.instructions)}</span>`:''}${m.purpose||m.prescriber?`<br><span class="sub">${[m.purpose?'For '+m.purpose:'',m.prescriber?'Prescribed by '+m.prescriber:''].filter(Boolean).map(esc).join(' · ')}</span>`:''}${m.end?`<br><span class="sub">Until ${fmtD(m.end,{day:'numeric',month:'short',year:'numeric'})}</span>`:''}</span>
+    <span class="row">${m.prn&&can.recordMeds()&&m.active!==false?`<button class="btn sm primary" data-act="recordDose" data-id="${m.id}">Give PRN</button>`:''}${can.manageMeds(c.id)?`<button class="btn sm" data-act="editMed" data-id="${m.id}" data-c="${c.id}">Edit</button>${m.active!==false?`<button class="btn sm" data-act="stopMed" data-id="${m.id}">Stop</button>`:`<button class="btn sm" data-act="resumeMed" data-id="${m.id}">Restart</button>`}<button class="btn sm danger" data-act="removeMed" data-id="${m.id}">Remove</button>`:''}</span></div>`;
+  return `<div class="cols"><div>
+    <div class="sh row" style="margin-bottom:10px"><h2 style="margin-right:auto">Doses for</h2><input type="date" data-ch="medDate" value="${k}" style="width:auto" aria-label="Date"></div>
+    ${due.length?`<div class="list">${due.map(it=>medRow(it,k,false)).join('')}</div>`:'<div class="panel empty"><p>No scheduled doses on this day.</p></div>'}
+    <div class="section"><div class="sh"><h2>Administration record</h2></div>
+    ${hist.length?`<div class="tbl-wrap"><table><thead><tr><th>When</th><th>Medication</th><th>Outcome</th><th>By</th><th>Photos</th><th>Notes</th></tr></thead><tbody>${hist.map(r=>`<tr><td>${esc(fmtD(r.date,{day:'numeric',month:'short'}))} ${fmtT(r.time)}</td><td>${esc(r.medName)} ${esc(r.dose||'')}${r.scheduled?'':' <span class="tag">PRN</span>'}</td><td>${pill(r.status[0].toUpperCase()+r.status.slice(1),MAR_PILL[r.status])}</td><td>${esc(r.by)}${r.witness?`<br><span class="small muted">Witness: ${esc(r.witness)}</span>`:''}</td><td>${(r.photos||[]).length?`<button class="mini-thumbs" data-act="viewPhotos" data-id="${r.id}" aria-label="View ${r.photos.length} photos">${r.photos.slice(0,3).map(p=>`<img src="${p.src}" alt="">`).join('')}${r.photos.length>3?`<span>+${r.photos.length-3}</span>`:''}</button>`:r.photosRequired&&r.status==='given'?'<span class="tag bad">Missing</span>':'<span class="muted">—</span>'}</td><td>${esc([r.reason,r.note,r.effect?'Effect: '+r.effect:''].filter(Boolean).join(' · '))}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">No doses recorded yet.</p>'}</div>
+  </div><div>
+    <div class="sh row" style="margin-bottom:10px"><h2 style="margin-right:auto">Medication list</h2>${can.manageMeds(c.id)?`<button class="btn sm primary" data-act="editMed" data-c="${c.id}">${icon('plus')}Add</button>`:''}</div>
+    ${active.length?`<div class="list">${active.map(medCard).join('')}</div>`:emptyBox('No medication recorded',can.manageMeds(c.id)?'Add medication from the pharmacy label or prescription.':'The office or client can add medication.')}
+    ${stopped.length?`<div class="section"><div class="sh"><h3>Stopped</h3></div><div class="list">${stopped.map(medCard).join('')}</div></div>`:''}
+  </div></div>`;
+}
+function clientTimeline(c){
+  const ev=[];const f=U.tlFilter;
+  S.notes.filter(n=>n.clientId===c.id).forEach(n=>ev.push({ts:n.ts,k:'note',cls:n.kind==='handover'?'note':'note',t:`${(KIND[n.kind]||KIND.general)[0]} · ${n.author}`,b:n.text+(n.mood?`\nSeemed: ${n.mood}`:'')}));
+  S.mar.filter(r=>r.clientId===c.id).forEach(r=>ev.push({ts:r.ts,k:'med',cls:'med',t:`${r.medName} ${r.status} · ${r.by}`,b:[r.dose,r.reason,r.note].filter(Boolean).join(' · ')}));
+  S.shifts.filter(s=>s.clientId===c.id&&s.checkIn).forEach(s=>{ev.push({ts:s.checkIn,k:'visit',cls:'visit',t:`Visit started · ${wName(s.workerId)}`,b:[s.type,s.location].filter(Boolean).join(' · ')});if(s.checkOut)ev.push({ts:s.checkOut,k:'visit',cls:'visit',t:`Visit finished · ${wName(s.workerId)}`,b:(s.tasksDone||[]).length?'Done: '+s.tasksDone.join(', '):''})});
+  if(U.role!=='client'||true)S.incidents.filter(i=>i.clientId===c.id).forEach(i=>ev.push({ts:tsOf(i.date,i.time),k:'inc',cls:'inc',t:`Incident: ${i.type} (${i.severity}) · ${i.by}`,b:i.desc}));
+  S.requests.filter(r=>r.clientId===c.id&&(U.role!=='worker'||r.byId===U.actor)).forEach(r=>ev.push({ts:r.ts,k:'req',cls:'req',t:`Request: ${(REQ[r.type]||{}).label||r.type} · ${r.status}`,b:reqSummary(r).replace(/&amp;/g,'&')}));
+  const list=ev.filter(e=>f==='all'||e.k===f).sort((a,b)=>b.ts-a.ts).slice(0,100);
+  const chips=[['all','Everything'],['note','Notes'],['med','Medication'],['visit','Visits'],['inc','Incidents'],['req','Requests']];
+  return `<div class="row" style="margin-bottom:16px"><div class="seg" style="flex-wrap:wrap">${chips.map(([k,l])=>`<button data-act="tlFilter" data-f="${k}" aria-pressed="${f===k}">${l}</button>`).join('')}</div><span style="flex:1"></span><button class="btn sm primary" data-act="addNote" data-client="${c.id}">${icon('plus')}Add note</button></div>
+    ${list.length?`<ul class="tl">${list.map(e=>`<li><span class="nd ${e.cls}"></span><div><div class="meta">${fmtTs(e.ts)}</div><b>${esc(e.t)}</b>${e.b?`<div class="txt">${esc(e.b)}</div>`:''}</div></li>`).join('')}</ul>`:emptyBox('Nothing here yet','Notes, medication records, visits and incidents for this person build up here as a complete history.')}`;
+}
+function clientVisits(c){
+  const all=S.shifts.filter(s=>s.clientId===c.id&&(U.role!=='worker'||s.workerId===U.actor||!s.workerId));
+  const up=all.filter(s=>s.date>=today()&&s.status==='scheduled').sort(bySt),past=all.filter(s=>!(s.date>=today()&&s.status==='scheduled')).sort(bySt).reverse().slice(0,30);
+  return `<div class="cols"><div><div class="sh row" style="margin-bottom:10px"><h2 style="margin-right:auto">Upcoming</h2>${U.role==='company'?`<button class="btn sm primary" data-act="editShift" data-c="${c.id}">${icon('plus')}Schedule</button>`:U.role==='client'?`<button class="btn sm primary" data-act="newRequest" data-type="new_support">Request support</button>`:''}</div>${up.length?`<div class="list">${up.map(s=>shiftItem(s,{date:1,who:'worker'})).join('')}</div>`:'<div class="panel empty"><p>No upcoming visits.</p></div>'}</div>
+  <div><div class="sh" style="margin-bottom:10px"><h2>Past & cancelled</h2></div>${past.length?`<div class="list">${past.map(s=>shiftItem(s,{date:1,who:'worker'})).join('')}</div>`:'<div class="panel empty"><p>No past visits.</p></div>'}</div></div>`;
+}
+function clientRequests(c){
+  const list=S.requests.filter(r=>r.clientId===c.id&&(U.role!=='worker'||r.byId===U.actor)).sort((a,b)=>b.ts-a.ts);
+  return `<div class="row" style="margin-bottom:12px"><span style="flex:1"></span>${U.role!=='worker'?`<button class="btn sm primary" data-act="newRequestFor" data-c="${c.id}">${icon('plus')}New request</button>`:''}</div>${list.length?`<div class="list">${list.map(reqItem).join('')}</div>`:emptyBox('No requests','Requests about this person’s support show here.')}`;
+}
+
+/* workers */
+V.workers=()=>{
+  const list=S.workers.filter(w=>U.showArchived?w.archived:!w.archived).sort((a,b)=>wName(a.id).localeCompare(wName(b.id)));
+  let h=pageHead('Support workers',`${activeWorkers().length} active`,`<button class="btn primary" data-act="editWorker">${icon('plus')}Add worker</button>`);
+  h+=`<div class="row" style="margin-bottom:12px"><div class="seg"><button data-act="toggleArchived" data-v="0" aria-pressed="${!U.showArchived}">Active</button><button data-act="toggleArchived" data-v="1" aria-pressed="${U.showArchived}">Removed</button></div></div>`;
+  if(!list.length)return h+(U.showArchived?emptyBox('No removed workers','Workers you remove are kept here with their records.'):emptyBox('No support workers yet','Add workers with their screening check and training dates. The app warns you before rostering someone whose checks have lapsed.',`<button class="btn primary" data-act="editWorker">Add worker</button>`));
+  h+=`<div class="list">${list.map(w=>{const wk=S.shifts.filter(s=>s.workerId===w.id&&s.date>=today()&&s.date<addDays(today(),7)&&s.status!=='cancelled');const hrs=wk.reduce((a,s)=>{const[h1,m1]=s.start.split(':').map(Number),[h2,m2]=s.end.split(':').map(Number);return a+(h2*60+m2-h1*60-m1)/60},0);
+    return `<button class="item" data-act="openWorker" data-id="${w.id}"><span class="avatar w">${esc(initials(wName(w.id)))}</span><span class="main"><span class="title">${esc(wName(w.id))}</span><span class="sub">${esc(w.role||'Support worker')} · ${hrs?hrs.toFixed(1).replace('.0','')+' h in next 7 days':'No visits in next 7 days'}</span></span><span class="row">${checkPill(w.screeningExp,'Screening')}</span></button>`}).join('')}</div>`;
+  return h;
+};
+
+/* meds overview */
+V.meds=()=>{
+  if(needsActor())return noActor();
+  const k=U.medDate||today();const cl=myClients();const ids=new Set(cl.map(c=>c.id));
+  const due=dueList(k,ids);const prn=S.meds.filter(m=>m.prn&&m.active!==false&&ids.has(m.clientId));
+  const done=due.filter(x=>x.rec).length;
+  let h=pageHead('Medication',U.role==='client'?'Your medication':'Medication round',U.role==='client'?`<button class="btn primary" data-act="editMed" data-c="${U.actor}">${icon('plus')}Add medication</button>`:'');
+  h+=`<div class="row" style="margin-bottom:14px"><button class="btn sm" data-act="medDay" data-d="-1" aria-label="Previous day">‹</button><input type="date" data-ch="medDate" value="${k}" style="width:auto" aria-label="Date"><button class="btn sm" data-act="medDay" data-d="1" aria-label="Next day">›</button>${k!==today()?`<button class="btn sm ghost" data-act="medDay" data-d="0">Today</button>`:''}<span class="muted small" style="margin-left:auto">${done} of ${due.length} doses recorded</span></div>`;
+  if(!cl.length)return h+emptyBox('No clients yet','Medication appears here once there are clients to support.');
+  if(!due.length&&!prn.length)return h+emptyBox('No medication scheduled',`Medication is added on each client’s record${U.role==='worker'?' by the office or the client':''}.`,U.role==='company'&&cl.length?`<button class="btn" data-act="openClientTab" data-id="${cl[0].id}" data-t="meds">Open ${esc(cName(cl[0].id))}</button>`:'');
+  const groups={};due.forEach(it=>(groups[it.t]=groups[it.t]||[]).push(it));
+  h+=`<div class="cols"><div>${Object.keys(groups).sort().map(t=>`<div class="section" style="margin-top:0;margin-bottom:18px"><div class="sh"><h3>${fmtT(t)}</h3></div><div class="list">${groups[t].map(it=>medRow(it,k)).join('')}</div></div>`).join('')||'<div class="panel empty"><p>No scheduled doses this day.</p></div>'}</div>
+  <div><div class="section" style="margin-top:0"><div class="sh"><h3>PRN (as needed)</h3></div>${prn.length?`<div class="list">${prn.map(m=>{const last=S.mar.filter(r=>r.medId===m.id).sort((a,b)=>b.ts-a.ts)[0];return `<div class="medrow"><span class="main"><span class="title">${esc(m.name)} ${esc(m.strength||'')}</span><br><span class="sub">${esc(cName(m.clientId))} · ${esc(m.dose)} · ${esc(m.prnReason||'As needed')}</span>${last?`<br><span class="sub">Last given ${fmtTs(last.ts)}</span>`:''}</span>${can.recordMeds()?`<button class="btn sm primary" data-act="recordDose" data-id="${m.id}">Give PRN</button>`:''}</div>`}).join('')}</div>`:'<p class="muted small">No PRN medication.</p>'}</div>
+  <div class="section"><div class="sh"><h3>By client</h3></div><div class="list">${cl.map(c=>{const n=S.meds.filter(m=>m.clientId===c.id&&m.active!==false).length;return `<button class="item" data-act="openClientTab" data-id="${c.id}" data-t="meds"><span class="main"><span class="title">${esc(cName(c.id))}</span><span class="sub">${n} active medication${n===1?'':'s'}</span></span>${c.allergies?'<span class="tag bad">Allergies</span>':''}<span class="muted">›</span></button>`}).join('')}</div></div></div></div>`;
+  return h;
+};
+
+/* notes */
+V.notes=()=>{
+  if(needsActor())return noActor();
+  const cl=myClients();const ids=new Set(cl.map(c=>c.id));
+  let list=S.notes.filter(n=>ids.has(n.clientId));
+  if(U.noteClient)list=list.filter(n=>n.clientId===U.noteClient);
+  if(U.noteKind)list=list.filter(n=>n.kind===U.noteKind);
+  list=list.sort((a,b)=>b.ts-a.ts).slice(0,120);
+  let h=pageHead('Notes & handover','Pass information to the next person',cl.length?`<button class="btn primary" data-act="addNote">${icon('plus')}Add note</button>`:'');
+  h+=`<div class="row" style="margin-bottom:14px">${U.role!=='client'?`<select data-ch="noteClient" style="max-width:220px" aria-label="Client"><option value="">All clients</option>${cl.map(c=>`<option value="${c.id}"${U.noteClient===c.id?' selected':''}>${esc(cName(c.id))}</option>`).join('')}</select>`:''}<select data-ch="noteKind" style="max-width:200px" aria-label="Type"><option value="">All types</option>${Object.entries(KIND).map(([k,v])=>`<option value="${k}"${U.noteKind===k?' selected':''}>${v[0]}</option>`).join('')}</select></div>`;
+  h+=list.length?`<div class="list">${list.map(noteBlock).join('')}</div>`:emptyBox('No notes yet','Progress notes, handovers and contact logs appear here, newest first.');
+  return h;
+};
+
+/* requests */
+V.requests=()=>{
+  if(needsActor())return noActor();
+  let list=S.requests.slice();
+  if(U.role!=='company'){const ids=new Set(myClients().map(c=>c.id));list=list.filter(r=>(r.byRole===U.role&&r.byId===U.actor)||(U.role==='client'&&r.clientId===U.actor))}
+  const pend=list.filter(r=>r.status==='pending');
+  if(U.reqFilter==='pending')list=pend;
+  list.sort((a,b)=>b.ts-a.ts);
+  let h=pageHead('Requests',U.role==='company'?'Approve or decline':'Ask the office for changes',`<button class="btn primary" data-act="newRequest">${icon('plus')}New request</button>`);
+  h+=`<div class="row" style="margin-bottom:14px"><div class="seg"><button data-act="reqFilter" data-f="pending" aria-pressed="${U.reqFilter==='pending'}">Waiting (${pend.length})</button><button data-act="reqFilter" data-f="all" aria-pressed="${U.reqFilter==='all'}">All</button></div></div>`;
+  h+=list.length?`<div class="list">${list.map(reqItem).join('')}</div>`:emptyBox(U.reqFilter==='pending'?'Nothing waiting':'No requests yet',U.role==='client'?'Ask for a particular worker, ask for someone to stop visiting, book extra support or change a visit.':U.role==='worker'?'Hand back a shift, pick up an open shift or tell the office when you’re unavailable.':'Requests from clients and workers arrive here.');
+  return h;
+};
+
+/* incidents */
+V.incidents=()=>{
+  if(needsActor())return noActor();
+  let list=S.incidents.slice();
+  if(U.role==='worker')list=list.filter(i=>i.byRole==='worker'&&i.by===actorLabel()||myClients().some(c=>c.id===i.clientId));
+  list.sort((a,b)=>(a.status===b.status?0:a.status==='open'?-1:1)||b.ts-a.ts);
+  let h=pageHead('Incidents','Record and follow up',`<button class="btn primary" data-act="addIncident"${myClients().length?'':' disabled'}>${icon('plus')}Report incident</button>`);
+  h+=`<div class="callout" style="margin-bottom:16px">In an emergency call <b>000</b>. Tell the office immediately about serious incidents — some must be notified to the NDIS Quality and Safeguards Commission within 24 hours.</div>`;
+  h+=list.length?`<div class="list">${list.map(i=>`<div class="note"><div class="row"><b style="margin-right:auto">${esc(i.type)} · ${esc(cName(i.clientId))}</b>${i.reportable?pill('Possibly reportable','bad'):''}${pill(i.severity,i.severity==='Low'?'':i.severity==='Medium'?'warn':'bad')}${pill(i.status==='open'?'Open':'Closed',i.status==='open'?'warn':'ok')}</div><div class="small muted">${esc(fmtD(i.date))} ${fmtT(i.time)}${i.location?' · '+esc(i.location):''} · Reported by ${esc(i.by)}</div><div class="txt"><b>What happened:</b> ${esc(i.desc)}\n<b>Action taken:</b> ${esc(i.actions)}${i.notified?`\n<b>Notified:</b> ${esc(i.notified)}`:''}${i.outcome?`\n<b>Outcome:</b> ${esc(i.outcome)}`:''}${i.commissionRef?`\n<b>Commission ref:</b> ${esc(i.commissionRef)}`:''}</div>${U.role==='company'&&i.status==='open'?`<div class="row"><button class="btn sm" data-act="closeIncident" data-id="${i.id}">Close with outcome</button></div>`:''}</div>`).join('')}</div>`:emptyBox('No incidents recorded','Injuries, medication errors, near misses and concerns are recorded here and followed up by the office.');
+  return h;
+};
+
+/* audit */
+V.audit=()=>{
+  let h=pageHead('Activity log','Who did what, and when');
+  h+=S.audit.length?`<div class="tbl-wrap"><table><thead><tr><th>When</th><th>Who</th><th>What</th></tr></thead><tbody>${S.audit.slice(0,300).map(a=>`<tr><td style="white-space:nowrap">${fmtTs(a.ts)}</td><td>${esc(a.who)}<br><span class="small muted">${esc(ROLES[a.role]||'')}</span></td><td>${esc(a.action)}</td></tr>`).join('')}</tbody></table></div>`:emptyBox('No activity yet','Every change anyone makes is recorded here.');
+  return h;
+};
+
+/* settings */
+V.settings=()=>{
+  const c=S.company;
+  const fields=[{k:'name',label:'Organisation name',req:1},{k:'abn',label:'ABN'},{k:'reg',label:'NDIS registration number'},{k:'phone',label:'Phone',type:'tel'},{k:'email',label:'Email',type:'email'},{k:'privacyOfficer',label:'Privacy officer (name or role)'},{k:'address',label:'Address',full:1}];
+  return pageHead('Settings','Organisation')+`<form id="coform" class="form panel" style="padding:18px"><div class="grid">${fields.map(f=>field(f,c[f.k])).join('')}</div><div class="row" style="margin-top:16px"><button class="btn primary" type="submit">Save details</button></div></form>
+  <div class="section"><div class="sh"><h2>Prototype data</h2></div><div class="panel" style="padding:18px;display:grid;gap:12px"><p class="muted">Everything you enter is saved only in this browser. Other devices and people won’t see it.</p><div class="row"><button class="btn" data-act="copyBackup">${icon('copy')}Copy backup</button><button class="btn" data-act="importData">Restore from backup</button><button class="btn danger" data-act="resetData">Clear all data</button></div></div></div>`;
+};
+
+/* legal */
+const DOCS=[['privacy','Privacy policy'],['terms','Terms of use'],['consent','Consent to share information'],['complaints','Complaints & feedback'],['incidents','Incident management'],['conduct','Code of conduct'],['retention','Records & data breaches']];
+V.legal=()=>{
+  const k=U.legal;
+  return pageHead('Policies','Legal & compliance · NSW')+`<div class="legal"><nav class="doclist" aria-label="Documents">${DOCS.map(([id,l])=>`<button data-act="legalDoc" data-k="${id}" aria-current="${k===id}">${l}</button>`).join('')}</nav><article class="panel doc">${LEGAL[k]?LEGAL[k]():''}</article></div>`;
+};
+const ORG=()=>esc(S.company.name||'[Organisation name]');
+const draft=()=>`<span class="draft">Template — get advice from a NSW lawyer before using with real participants</span>`;
+const orgLine=()=>`<p class="muted small">${ORG()}${S.company.abn?' · ABN '+esc(S.company.abn):''}${S.company.reg?' · NDIS registration '+esc(S.company.reg):''}</p>`;
+const LEGAL={
+privacy:()=>`${draft()}<h2>Privacy policy</h2>${orgLine()}
+<h3>About this policy</h3><p>This policy explains how ${ORG()} collects, uses, stores and shares personal and health information about the people we support, their families and representatives, and our workers. It applies to our services and to this app.</p><p>We handle information in line with the <i>Privacy Act 1988</i> (Cth) and the Australian Privacy Principles, the <i>Health Records and Information Privacy Act 2002</i> (NSW) and its Health Privacy Principles, the <i>National Disability Insurance Scheme Act 2013</i> (Cth), the NDIS Practice Standards and the NDIS Code of Conduct.</p>
+<h3>What we collect</h3><ul><li>Identity and contact details, including emergency contacts, nominees and guardians.</li><li>NDIS details such as your NDIS number, plan dates, plan management and funded supports.</li><li>Health information: conditions, allergies, medication, medication administration records, behaviour support plans and health professional details.</li><li>Records of support: visit times and locations, progress notes, handover notes, incidents, complaints and requests.</li><li>For workers: screening check details, qualifications, training and availability.</li><li>Technical information such as device type and an activity log of changes made in the app.</li></ul>
+<h3>How we collect it</h3><p>Mostly directly from you or your nominee. With your consent, we may also collect information from your GP, pharmacy, other health professionals, plan manager, support coordinator or the NDIA.</p>
+<h3>Why we use it</h3><ul><li>To plan, deliver and coordinate your supports safely.</li><li>To assist with medication as prescribed and keep accurate records.</li><li>To pass relevant information between the workers who support you.</li><li>To roster workers and respect your preferences about who supports you.</li><li>To meet our obligations, including incident management, complaints handling, record keeping and claiming for supports.</li><li>To improve the quality and safety of our services.</li></ul>
+<h3>Who we share it with</h3><p>Only people who need it to support you: your support workers and our staff; your nominee or guardian; health professionals, your plan manager or support coordinator with your consent; the NDIA and the NDIS Quality and Safeguards Commission where the law requires; and others where required or authorised by law, such as to lessen a serious threat to someone’s life, health or safety. We do not sell personal information.</p>
+<h3>Consent</h3><p>We ask for your consent before collecting health information and before sharing it outside our organisation, except where the law allows otherwise. You can withdraw or change your consent at any time by telling us. If you do, we will explain any effect on the supports we can provide.</p>
+<h3>Storage and security</h3><p>Information is stored electronically with access limited by role, encrypted in transit and at rest, and changes are logged. Workers see only information about the people they support. [State whether any data is stored or accessed outside Australia, and where.]</p>
+<h3>Access and correction</h3><p>You can ask to see or correct the information we hold about you. We will respond within 30 days. If we refuse, we will tell you why and how to complain.</p>
+<h3>Complaints about privacy</h3><p>Contact our privacy officer${S.company.privacyOfficer?' ('+esc(S.company.privacyOfficer)+')':''}${S.company.email?' at '+esc(S.company.email):''}${S.company.phone?' or '+esc(S.company.phone):''}. If you are not satisfied, you can contact the Office of the Australian Information Commissioner (1300 363 992, oaic.gov.au), the NSW Information and Privacy Commission (1800 472 679, ipc.nsw.gov.au) for health information, or the NDIS Quality and Safeguards Commission (1800 035 544).</p>`,
+terms:()=>`${draft()}<h2>Terms of use</h2>${orgLine()}
+<h3>Agreement</h3><p>By using this app you agree to these terms. Your NDIS service agreement with ${ORG()} continues to apply and takes priority if anything here conflicts with it.</p>
+<h3>Who can use the app</h3><p>Authorised staff and support workers of ${ORG()}, NDIS participants we support, and nominees, guardians or people a participant has authorised. You must keep your login private and tell us straight away if you think someone else has used it.</p>
+<h3>Using it properly</h3><ul><li>Only look at information you need for your role.</li><li>Write records at the time, or as soon as possible after. Keep them factual, respectful and accurate.</li><li>Do not copy, photograph or share information outside the app unless our policies allow it.</li><li>Do not change or delete someone else’s records. Corrections are added as new entries.</li></ul>
+<h3>Not an emergency service</h3><p>This app is not monitored around the clock. In an emergency call 000. Requests and messages may not be seen straight away.</p>
+<h3>Medication</h3><p>Medication records support, but do not replace, the prescriber’s instructions and the pharmacy label. Workers must only assist with medication they are trained and authorised to assist with.</p>
+<h3>Availability</h3><p>We aim to keep the app available but cannot promise it will always be free of interruptions or errors. Keep a paper backup process for medication and emergencies.</p>
+<h3>Your rights</h3><p>Nothing in these terms limits your rights under the Australian Consumer Law or your rights as an NDIS participant.</p>
+<h3>Suspension</h3><p>We may suspend access to protect people’s safety or privacy, or if these terms are breached.</p>
+<h3>Changes</h3><p>We will tell you about important changes before they take effect.</p>
+<h3>Governing law</h3><p>These terms are governed by the laws of New South Wales.</p>`,
+consent:()=>{const cl=U.role==='company'?activeClients():U.role==='client'?myClients():[];
+return `${draft()}<h2>Consent to collect and share information</h2>${orgLine()}
+<p>${ORG()} needs your consent to collect health information about you and to share it with the people involved in your support. You choose who we share with. You can change or withdraw consent at any time.</p>
+<h3>What you are agreeing to</h3><ul><li>We will collect and record information needed to support you, including health and medication information.</li><li>Your support workers and our staff can see the information they need to support you.</li><li>We will share information with the people you tick on the consent record, only as needed.</li><li>We may share information without consent only where the law requires or allows it, such as in an emergency.</li></ul>
+<h3>Supported decision-making</h3><p>We will explain this form in a way that works for you, including Easy Read, an interpreter, or with a person you trust. If you have a guardian or nominee for these decisions, they can consent on your behalf.</p>
+${cl.length?`<h3>Consent records</h3><div class="list">${cl.map(c=>{const x=S.consents.filter(y=>y.clientId===c.id&&!y.withdrawn).sort((a,b)=>b.ts-a.ts)[0];return `<div class="medrow"><span class="main"><span class="title">${esc(cName(c.id))}</span><br><span class="sub">${x?`Recorded ${fmtTs(x.ts)} · ${esc(x.givenBy)}`:'Not recorded'}</span></span>${x?pill('Current','ok'):pill('Needed','warn')}<button class="btn sm" data-act="recordConsent" data-id="${c.id}">${x?'Update':'Record'}</button>${x?`<button class="btn sm ghost" data-act="withdrawConsent" data-id="${c.id}">Withdraw</button>`:''}</div>`}).join('')}</div>`:''}`},
+complaints:()=>`${draft()}<h2>Complaints & feedback</h2>${orgLine()}
+<p>Everyone has the right to complain. Making a complaint will not affect your services, and you will not be treated differently.</p>
+<h3>How to make a complaint</h3><ul><li>Tell your support worker or anyone in our office.</li><li>Use “New request › Something else” in this app.</li><li>Phone ${esc(S.company.phone||'[phone]')} or email ${esc(S.company.email||'[email]')}.</li><li>You can ask a family member, friend or advocate to help or to complain for you. You can complain anonymously.</li></ul>
+<h3>What we will do</h3><ul><li>Acknowledge your complaint within 2 business days.</li><li>Look into it fairly, involving you as much as you want.</li><li>Tell you what we found and what we will do, usually within 21 days.</li><li>Keep a record and use it to improve our services.</li></ul>
+<h3>If you are not happy with our response</h3><p>You can contact the NDIS Quality and Safeguards Commission on 1800 035 544 or at ndiscommission.gov.au. You can also contact the Commission at any time without coming to us first. Free independent advocacy is available through the Disability Advocacy Finder at askizzy.org.au or the NSW Ageing and Disability Commission (1800 628 221) for concerns about abuse, neglect or exploitation of adults with disability.</p>`,
+incidents:()=>`${draft()}<h2>Incident management</h2>${orgLine()}
+<p>An incident is anything that harms, or could have harmed, a person we support or a worker during support. This includes near misses and allegations.</p>
+<h3>What to do</h3><ul><li><b>Make it safe.</b> Call 000 if anyone is in danger or needs urgent medical help. Call police if a crime may have occurred.</li><li><b>Support the person.</b> Provide first aid and stay with them if safe.</li><li><b>Tell the office straight away</b> for anything serious, then record it in the app the same day.</li><li><b>Preserve evidence</b> where there may be abuse or a crime. Do not question the person in detail.</li></ul>
+<h3>Reportable incidents</h3><p>Registered NDIS providers must notify the NDIS Quality and Safeguards Commission of reportable incidents. These include:</p><ul><li>the death of a person with disability;</li><li>serious injury;</li><li>abuse or neglect;</li><li>unlawful sexual or physical contact with, or assault of, a person with disability;</li><li>sexual misconduct committed against, or in the presence of, a person with disability;</li><li>use of a restrictive practice that is not authorised or not in line with a behaviour support plan.</li></ul><p>Most must be notified within 24 hours of key personnel becoming aware, with a further report within 5 business days. Some uses of restrictive practices have a 5 business day timeframe. Check current NDIS Commission guidance for exact requirements.</p>
+<h3>After an incident</h3><p>The office will review each incident, involve the person and their supporters, take action to prevent it happening again, and record the outcome.</p>`,
+conduct:()=>`${draft()}<h2>Code of conduct</h2>${orgLine()}
+<p>All workers must follow the NDIS Code of Conduct. When providing supports you must:</p>
+<ul><li>act with respect for individual rights to freedom of expression, self-determination and decision-making;</li><li>respect the privacy of people with disability;</li><li>provide supports and services in a safe and competent manner, with care and skill;</li><li>act with integrity, honesty and transparency;</li><li>promptly take steps to raise and act on concerns about matters that might affect the quality and safety of supports;</li><li>take all reasonable steps to prevent and respond to all forms of violence, exploitation, neglect and abuse;</li><li>take all reasonable steps to prevent sexual misconduct.</li></ul>
+<h3>Our expectations</h3><ul><li>Hold a current NDIS Worker Screening Check, and a Working With Children Check if supporting under-18s in NSW.</li><li>Only assist with medication after completing training.</li><li>Follow behaviour support plans. Never use a restrictive practice that is not authorised.</li><li>Keep accurate records in this app and complete handovers before leaving.</li><li>Respect people’s choices about who supports them.</li></ul>`,
+retention:()=>`${draft()}<h2>Records & data breaches</h2>${orgLine()}
+<h3>Keeping records</h3><p>Records are kept securely for as long as the law requires. Under the <i>Health Records and Information Privacy Act 2002</i> (NSW), health information about an adult is generally kept for at least 7 years after the last service, and for a person who was under 18 until they turn 25. NDIS rules also require providers to keep records of supports for at least 7 years.</p><p>When a client is removed in this app, their records are kept and can be restored. Records are only destroyed securely once retention periods end.</p>
+<h3>Data breaches</h3><p>A data breach is when personal information is lost, or accessed or disclosed without authorisation. If one happens we will:</p><ul><li><b>Contain</b> the breach straight away.</li><li><b>Assess</b> whether it is likely to cause serious harm.</li><li><b>Notify</b> affected people and the Office of the Australian Information Commissioner if it is an eligible data breach under the Notifiable Data Breaches scheme.</li><li><b>Review</b> what happened and take steps to stop it happening again.</li></ul>
+<p>Report any suspected breach to the privacy officer immediately — for example a lost phone, a message sent to the wrong person, or a shared login.</p>`,
+};
+function recordConsent(id){
+  const c=byId(S.clients,id);if(!c)return;
+  const prev=S.consents.filter(x=>x.clientId===id&&!x.withdrawn).sort((a,b)=>b.ts-a.ts)[0];
+  const scopes=['Support workers and office staff','Nominee / guardian','GP and health professionals','Pharmacy','Plan manager','Support coordinator','Family members named in the record','NDIA (as required)'];
+  openForm({title:`Consent · ${cName(id)}`,submit:'Record consent',done:'Consent recorded',values:prev||{givenBy:U.role==='client'?'Participant':'',review:addDays(today(),365),scope:scopes.slice(0,1)},
+    intro:'Read the consent statement in Policies with the person in a format that works for them before recording it.',
+    fields:[{k:'givenBy',label:'Consent given by',type:'select',req:1,options:[['Participant','The participant'],['Nominee','Nominee'],['Guardian','Guardian'],['Parent','Parent (under 18)']]},{k:'givenName',label:'Name of person giving consent (if not participant)'},{k:'scope',label:'Information can be shared with',type:'checks',options:scopes.map(s=>[s,s]),req:1},{k:'format',label:'How it was explained',type:'select',options:['Verbally','Easy Read','Interpreter','Written','With support person'].map(x=>[x,x])},{k:'review',label:'Review by',type:'date'},{k:'notes',label:'Notes or limits',type:'textarea',rows:2}],
+    onSave(d){S.consents.push(Object.assign({id:uid(),clientId:id,ts:Date.now(),recordedBy:actorLabel()},d));log(`Recorded consent for ${cName(id)}`)}});
+}
+
+/* ---------- actions ---------- */
+const ACT={
+  closeModal:()=>closeModal(),
+  confirmYes:()=>{const f=PENDING;PENDING=null;closeModal();f&&f();save();render()},
+  go:d=>go(d.v,d.p),
+  role:d=>{U.role=d.r;U.actor=null;U.view='home';U.q='';U.showArchived=false;closeModal();render();window.scrollTo(0,0)},
+  more:()=>{const items=NAV[U.role].slice(4);openModal({title:'More',body:`<div class="list">${items.map(v=>`<button class="item" data-act="go" data-v="${v}">${icon(NAVL[v][1])}<span class="main"><span class="title">${navLabel(v)}</span></span>${badge(v)?`<span class="pill bad">${badge(v)}</span>`:''}</button>`).join('')}</div>`})},
+  editClient:d=>editClient(d.id),
+  openClient:d=>{U.view='client';U.param=d.id;U.tab='overview';U.medDate=null;render();window.scrollTo(0,0)},
+  openClientTab:d=>{U.view=U.role==='client'?'profile':'client';U.param=d.id;U.tab=d.t;render();window.scrollTo(0,0)},
+  goClientMeds:d=>{closeModal();U.view='client';U.param=d.id;U.tab='meds';U.medDate=null;render()},
+  archiveClient:d=>confirmBox('Remove client',`Remove <b>${esc(cName(d.id))}</b>? Their upcoming visits will be cancelled. Records are kept for the legally required period and the client can be restored.`,'Remove client',()=>{const c=byId(S.clients,d.id);c.archived=true;c.archivedTs=Date.now();S.shifts.filter(s=>s.clientId===c.id&&s.status==='scheduled'&&s.date>=today()).forEach(s=>s.status='cancelled');log(`Removed client ${cName(c.id)}`);U.view='clients';toast('Client removed')},true),
+  restoreClient:d=>{const c=byId(S.clients,d.id);c.archived=false;log(`Restored client ${cName(c.id)}`);save();render();toast('Client restored')},
+  toggleArchived:d=>{U.showArchived=d.v==='1';render()},
+  editWorker:d=>editWorker(d.id),
+  openWorker:d=>openWorker(d.id),
+  archiveWorker:d=>confirmBox('Remove support worker',`Remove <b>${esc(wName(d.id))}</b>? Their upcoming visits become unassigned. Their records are kept.`,'Remove worker',()=>{const w=byId(S.workers,d.id);w.archived=true;S.shifts.filter(s=>s.workerId===w.id&&s.status==='scheduled'&&s.date>=today()).forEach(s=>s.workerId='');log(`Removed support worker ${wName(w.id)}`);toast('Worker removed')},true),
+  restoreWorker:d=>{byId(S.workers,d.id).archived=false;log(`Restored support worker ${wName(d.id)}`);closeModal();save();render()},
+  editShift:d=>editShift(d.id,{date:d.k||U.cal.sel||today(),clientId:d.c||''}),
+  openShift:d=>openShift(d.id),
+  cancelShift:d=>confirmBox('Cancel visit','Cancel this visit? It stays on record as cancelled.','Cancel visit',()=>{const s=byId(S.shifts,d.id);s.status='cancelled';log(`Cancelled visit for ${cName(s.clientId)} on ${fmtD(s.date)}`);toast('Visit cancelled')},true),
+  deleteShift:d=>confirmBox('Delete visit','Delete this visit completely? Use Cancel instead if it was booked and called off.','Delete',()=>{const s=byId(S.shifts,d.id);S.shifts=S.shifts.filter(x=>x.id!==d.id);log(`Deleted visit for ${cName(s.clientId)} on ${fmtD(s.date)}`)},true),
+  startShift:d=>{const s=byId(S.shifts,d.id);s.status='in-progress';s.checkIn=Date.now();log(`Started visit with ${cName(s.clientId)}`);save();openShift(d.id);render();toast('Visit started')},
+  endShift:d=>endShift(d.id),
+  editMed:d=>editMed(d.c,d.id),
+  stopMed:d=>confirmBox('Stop medication','Mark this medication as stopped from today? It stays in the history.','Stop',()=>{const m=byId(S.meds,d.id);m.active=false;m.end=today();log(`Stopped ${m.name} for ${cName(m.clientId)}`)}),
+  resumeMed:d=>{const m=byId(S.meds,d.id);m.active=true;m.end='';log(`Restarted ${m.name} for ${cName(m.clientId)}`);save();render()},
+  removeMed:d=>confirmBox('Remove medication','Remove this medication from the list? Doses already recorded stay in the administration record.','Remove',()=>{const m=byId(S.meds,d.id);S.meds=S.meds.filter(x=>x.id!==d.id);log(`Removed ${m.name} for ${cName(m.clientId)}`)},true),
+  recordDose:d=>recordDose(d.id,d.t,d.k),
+  viewPhotos:d=>{const r=byId(S.mar,d.id);if(!r)return;openModal({title:`${r.medName} · ${fmtD(r.date)} ${fmtT(r.time)}`,wide:1,body:`<p class="muted small" style="margin-bottom:12px">Recorded by ${esc(r.by)} · ${esc(r.status)}</p><div class="photo-grid">${r.photos.map((p,i)=>`<figure><img src="${p.src}" alt="Photo ${i+1}"><figcaption class="small muted">Photo ${i+1} · ${fmtTs(p.ts)}</figcaption></figure>`).join('')}</div>`})},
+  medDay:d=>{U.medDate=d.d==='0'?null:addDays(U.medDate||today(),+d.d);render()},
+  addNote:d=>addNote(d.client,d.shift),
+  ackNote:d=>{const n=byId(S.notes,d.id);n.ack=[...new Set([...(n.ack||[]),U.actor])];log(`Read handover note for ${cName(n.clientId)}`);save();render()},
+  newRequest:d=>newRequest(d.type,d.shift),
+  newRequestFor:d=>{newRequest(null)},
+  decide:d=>{const r=byId(S.requests,d.id);const ap=d.d==='approved';openForm({title:ap?'Approve request':'Decline request',submit:ap?'Approve':'Decline',done:ap?'Request approved':'Request declined',intro:`<b>${esc(REQ[r.type].label)}</b><br>${reqSummary(r)}${ap?`<br><span class="muted">${esc(approvePreview(r))}</span>`:''}`,fields:[{k:'response',label:'Reply to '+r.by,type:'textarea',rows:3,req:!ap}],onSave(x){r.status=d.d;r.response=x.response;r.decidedTs=Date.now();if(ap)r.effect=applyRequest(r);log(`${ap?'Approved':'Declined'} request from ${r.by}: ${REQ[r.type].label}`);if(ap&&r.type==='change_shift'&&r.shiftId){save();setTimeout(()=>editShift(r.shiftId),60)}}})},
+  withdraw:d=>{const r=byId(S.requests,d.id);r.status='withdrawn';log(`Withdrew request: ${REQ[r.type].label}`);save();render()},
+  reqFilter:d=>{U.reqFilter=d.f;render()},
+  addIncident:()=>addIncident(U.role==='client'?U.actor:''),
+  closeIncident:d=>closeIncident(d.id),
+  legalDoc:d=>{U.legal=d.k;render()},
+  recordConsent:d=>recordConsent(d.id),
+  withdrawConsent:d=>confirmBox('Withdraw consent',`Record that ${esc(cName(d.id))} has withdrawn consent? The office should talk with them about what this means for their supports.`,'Withdraw',()=>{S.consents.filter(x=>x.clientId===d.id).forEach(x=>{x.withdrawn=Date.now()});log(`Recorded withdrawal of consent for ${cName(d.id)}`)},true),
+  copySummary:d=>{log(`Copied summary for ${cName(d.id)}`);save();copyText(clientSummary(d.id),'Client summary')},
+  tab:d=>{U.tab=d.t;render()},
+  tlFilter:d=>{U.tlFilter=d.f;render()},
+  calNav:d=>{const c=U.cal;if(c.mode==='month'){const x=new Date(c.y,c.m+(+d.d),1);c.y=x.getFullYear();c.m=x.getMonth();c.sel=dkey(x)}else{c.sel=addDays(c.sel,7*(+d.d));const x=parseK(c.sel);c.y=x.getFullYear();c.m=x.getMonth()}render()},
+  calToday:()=>{const x=new Date();Object.assign(U.cal,{y:x.getFullYear(),m:x.getMonth(),sel:today()});render()},
+  calMode:d=>{U.cal.mode=d.m;render()},
+  calSel:d=>{U.cal.sel=d.k;const x=parseK(d.k);if(x.getMonth()!==U.cal.m){U.cal.m=x.getMonth();U.cal.y=x.getFullYear()}render()},
+  alertGo:d=>{const[v,p]=d.go.split(':');if(v==='worker')return openWorker(p);if(v==='client')return ACT.openClient({id:p});if(v==='consent'){U.legal='consent';return go('legal')}if(v==='calendar'&&p==='u')U.cal.filter='u:';go(v)},
+  copyBackup:()=>copyText(JSON.stringify(S),'Backup'),
+  importData:()=>openForm({title:'Restore from backup',submit:'Restore',fields:[{k:'json',label:'Paste backup text',type:'textarea',rows:8,req:1}],validate:d=>{try{const o=JSON.parse(d.json);if(!o||!Array.isArray(o.clients))return'That doesn’t look like a backup from this app.'}catch(e){return'That text isn’t a valid backup.'}},onSave(d){S=Object.assign(blank(),JSON.parse(d.json));log('Restored data from backup')},done:'Backup restored'}),
+  resetData:()=>confirmBox('Clear all data','Delete every client, worker, visit, note and record in this browser? This can’t be undone.','Clear everything',()=>{S=blank();U.view='home';toast('All data cleared')},true),
+};
+function approvePreview(r){return{remove_worker:'Approving marks the worker as not to be rostered and unassigns their upcoming visits with this client.',request_worker:'Approving adds them as a preferred worker'+(r.date&&r.start?' and books the visit.':'.'),new_support:r.date&&r.start?'Approving adds an unassigned visit to the calendar.':'',cancel_shift:'Approving cancels the visit.',handback:'Approving makes the shift open for others.',pickup:'Approving assigns the shift to this worker.',leave:'Approving unassigns their visits in these dates.',change_shift:'After approving, edit the visit.'}[r.type]||''}
+const CH={
+  actor:v=>{U.actor=v;U.view='home';render()},
+  calFilter:v=>{U.cal.filter=v;render()},
+  medDate:v=>{U.medDate=v||null;render()},
+  noteClient:v=>{U.noteClient=v;render()},
+  noteKind:v=>{U.noteKind=v;render()},
+};
+function go(v,p){closeModal();U.view=v;U.param=p||null;if(v!=='client'&&v!=='profile')U.tab='overview';if(v==='profile')U.tab=U.tab||'overview';U.q=v==='clients'?U.q:'';U.showArchived=false;render();window.scrollTo(0,0)}
+
+document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el||el.disabled)return;const f=ACT[el.dataset.act];if(f){e.preventDefault();f(el.dataset)}});
+document.addEventListener('change',e=>{const el=e.target.closest('[data-ch]');if(el&&CH[el.dataset.ch])CH[el.dataset.ch](el.value)});
+document.addEventListener('input',e=>{const el=e.target.closest('[data-in]');if(el){U[el.dataset.in]=el.value;render();const n=$('#'+el.id);if(n){n.focus();const L=n.value.length;try{n.setSelectionRange(L,L)}catch(_){}}}});
+document.addEventListener('submit',e=>{if(e.target.id==='coform'){e.preventDefault();const f=e.target;const d={};['name','abn','reg','phone','email','privacyOfficer','address'].forEach(k=>d[k]=f.elements[k].value.trim());if(!d.name){toast('Add an organisation name');return}S.company=d;log('Updated organisation details');save();render();toast('Details saved')}});
+
+/* ---------- shell ---------- */
+function navLabel(v){if(v==='clients'&&U.role==='worker')return'My clients';if(v==='requests'&&U.role!=='company')return'My requests';return NAVL[v][0]}
+function badge(v){
+  if(v==='requests'&&U.role==='company')return S.requests.filter(r=>r.status==='pending').length;
+  if(v==='incidents'&&U.role==='company')return S.incidents.filter(i=>i.status==='open').length;
+  if(v==='notes'&&U.role==='worker'&&U.actor){const ids=new Set(myClients().map(c=>c.id));return S.notes.filter(n=>ids.has(n.clientId)&&n.kind==='handover'&&n.authorId!==U.actor&&!(n.ack||[]).includes(U.actor)).length}
+  if(v==='meds'&&U.role!=='client'){const t=today();return dueList(t,new Set(myClients().map(c=>c.id))).filter(it=>dueState(it,t)==='overdue').length}
+  return 0;
+}
+function fixActor(){
+  if(U.role==='worker'){const a=activeWorkers();if(!a.find(w=>w.id===U.actor))U.actor=a[0]?a[0].id:null}
+  else if(U.role==='client'){const a=activeClients();if(!a.find(c=>c.id===U.actor))U.actor=a[0]?a[0].id:null}
+  else U.actor=null;
+  if(U.view==='client'&&U.role==='client')U.view='profile';
+  if(U.view==='client'&&U.role==='worker'&&!myClients().some(c=>c.id===U.param))U.view='clients';
+  if(U.view!=='client'&&!NAV[U.role].includes(U.view))U.view='home';
+}
+const NAV={company:['home','calendar','clients','meds','workers','notes','requests','incidents','legal','audit','settings'],worker:['home','calendar','clients','meds','notes','requests','incidents','legal'],client:['home','calendar','profile','meds','notes','requests','legal']};
+const NAVL={home:['Today','home'],calendar:['Calendar','cal'],clients:['Clients','people'],profile:['My details','people'],workers:['Support workers','badge'],meds:['Medication','pill'],notes:['Notes & handover','note'],requests:['Requests','inbox'],incidents:['Incidents','alert'],legal:['Policies','scale'],audit:['Activity log','list'],settings:['Settings','gear']};
+const ROLES={company:'Company',worker:'Support worker',client:'Client'};
+function render(){
+  fixActor();saveU();
+  const nav=NAV[U.role];const cur=U.view==='client'?(U.role==='client'?'profile':'clients'):U.view;
+  const actorSel=U.role==='company'?'':`<select data-ch="actor" aria-label="Choose ${U.role==='worker'?'support worker':'client'}">${(U.role==='worker'?activeWorkers().map(w=>[w.id,wName(w.id)]):activeClients().map(c=>[c.id,cName(c.id)])).map(([id,n])=>`<option value="${id}"${id===U.actor?' selected':''}>${esc(n)}</option>`).join('')||'<option>None added yet</option>'}</select>`;
+  const shortNav=nav.slice(0,4);
+  const moreBadge=nav.slice(4).reduce((a,v)=>a+badge(v),0);
+  $('#app').innerHTML=`<div class="app">
+    <header class="top"><div class="brand"><span class="mark">${icon('note')}</span><span><b>Handover</b><span>${esc(S.company.name||'NDIS support records')}</span></span></div>
+      <div class="viewas"><span class="proto">Prototype</span><span class="small muted">Viewing as</span><div class="seg" role="group" aria-label="Viewing as">${Object.entries(ROLES).map(([k,l])=>`<button data-act="role" data-r="${k}" aria-pressed="${U.role===k}">${k==='worker'?'Worker':l}</button>`).join('')}</div>${actorSel}</div></header>
+    <div class="body">
+      <nav class="side" aria-label="Main">${nav.map(v=>{const b=badge(v);return `<button data-act="go" data-v="${v}" aria-current="${cur===v?'page':'false'}">${icon(NAVL[v][1])}<span>${navLabel(v)}</span>${b?`<span class="count">${b}</span>`:''}</button>`}).join('')}<div class="sidefoot">Data is saved in this browser only.</div></nav>
+      <main id="main">${(V[U.view]||V.home)()}</main>
+    </div>
+    <nav class="tabbar" aria-label="Main">${shortNav.map(v=>{const b=badge(v);return `<button data-act="go" data-v="${v}" aria-current="${cur===v?'page':'false'}">${icon(NAVL[v][1])}<span>${v==='notes'?'Notes':v==='workers'?'Workers':navLabel(v).replace('My ','')}</span>${b?`<span class="dot-badge">${b}</span>`:''}</button>`}).join('')}<button data-act="more" aria-current="${shortNav.includes(cur)?'false':'page'}">${icon('more')}<span>More</span>${moreBadge?`<span class="dot-badge">${moreBadge}</span>`:''}</button></nav>
+  </div>`;
+}
+render();
+setInterval(()=>{if(!MODAL&&!document.activeElement.matches('input,textarea,select'))render()},60000);
+})();
+</script>
+
+</body></html>
