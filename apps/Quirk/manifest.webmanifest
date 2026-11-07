@@ -1,0 +1,13 @@
+{
+  "name": "Quirk — QR codes with character",
+  "short_name": "Quirk",
+  "description": "Design stylish QR codes in your browser. Free, no sign-up, nothing leaves your device.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F1E7",
+  "theme_color": "#1B1A17",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

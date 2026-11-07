@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quirk — QR codes with character</title>
+<meta name="description" content="Design stylish QR codes for links, Wi-Fi, contacts and more. Custom colours, shapes and logos. Free, no sign-up, and nothing leaves your browser.">
+<meta name="theme-color" content="#1B1A17">
+<meta property="og:title" content="Quirk — QR codes with character">
+<meta property="og:description" content="Design stylish QR codes right in your browser. Free, private, no sign-up.">
+<meta property="og:type" content="website">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="./assets/index-D1-Wk2no.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DFbG2dkP.css">
+</head>
+<body>
+<noscript><div class="wrap"><p>Quirk needs JavaScript to generate QR codes — everything runs locally in your browser.</p></div></noscript>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="#1B1A17"/>
+        <rect x="12" y="12" width="20" height="20" rx="6" fill="none" stroke="#FF5A36" stroke-width="5"/>
+        <circle cx="22" cy="22" r="4" fill="#FF5A36"/>
+        <circle cx="44" cy="20" r="4" fill="#F6F1E7"/>
+        <circle cx="20" cy="44" r="4" fill="#F6F1E7"/>
+        <circle cx="38" cy="38" r="4" fill="#F6F1E7"/>
+        <circle cx="48" cy="48" r="5" fill="#FFC93C"/>
+      </svg>
+      <div>
+        <div class="wordmark">quirk<span>.</span></div>
+        <div class="tag">QR codes with character</div>
+      </div>
+    </div>
+    <div class="pill">free · no sign-up · <b>made in your browser</b></div>
+  </header>
+
+  <div class="grid">
+    <main>
+      <section class="card" aria-labelledby="h-content">
+        <h2 id="h-content"><span class="n">1</span>What should it say?</h2>
+        <div class="tabs" role="tablist" id="tabs"></div>
+        <form class="fields" id="fields" autocomplete="off"></form>
+      </section>
+
+      <section class="card" aria-labelledby="h-style">
+        <h2 id="h-style"><span class="n">2</span>Give it some style</h2>
+
+        <div class="opt-group">
+          <div class="opt-label">Palette</div>
+          <div class="swatches" id="presets"></div>
+        </div>
+
+        <div class="opt-group">
+          <div class="colors">
+            <label class="color"><input type="color" id="cFg" value="#1B1A17"><span>Dots<code id="cFgT">#1B1A17</code></span></label>
+            <label class="color"><input type="color" id="cEye" value="#FF5A36"><span>Eyes<code id="cEyeT">#FF5A36</code></span></label>
+            <label class="color"><input type="color" id="cBg" value="#FFFDF8"><span>Background<code id="cBgT">#FFFDF8</code></span></label>
+          </div>
+          <label class="check" style="margin-top:10px"><input type="checkbox" id="transparent"> Transparent background</label>
+        </div>
+
+        <div class="opt-group">
+          <div class="opt-label">Dot shape</div>
+          <div class="choices" id="dotShapes"></div>
+        </div>
+
+        <div class="opt-group">
+          <div class="opt-label">Eye shape</div>
+          <div class="choices" id="eyeShapes"></div>
+        </div>
+
+        <div class="opt-group">
+          <div class="opt-label">Center logo <em>optional</em></div>
+          <div class="logo-drop" id="logoDrop">
+            <div class="thumb" id="logoThumb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B574E" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <div class="txt" id="logoTxt">Drop an image here, or choose one. Error correction switches to High so it still scans.</div>
+            <input type="file" id="logoFile" accept="image/*" class="sr">
+            <button type="button" class="btn-sm" id="logoPick">Choose</button>
+            <button type="button" class="btn-sm" id="logoClear" hidden>Remove</button>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="opt-group">
+            <div class="opt-label">Error correction <em id="ecHint">recovers ~15%</em></div>
+            <div class="seg" id="ecSeg"></div>
+          </div>
+          <div class="opt-group">
+            <div class="opt-label">Quiet margin <em id="marginV">4</em></div>
+            <input type="range" id="margin" min="0" max="8" value="4">
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="preview">
+      <div class="ticket">
+        <div class="ticket-top"><span><span class="dot"></span>Live preview</span><span id="kind">Link</span></div>
+        <div class="stage" id="stage"><div class="empty" id="empty">Type something on the left and your code appears here.</div></div>
+        <div class="meta"><span id="metaV">—</span><span id="metaC">—</span></div>
+        <div class="payload" id="payloadShow" title=""></div>
+        <div class="warn" id="warn" role="status"><span>⚠︎</span><span id="warnTxt"></span></div>
+        <div class="actions">
+          <div class="sizes"><span>PNG size</span><div class="seg" id="sizeSeg"></div></div>
+          <button class="btn btn-primary" id="dlPng" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download PNG</button>
+          <div class="two">
+            <button class="btn btn-ghost" id="dlSvg" type="button">SVG</button>
+            <button class="btn btn-ghost" id="copyImg" type="button">Copy image</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <footer>quirk. — everything happens on this page; nothing you type is sent anywhere.</footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
