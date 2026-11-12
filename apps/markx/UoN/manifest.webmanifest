@@ -1,0 +1,13 @@
+{
+  "name": "markx · Grade planner for UoN students",
+  "short_name": "markx UoN",
+  "description": "Work out what you need on your remaining assessments and track your UoN GPA.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2d3138",
+  "icons": [
+    { "src": "../images/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

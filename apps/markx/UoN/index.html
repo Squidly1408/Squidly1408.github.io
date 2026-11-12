@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>markx · Grade planner for UoN students</title>
+<meta name="description" content="Work out what you need on your remaining assessments to get a P, C, D or HD, and track your GPA on the University of Newcastle 7-point scale. Free, private, runs in your browser.">
+<meta name="theme-color" content="#2d3138">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../images/logo.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:title" content="markx · Grade planner for UoN students">
+<meta property="og:description" content="What do you need on the rest of the course to get a Credit? markx works it out, and tracks your GPA too.">
+<meta property="og:image" content="https://squidly1408.github.io/MarkX/images/banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/fira-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fira-sans-condensed-900.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Fira Sans Condensed';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/fira-sans-condensed-700.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans Condensed';font-weight:800;font-style:normal;font-display:swap;src:url(fonts/fira-sans-condensed-800.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans Condensed';font-weight:900;font-style:normal;font-display:swap;src:url(fonts/fira-sans-condensed-900.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans';font-weight:400;font-style:normal;font-display:swap;src:url(fonts/fira-sans-400.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans';font-weight:600;font-style:normal;font-display:swap;src:url(fonts/fira-sans-600.woff2) format('woff2')}
+
+/* Visual language taken from newcastle.edu.au: charcoal + bright UoN blue, heavy condensed headings,
+   square grey tiles, centred section titles with a short blue rule, labelled panels. No UoN logo used. */
+:root{
+  --char:#2d3138; --char-2:#3d414a; --slate:#5b6270;
+  --blue:#1295d8; --blue-d:#0c77ad; --blue-l:#e5f3fa;
+  --tile:#ecedef; --tile-2:#f6f7f9; --line:#c6cad1; --line-2:#d9dbe0; --muted:#5b6270;
+  --ok:#17784a; --ok-l:#e2f4ea; --warn:#9a5b00; --warn-l:#fdf0d8; --bad:#cc181e; --bad-l:#fbe4e4;
+  --g-hd:#0a5f8c; --g-d:#1295d8; --g-c:#6fc0ea; --g-p:#a1a7b2; --g-ff:#cc181e;
+  --head:"Fira Sans Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --body:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#fff;color:var(--char);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:var(--head);margin:0;line-height:1.1;text-wrap:balance}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.container{max-width:1080px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+[hidden]{display:none!important}
+
+/* ---------- top nav ---------- */
+.nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line-2);height:64px;display:flex;align-items:stretch}
+.nav .mark{width:64px;background:var(--char);display:grid;place-items:center;flex:none}
+.nav .mark svg{width:32px;height:32px}
+.nav .name{display:flex;flex-direction:column;justify-content:center;padding:0 14px;min-width:0}
+.nav .name b{font-family:var(--head);font-weight:900;font-size:1.45rem;letter-spacing:-.01em;line-height:1}
+.nav .name b span{color:var(--blue)}
+.nav .name small{color:var(--muted);font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav .views{margin-left:auto;display:flex;align-items:stretch}
+.view-btn{border:0;background:transparent;padding:0 18px;font-family:var(--head);font-weight:700;font-size:1.08rem;border-bottom:4px solid transparent;color:var(--char)}
+.view-btn[aria-pressed="true"]{border-bottom-color:var(--blue);color:var(--blue-d)}
+.view-btn.help{background:var(--blue);color:#fff;padding:0 20px}
+
+/* ---------- hero ---------- */
+.hero{background-color:var(--char);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='160' viewBox='0 0 240 160'%3E%3Cg fill-opacity='.10'%3E%3Cpath fill='%231295d8' d='M0 0h80L0 80z'/%3E%3Cpath fill='%23ffffff' d='M80 0l80 80H80z'/%3E%3Cpath fill='%231295d8' d='M160 80h80v80z'/%3E%3Cpath fill='%23ffffff' d='M0 160l80-80v80z'/%3E%3Cpath fill='%230c77ad' d='M160 0h80l-80 80z'/%3E%3C/g%3E%3C/svg%3E");color:#fff;padding:34px 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:end}
+.label-box{display:inline-block;background:var(--char-2);color:#fff;font-family:var(--head);font-weight:700;font-size:1.05rem;padding:10px 18px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.answer{background:var(--blue-d);padding:24px 24px 26px}
+.answer h1{font-weight:800;font-size:clamp(1.75rem,3.6vw,2.6rem)}
+.answer h1 em{font-style:normal;background:#fff;color:var(--blue-d);padding:0 .2em;white-space:nowrap}
+.answer p{margin:10px 0 0;color:rgba(255,255,255,.9);font-size:1rem;max-width:58ch}
+.progress{margin-top:20px}
+.pbar{position:relative;height:14px;background:rgba(255,255,255,.18)}
+.pbar .got{position:absolute;inset:0 auto 0 0;background:#fff}
+.pbar .lost{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.4) 0 3px,transparent 3px 7px)}
+.pbar .tk{position:absolute;top:-5px;bottom:-5px;width:2px;margin-left:-1px;background:rgba(255,255,255,.45)}
+.pbar .tk.on{background:#ffd23f;width:3px}
+.pbar .tk span{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-size:.74rem;font-weight:600;color:rgba(255,255,255,.8);white-space:nowrap}
+.pbar .tk.on span{color:#ffd23f}
+.plegend{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:rgba(255,255,255,.82);margin-top:32px}
+.plegend i{display:inline-block;width:12px;height:10px;margin-right:6px;vertical-align:-1px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.stat{background:rgba(255,255,255,.08);padding:16px 18px;min-width:0}
+.stat .k{font-size:.76rem;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.stat .v{font-family:var(--head);font-weight:800;font-size:2rem;line-height:1.05;margin-top:4px}
+.stat .v small{font-size:.95rem;font-weight:700;color:rgba(255,255,255,.72)}
+.stat .s{font-size:.82rem;color:rgba(255,255,255,.75)}
+
+.strip{background:var(--tile-2);border-bottom:1px solid var(--line-2)}
+.strip .container{display:flex;gap:8px;align-items:center;padding-top:14px;padding-bottom:14px;overflow-x:auto}
+.strip .lbl{font-size:.82rem;color:var(--muted);font-weight:600;margin-right:4px;white-space:nowrap}
+.ctab{border:1px solid var(--line);background:#fff;padding:8px 14px;font-family:var(--head);font-weight:700;font-size:1rem;white-space:nowrap;border-radius:2px;flex:none}
+.ctab[aria-selected="true"]{background:var(--char);border-color:var(--char);color:#fff}
+.ctab.add{border-style:dashed;color:var(--blue-d);background:transparent}
+
+/* ---------- sections ---------- */
+main{padding:10px 0 20px}
+.sec{padding:34px 0 6px}
+.sec-title{text-align:center;margin-bottom:22px}
+.sec-title h2{font-weight:900;font-size:1.85rem}
+.sec-title h2::after{content:"";display:block;width:100px;height:4px;background:var(--blue);margin:12px auto 0}
+.sec-title p{color:var(--muted);margin:12px auto 0;max-width:62ch;font-size:.95rem}
+.step{display:inline-grid;place-items:center;width:30px;height:30px;background:var(--blue);color:#fff;font-size:1rem;font-weight:800;margin-right:10px;vertical-align:4px}
+
+.details{display:grid;grid-template-columns:minmax(0,1fr) 170px auto;gap:12px;align-items:end;background:var(--tile);padding:18px}
+.field label{display:block;font-size:.82rem;font-weight:600;color:var(--slate);margin-bottom:5px}
+.inp{width:100%;min-width:0;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:2px;font-size:1rem;-webkit-appearance:none;appearance:none}
+select.inp,.sel{-webkit-appearance:none;appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232d3138' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 10px center;padding-right:30px}
+.inp:focus,.sel:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px var(--blue-l)}
+.inp.big{font-family:var(--head);font-weight:700;font-size:1.25rem}
+.inp::placeholder{color:#9aa0ab}
+.btn{border:0;background:var(--blue-d);color:#fff;padding:11px 18px;font-weight:600;border-radius:2px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn:hover{background:var(--blue)}
+.btn.line{background:transparent;border:2px solid var(--char);color:var(--char)}
+.btn.line:hover{background:var(--char);color:#fff}
+.btn.quiet{background:transparent;color:var(--slate);border:1px solid var(--line);padding:10px 14px}
+.btn.quiet:hover{border-color:var(--bad);color:var(--bad)}
+.btn.quiet.armed{background:var(--bad);border-color:var(--bad);color:#fff}
+.chev{display:inline-block;width:8px;height:8px;border-right:2.5px solid currentColor;border-top:2.5px solid currentColor;transform:rotate(45deg)}
+.example-note{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--blue-l);border-left:5px solid var(--blue);padding:12px 16px;margin-bottom:12px;font-size:.95rem}
+
+/* grade tiles */
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gt{border:0;background:var(--tile);padding:16px 16px 14px;text-align:left;border-top:5px solid transparent;border-radius:2px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.gt:hover{background:#e3e5e8}
+.gt .code{font-family:var(--head);font-weight:900;font-size:1.6rem;line-height:1}
+.gt .nm{font-size:.88rem;color:var(--slate)}
+.gt .st{margin-top:10px;font-weight:600;font-size:1rem}
+.gt .st small{display:block;font-weight:400;color:var(--slate);font-size:.8rem}
+.gt.secured .st{color:var(--ok)}
+.gt.gone{opacity:.6}
+.gt.hard .st{color:var(--warn)}
+.gt[aria-pressed="true"]{background:var(--char);color:#fff;border-top-color:var(--blue)}
+.gt[aria-pressed="true"] .nm,.gt[aria-pressed="true"] .st small{color:rgba(255,255,255,.75)}
+.gt[aria-pressed="true"].secured .st{color:#7fe0ad}
+.gt[aria-pressed="true"].hard .st{color:#ffd23f}
+.gt .pick{font-size:.74rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-d);margin-top:8px}
+.gt[aria-pressed="true"] .pick{color:#7cc8ef}
+
+/* assessments */
+.list{border-top:4px solid var(--char)}
+.ahead,.arow{display:grid;grid-template-columns:minmax(0,1.9fr) 96px minmax(0,1.35fr) minmax(0,1.25fr) 40px;gap:14px;align-items:start;padding:14px 16px}
+.ahead{background:var(--tile-2);font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);padding-top:10px;padding-bottom:10px;align-items:end}
+.arow{border-bottom:1px solid var(--line-2)}
+.cell{min-width:0}
+.cell .ml{display:none;font-size:.78rem;font-weight:600;color:var(--slate);margin-bottom:4px}
+.suffix{position:relative}
+.suffix .inp{padding-right:28px;text-align:right}
+.suffix span{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:6px}
+.pair .inp{text-align:right;padding-left:8px;padding-right:10px}
+.pair .slash{color:var(--muted);font-size:1.15rem;font-weight:600}
+.pair .of{background:var(--tile-2)}
+.sub-lbl{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;font-size:.72rem;color:var(--muted);margin-top:3px;text-align:right}
+.interp{font-size:.8rem;color:var(--muted);margin-top:3px;min-height:1.2em}
+.interp.err{color:var(--bad)}
+.minlink{border:0;background:transparent;color:var(--blue-d);font-size:.82rem;font-weight:600;padding:6px 0 0;text-decoration:underline;text-underline-offset:3px}
+.hurdle{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.84rem;color:var(--slate)}
+.hurdle .suffix{width:92px}
+.hurdle .inp{padding:6px 26px 6px 8px;font-size:.92rem}
+.hurdle .x{border:0;background:transparent;color:var(--muted);font-size:1.1rem;padding:2px 6px}
+.need{padding-top:2px}
+.badge{display:inline-block;padding:5px 10px;font-weight:700;font-size:.95rem;border-radius:2px}
+.badge.todo{background:var(--blue-l);color:var(--blue-d)}
+.badge.ok{background:var(--ok-l);color:var(--ok)}
+.badge.bad{background:var(--bad-l);color:var(--bad)}
+.badge.warn{background:var(--warn-l);color:var(--warn)}
+.badge.none{background:var(--tile);color:var(--slate)}
+.need .why{font-size:.8rem;color:var(--muted);margin-top:4px}
+.del{border:0;background:transparent;width:38px;height:42px;color:var(--muted);font-size:1.3rem;border-radius:2px}
+.del:hover{background:var(--bad-l);color:var(--bad)}
+.del.armed{background:var(--bad);color:#fff;font-size:.7rem;font-weight:700}
+.afoot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px}
+.wsum{font-size:.9rem;font-weight:600}
+.wsum.ok{color:var(--ok)}
+.wsum.off{color:var(--warn)}
+.alerts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.alerts:empty{display:none}
+.alert{padding:12px 16px;font-size:.92rem;border-left:5px solid}
+.alert.bad{background:var(--bad-l);border-color:var(--bad);color:#8e1014}
+.alert.warn{background:var(--warn-l);border-color:var(--warn);color:#6e4100}
+.empty{padding:26px 16px;text-align:center;color:var(--muted)}
+
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.tip{background:var(--tile);padding:16px 18px;font-size:.9rem;color:var(--slate)}
+.tip b{display:block;font-family:var(--head);font-size:1.12rem;color:var(--char);margin-bottom:4px}
+
+/* ---------- GPA view ---------- */
+.gauge{margin-top:22px}
+.gscale{position:relative;height:16px;background:linear-gradient(90deg,rgba(255,255,255,.12) 0 57.14%,rgba(255,255,255,.2) 57.14% 71.43%,rgba(255,255,255,.28) 71.43% 85.71%,rgba(255,255,255,.36) 85.71%)}
+.gscale .lab{position:absolute;top:22px;transform:translateX(-50%);font-size:.74rem;font-weight:600;color:rgba(255,255,255,.75);white-space:nowrap}
+.gscale .pin{position:absolute;top:-8px;bottom:-8px;width:4px;margin-left:-2px;background:#fff}
+.gscale .pin.proj{background:#ffd23f}
+.gscale .range{position:absolute;top:4px;bottom:4px;background:rgba(255,210,63,.35)}
+.glegend{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:rgba(255,255,255,.85);margin-top:34px}
+.glegend i{display:inline-block;width:10px;height:12px;margin-right:6px;vertical-align:-1px}
+
+.panel{border-top:4px solid var(--char)}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{background:var(--tile-2);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);text-align:left;padding:10px 12px;font-weight:600;white-space:nowrap}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+.tbl .r{text-align:right}
+.sel{border:1px solid var(--line);padding:8px 30px 8px 10px;border-radius:2px;font-size:.95rem;min-width:0}
+.sel:disabled{background-color:var(--tile-2);color:var(--muted)}
+.cname{font-family:var(--head);font-weight:700;font-size:1.08rem;border:0;background:transparent;padding:0;text-align:left;color:var(--blue-d);text-decoration:underline;text-underline-offset:3px}
+.basis{color:var(--muted);font-size:.86rem}
+.gb{display:inline-block;min-width:62px;text-align:center;padding:5px 8px;font-weight:700;border-radius:2px;color:#fff;font-size:.92rem;white-space:nowrap}
+.gb.HD{background:var(--g-hd)}.gb.D{background:var(--g-d)}.gb.C{background:var(--g-c);color:#0b3a55}.gb.P{background:var(--g-p);color:#1f2328}.gb.FF{background:var(--g-ff)}.gb.UP{background:var(--tile);color:var(--slate)}
+.gb.proj{outline:2px dashed currentColor;outline-offset:-2px;background:transparent!important}
+.gb.proj.HD{color:var(--g-hd)}.gb.proj.D{color:var(--blue-d)}.gb.proj.C{color:#2b7fae}.gb.proj.P{color:var(--slate)}.gb.proj.FF{color:var(--g-ff)}
+.tfoot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 12px}
+.tfoot .note{font-size:.84rem;color:var(--muted)}
+.inp.sm{padding:8px 10px;font-size:.95rem}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--tile);padding:20px}
+.card h3{font-weight:800;font-size:1.3rem;margin-bottom:6px}
+.card p{margin:0;color:var(--slate);font-size:.92rem}
+.target-row{display:flex;gap:10px;align-items:center;margin:14px 0 12px;flex-wrap:wrap}
+.target-row .inp{width:90px;font-family:var(--head);font-weight:800;font-size:1.4rem;text-align:center;padding:6px}
+.tgt-out{background:#fff;padding:14px 16px;border-left:5px solid var(--blue);font-size:.98rem}
+.tgt-out.bad{border-color:var(--bad)}
+.tgt-out.ok{border-color:var(--ok)}
+.tgt-out b{font-family:var(--head);font-size:1.2rem}
+.mix{display:flex;height:34px;margin:14px 0 10px;background:#fff}
+.mix div{display:grid;place-items:center;color:#fff;font-weight:700;font-size:.82rem;min-width:0;overflow:hidden}
+.mixlegend{display:flex;flex-wrap:wrap;gap:12px;font-size:.84rem;color:var(--slate)}
+.mixlegend i{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+
+details.backup{margin-top:30px;background:var(--tile-2);padding:14px 18px;font-size:.92rem}
+details.backup summary{cursor:pointer;font-weight:600}
+details.backup .box{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+details.backup textarea{width:100%;min-height:80px;border:1px solid var(--line);padding:8px;font-family:ui-monospace,Menlo,monospace;font-size:.78rem;border-radius:2px}
+footer{background:var(--char);color:rgba(255,255,255,.82);font-size:.85rem;padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));margin-top:30px}
+footer .container{display:flex;flex-direction:column;gap:6px}
+footer b{color:#fff}
+
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:0}
+  .grades{grid-template-columns:1fr 1fr}
+  .details{grid-template-columns:1fr 1fr}
+  .details .field:first-child{grid-column:1/-1}
+  .tips,.two{grid-template-columns:1fr}
+  .ahead{display:none}
+  .arow{grid-template-columns:96px minmax(0,1fr);gap:12px;position:relative;padding:16px}
+  .arow .c-name{grid-column:1/-1;padding-right:44px}
+  .arow .c-need{grid-column:1/-1}
+  .arow .c-del{position:absolute;top:14px;right:10px}
+  .cell .ml{display:block}
+  .nav .name small{display:none}
+  .view-btn{padding:0 12px}
+  .tbl thead{display:none}
+  .tbl,.tbl tbody{display:block}
+  .tbl tr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border-bottom:1px solid var(--line-2)}
+  .tbl td{border:0;padding:0;min-width:0}
+  .tbl td.empty{grid-column:1/-1}
+  .tbl .hide-sm{display:none}
+  .t-course{grid-column:1/3}.t-grade{grid-column:3;grid-row:1}.t-units{grid-row:2}.t-goal{grid-column:2/4;grid-row:2}
+  .t-goal .sel{width:100%}
+  .p-code{grid-column:1/-1}.p-units{grid-row:2}.p-grade{grid-row:2}.p-grade .sel{width:100%}.p-del{grid-row:2}
+}
+.faq{display:flex;flex-direction:column;gap:8px}
+.faq details{background:var(--tile);padding:0 18px}
+.faq summary{cursor:pointer;font-family:var(--head);font-weight:700;font-size:1.12rem;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--blue-d);font-size:1.4rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 16px;color:var(--slate);font-size:.95rem;max-width:75ch}
+.bk-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bk-file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+footer a{color:#fff}
+.noscript{background:var(--warn-l);color:#6e4100;padding:14px 18px;text-align:center}
+@media print{
+  .nav .views,.strip,.afoot,.del,.minlink,.hurdle .x,details.backup,#howto,#faq,.example-note,.btn,.ctab.add{display:none!important}
+  .nav{position:static}
+  .hero{background:#fff!important;color:var(--char);padding:0}
+  .answer{background:#fff;color:var(--char);border:2px solid var(--char)}
+  .answer p,.stat .k,.stat .s,.stat .v small{color:var(--slate)}
+  .stat{background:var(--tile-2)}
+  .progress,.gauge{display:none}
+  .inp{border-color:transparent}
+  footer{background:#fff;color:var(--slate)}footer b,footer a{color:var(--char)}
+  .sec{break-inside:avoid}
+}
+@media (max-width:440px){.view-btn.help{display:none}.answer{padding:20px 18px 22px}.stat{padding:14px}.stat .v{font-size:1.7rem}}
+@media (prefers-reduced-motion:no-preference){.pbar .got,.pbar .lost{transition:width .25s,left .25s}}
+</style>
+</head>
+<body>
+<noscript><div class="noscript">markx needs JavaScript to do the maths. Turn it on for this page and reload.</div></noscript>
+
+<header class="nav">
+  <div class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="4" y="17" width="6" height="11" fill="#fff" opacity=".55"/><rect x="13" y="12" width="6" height="16" fill="#fff" opacity=".8"/><rect x="22" y="4" width="6" height="24" fill="#fff"/><rect x="2" y="9" width="28" height="2.4" fill="#1295d8"/></svg></div>
+  <div class="name"><b>mark<span>x</span></b><small>Grade planner for University of Newcastle students</small></div>
+  <nav class="views" aria-label="Views">
+    <button class="view-btn" type="button" data-view="course" aria-pressed="true">My courses</button>
+    <button class="view-btn" type="button" data-view="gpa" aria-pressed="false">My GPA</button>
+    <button class="view-btn help" type="button" id="helpBtn">How it works</button>
+  </nav>
+</header>
+
+<!-- ============ COURSE VIEW ============ -->
+<div id="courseView">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="label-box" id="heroCourse">Course</div>
+        <div class="answer" aria-live="polite">
+          <h1 id="heroAnswer">Add your assessments to see what you need.</h1>
+          <p id="heroSub"></p>
+          <div class="progress">
+            <div class="pbar" id="pbar"></div>
+            <div class="plegend"><span><i style="background:#fff"></i>Marks secured</span><span><i style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 2px,transparent 2px 5px)"></i>Marks lost</span><span><i style="background:rgba(255,255,255,.18)"></i>Still to come</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="k">Locked in</div><div class="v num" id="stLocked">0</div><div class="s" id="stLockedS">marks so far</div></div>
+        <div class="stat"><div class="k">Your average</div><div class="v num" id="stAvg">—</div><div class="s">on marked work</div></div>
+        <div class="stat"><div class="k">Still to come</div><div class="v num" id="stLeft">100<small>%</small></div><div class="s">of the course</div></div>
+        <div class="stat"><div class="k">Best possible</div><div class="v num" id="stMax">100<small>%</small></div><div class="s">if you ace the rest</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip"><div class="container" role="tablist" aria-label="Your courses" id="tabs"></div></div>
+
+  <main class="container">
+    <section class="sec">
+      <div class="sec-title"><h2><span class="step">1</span>Your course</h2></div>
+      <div id="exampleNote"></div>
+      <div class="details">
+        <div class="field"><label for="cName">Course code and name</label><input class="inp big" id="cName" placeholder="e.g. SENG1110 Object Oriented Programming" autocomplete="off"></div>
+        <div class="field"><label for="cUnits">Unit value</label>
+          <select class="inp" id="cUnits"><option value="10">10 units</option><option value="20">20 units</option><option value="40">40 units</option></select></div>
+        <div class="field"><button class="btn quiet" id="delCourse" type="button">Delete course</button></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-title"><h2><span class="step">2</span>Add your assessments</h2><p>Copy each item and its weighting from your Course Outline. Leave the score empty for anything not marked yet.</p></div>
+      <div class="list">
+        <div class="ahead"><span>Assessment</span><span>Weight</span><span>Your mark (score / out of)</span><span>What you need</span><span></span></div>
+        <div id="rows"></div>
+        <div class="afoot">
+          <button class="btn" id="addItem" type="button">+ Add assessment</button>
+          <span class="wsum" id="wsum"></span>
+        </div>
+      </div>
+      <div class="alerts" id="alerts"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-title"><h2><span class="step">3</span>Pick your goal</h2><p>Tap a grade to set it as your goal. Each tile shows the average you'd need on everything that's left.</p></div>
+      <div class="grades" id="grades"></div>
+    </section>
+
+    <section class="sec" id="howto">
+      <div class="sec-title"><h2>How it works</h2></div>
+      <div class="tips">
+        <div class="tip"><b>Score and out of</b>Type your score in the first box and what it's marked out of in the second, like 17 and 20. markx works out the percentage.</div>
+        <div class="tip"><b>Minimum marks</b>If your Course Outline says you must reach a minimum mark on an item to pass, tap "Add minimum mark" on that item.</div>
+        <div class="tip"><b>Private by default</b>Everything stays in this browser. Nothing is sent anywhere. Use the backup below to move to another device.</div>
+      </div>
+    </section>
+
+    <section class="sec" id="faq">
+      <div class="sec-title"><h2>Questions</h2></div>
+      <div class="faq">
+        <details><summary>Where do I find my assessment weightings?</summary>
+          <p>In your Course Outline, under the assessment section. Each item lists its weighting as a percentage, and any minimum mark you need to reach. Course Outlines are linked from your course's Canvas site and the UoN course handbook.</p></details>
+        <details><summary>What's a minimum mark (hurdle)?</summary>
+          <p>Some assessments say you must reach a set mark on that item to pass the course, no matter how well you do overall. A final exam with a 40% minimum is common. markx makes sure every "What you need" figure also clears those minimums, and warns you if a marked item missed one.</p></details>
+        <details><summary>How is "what you need" worked out?</summary>
+          <p>markx adds up the course marks you've already earned, then finds the lowest average across everything not yet marked that gets you to your goal grade. If an item has a minimum mark higher than that average, it needs at least the minimum and the others can be a little lower.</p></details>
+        <details><summary>My weights don't add to 100%. What happens?</summary>
+          <p>Results are scaled as if they did, so the maths still works while you fill things in. Double-check against your Course Outline though, since a missing item will throw out your numbers.</p></details>
+        <details><summary>How is my GPA calculated?</summary>
+          <p>UoN uses a 7-point scale: HD is 7, D is 6, C is 5, P is 4 and FF is 0. Each grade is multiplied by the course's unit value, added up, then divided by the total units. Ungraded passes (UP) don't count. markx shows it to one decimal place. Your official GPA is the one on myHub.</p></details>
+        <details><summary>What if I miss a minimum mark or fail a course?</summary>
+          <p>You may be eligible for a supplementary assessment or other options. Talk to your course coordinator early, and check the UoN policies on assessment and adverse circumstances. markx can't tell you what you're eligible for.</p></details>
+        <details><summary>Is my data saved? Can I use it on my phone too?</summary>
+          <p>It saves automatically in this browser on this device. To move it, open "Back up or move your data" below, download a backup file (or copy the text), then load it on your other device.</p></details>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ============ GPA VIEW ============ -->
+<div id="gpaView" hidden>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="label-box">My GPA</div>
+        <div class="answer" aria-live="polite">
+          <h1 id="gpaAnswer">Your GPA</h1>
+          <p id="gpaSubline"></p>
+          <div class="gauge"><div class="gscale" id="gscale"></div>
+            <div class="glegend"><span><i style="background:#fff"></i>Current GPA</span><span><i style="background:#ffd23f"></i>Projected GPA</span><span><i style="background:rgba(255,210,63,.45)"></i>Possible range this term</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="k">Current GPA</div><div class="v num" id="gCur">—</div><div class="s" id="gCurS">finished courses</div></div>
+        <div class="stat"><div class="k">Projected GPA</div><div class="v num" id="gProj">—</div><div class="s" id="gProjS">if you hit your goals</div></div>
+        <div class="stat"><div class="k">If you just pass</div><div class="v num" id="gLow">—</div><div class="s">P in this term's courses</div></div>
+        <div class="stat"><div class="k">Best possible</div><div class="v num" id="gHigh">—</div><div class="s">if you ace the rest</div></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="sec">
+      <div class="sec-title"><h2><span class="step">1</span>This term</h2><p>Courses you're tracking in markx. Change a goal here and it updates the course too. Finished courses count at their final grade.</p></div>
+      <div class="panel" style="overflow-x:auto">
+        <table class="tbl"><thead><tr><th>Course</th><th>Units</th><th class="hide-sm">Progress</th><th>Goal</th><th class="r">Grade</th></tr></thead><tbody id="termRows"></tbody></table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-title"><h2><span class="step">2</span>Past results</h2><p>Add courses you've already finished (they're on myHub) so your GPA covers your whole degree. UP grades don't count towards GPA.</p></div>
+      <div class="panel" style="overflow-x:auto">
+        <table class="tbl"><thead><tr><th>Course</th><th>Units</th><th>Grade</th><th class="r"></th></tr></thead><tbody id="pastRows"></tbody></table>
+        <div class="tfoot"><button class="btn" type="button" id="addPast">+ Add past result</button><span class="note" id="pastNote"></span></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-title"><h2><span class="step">3</span>Plan ahead</h2></div>
+      <div class="two">
+        <div class="card">
+          <h3>Aim for a GPA</h3>
+          <p>See what you'd need this term to finish on a GPA you choose.</p>
+          <div class="target-row"><label for="tgtGpa"><b>Target GPA</b></label><input class="inp num" id="tgtGpa" inputmode="decimal" placeholder="6.0"><span class="basis">out of 7</span></div>
+          <div class="tgt-out" id="tgtOut">Enter a target GPA.</div>
+        </div>
+        <div class="card">
+          <h3>Your grade mix</h3>
+          <p>Share of your units at each grade, using final grades plus this term's goals.</p>
+          <div class="mix" id="mix"></div>
+          <div class="mixlegend" id="mixLegend"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="container">
+  <details class="backup">
+    <summary>Back up or move your data</summary>
+    <div class="box">
+      <div class="bk-row"><button class="btn line" id="dlBk" type="button">Download backup file</button><label class="btn line" for="ulBk">Load backup file</label><input class="bk-file" type="file" id="ulBk" accept=".json,application/json"></div>
+      <div class="bk-row"><button class="btn line" id="copyBk" type="button">Copy backup as text</button> <span id="copyMsg"></span></div>
+      <textarea id="bkText" placeholder="Paste a backup here to restore it" aria-label="Backup text"></textarea>
+      <div class="bk-row"><button class="btn line" id="restoreBk" type="button">Restore from pasted backup</button> <span id="restoreMsg" role="status"></span></div>
+    </div>
+  </details>
+</div>
+
+<footer>
+  <div class="container">
+    <span><b>Grade bands:</b> HD 85–100 · D 75–84 · C 65–74 · P 50–64 · FF below 50, as published by UoN. GPA uses UoN's 7-point scale (HD 7, D 6, C 5, P 4, FF 0), weighted by unit value and rounded to one decimal place. Your official results are always the ones on myHub.</span>
+    <span>markx is an independent student-built prototype. It is not affiliated with or endorsed by the University of Newcastle.</span>
+    <span><a href="../">General version</a> · <a href="https://github.com/Squidly1408/MarkX">Source on GitHub</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+const KEY="markx-uon-v1";
+const SCALE=[{g:"Pass",s:"P",v:50,pt:4},{g:"Credit",s:"C",v:65,pt:5},{g:"Distinction",s:"D",v:75,pt:6},{g:"High Distinction",s:"HD",v:85,pt:7}];
+const FF={g:"Fail",s:"FF",v:0,pt:0};
+const PTS={HD:7,D:6,C:5,P:4,FF:0};
+const GNAME={HD:"High Distinction",D:"Distinction",C:"Credit",P:"Pass",FF:"Fail",UP:"Ungraded pass"};
+const uid=()=>Math.random().toString(36).slice(2,9);
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num=v=>{if(v===""||v==null)return null;const n=parseFloat(v);return isFinite(n)?n:null};
+const f1=n=>(Math.round(n*10)/10).toFixed(1).replace(/\.0$/,"");
+const g1=n=>(Math.round(n*10)/10).toFixed(1);
+function band(p){let r=FF;for(const s of SCALE)if(p>=s.v-1e-9)r=s;return r}
+const article=g=>/^[AEIOU]/i.test(g)?"an":"a";
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+
+function sample(){
+  return {id:uid(),name:"COMP1000 Sample Course",example:true,target:65,units:10,items:[
+    {id:uid(),name:"Weekly quizzes",weight:"15",score:"12.5",outOf:"15",hurdle:""},
+    {id:uid(),name:"Assignment 1",weight:"20",score:"71",outOf:"100",hurdle:""},
+    {id:uid(),name:"Assignment 2",weight:"25",score:"",outOf:"100",hurdle:""},
+    {id:uid(),name:"Final exam",weight:"40",score:"",outOf:"100",hurdle:"40"}
+  ]};
+}
+const blankCourse=()=>({id:uid(),name:"",target:65,units:10,items:[{id:uid(),name:"",weight:"",score:"",outOf:"100",hurdle:""}]});
+
+/* ---------- load + migrate ---------- */
+function migrate(s){
+if(!Array.isArray(s.past))s.past=[];
+s.units.forEach(u=>{u.units=num(u.units)||10;if(!Array.isArray(u.items))u.items=[];if(num(u.target)==null)u.target=65;u.items.forEach(it=>{
+  if(it.mark!=null){ // single-box format from the previous version
+    const s=String(it.mark).trim().replace(/\s+/g,""),m=s.match(/^(\d*\.?\d+)\/(\d*\.?\d+)$/);
+    if(m){it.score=m[1];it.outOf=m[2]}else{it.score=s.replace("%","");it.outOf="100"}
+    delete it.mark;
+  }
+  if(it.score==null)it.score="";if(it.outOf==null||it.outOf==="")it.outOf="100";if(it.hurdle==null)it.hurdle="";
+})});
+if(!s.units.some(u=>u.id===s.active))s.active=s.units[0].id;
+return s;
+}
+const isBackup=d=>d&&Array.isArray(d.units)&&d.units.length>0&&d.units.every(u=>u&&typeof u==="object");
+let state;
+try{state=JSON.parse(localStorage.getItem(KEY));}catch(e){state=null}
+if(!isBackup(state)){const u=sample();state={units:[u],active:u.id,view:"course"};}
+migrate(state);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
+const course=()=>state.units.find(u=>u.id===state.active)||state.units[0];
+
+/* ---------- maths ---------- */
+function readMark(it){
+  const sc=num(it.score),out=num(it.outOf);
+  if(sc==null)return {empty:true};
+  if(out==null||out<=0)return {err:"Enter what it's out of"};
+  return {pct:sc/out*100,over:sc>out,out};
+}
+function compute(u){
+  const items=u.items.map(it=>{const w=Math.max(0,num(it.weight)||0),rm=readMark(it),h=num(it.hurdle);
+    return {id:it.id,w,rm,pct:rm.pct==null?null:rm.pct,h:h>0?h:null}});
+  const totalW=items.reduce((a,b)=>a+b.w,0),k=totalW>0?100/totalW:0;
+  let earned=0,doneW=0;
+  items.forEach(i=>{i.cw=i.w*k;if(i.pct!=null){i.contrib=i.cw*Math.min(i.pct,100)/100;earned+=i.contrib;doneW+=i.cw}});
+  const remW=Math.max(0,100-doneW),pending=items.filter(i=>i.pct==null&&i.cw>0);
+  const failed=items.filter(i=>i.pct!=null&&i.h!=null&&i.pct<i.h);
+  function need(t){
+    const N=t-earned,f=r=>pending.reduce((a,i)=>a+i.cw*Math.max(r,i.h||0)/100,0);
+    if(!pending.length)return {r:null,reached:earned>=t-1e-9,possible:earned>=t-1e-9};
+    if(f(0)>=N-1e-9)return {r:0,reached:true,possible:true};
+    if(f(100)<N-1e-9)return {r:null,reached:false,possible:false};
+    let lo=0,hi=100;for(let n=0;n<50;n++){const m=(lo+hi)/2;if(f(m)>=N)hi=m;else lo=m}
+    return {r:hi,reached:false,possible:true};
+  }
+  return {items,totalW,earned,doneW,remW,pending,failed,need,max:earned+remW,avg:doneW>0?earned/doneW*100:null};
+}
+/* GPA view of one tracked course: final / projected (goal) / floor / ceiling */
+function courseGPA(u){
+  const c=compute(u),units=num(u.units)||10;
+  if(!c.items.length||c.totalW===0)return {units,empty:true};
+  if(c.failed.length)return {units,done:true,grade:"FF",basis:"Minimum mark not met",lo:"FF",hi:"FF"};
+  if(!c.pending.length){const b=band(c.earned);return {units,done:true,grade:b.s,basis:`Final mark ${f1(c.earned)}%`,lo:b.s,hi:b.s}}
+  const hi=band(c.max).s,lo=hi==="FF"?"FF":(band(c.earned).s!=="FF"?band(c.earned).s:"P");
+  const goal=c.need(u.target).possible?band(u.target).s:hi;
+  const pct=Math.round(c.doneW);
+  return {units,done:false,grade:goal,basis:`${pct}% marked`,lo,hi,goalReachable:c.need(u.target).possible};
+}
+function gpaOf(list){let p=0,u=0;list.forEach(x=>{if(x.grade in PTS){p+=PTS[x.grade]*x.units;u+=x.units}});return u?{gpa:p/u,units:u,pts:p}:{gpa:null,units:0,pts:0}}
+const fmtGpa=g=>g==null?"—":g1(g);
+const shortName=n=>{n=(n||"").trim();const m=n.match(/^[A-Z]{3,5}\d{3,5}/i);return m?m[0].toUpperCase():(n?(n.length>20?n.slice(0,18)+"…":n):"New course")};
+
+/* ---------- course view ---------- */
+function renderTabs(){
+  $("tabs").innerHTML=`<span class="lbl">Your courses</span>`+state.units.map(u=>`<button class="ctab" role="tab" type="button" aria-selected="${u.id===state.active}" data-id="${u.id}">${esc(shortName(u.name))}</button>`).join("")+
+    `<button class="ctab add" type="button" id="addCourse">+ Add course</button>`;
+}
+function renderDetails(){
+  const u=course();
+  $("cName").value=u.name;$("cUnits").value=String(u.units||10);
+  $("exampleNote").innerHTML=u.example?`<div class="example-note"><span>This is an <b>example course</b> so you can see how markx works. Change anything, or start fresh.</span><button class="btn" type="button" id="startFresh">Start my own course <span class="chev"></span></button></div>`:"";
+}
+function renderRows(){
+  const u=course(),rows=$("rows");
+  if(!u.items.length){rows.innerHTML=`<div class="empty">No assessments yet. Add the first one from your Course Outline.</div>`;return}
+  rows.innerHTML=u.items.map((it,ix)=>{
+    const showH=it.hurdle!==""||it._h;
+    return `<div class="arow" data-id="${it.id}">
+      <div class="cell c-name"><span class="ml">Assessment</span>
+        <input class="inp" data-k="name" value="${esc(it.name)}" placeholder="e.g. Assignment ${ix+1}" aria-label="Assessment name">
+        ${showH?`<div class="hurdle">Minimum to pass <span class="suffix"><input class="inp num" data-k="hurdle" inputmode="decimal" value="${esc(it.hurdle)}" placeholder="40" aria-label="Minimum mark percent"><span>%</span></span><button class="x" type="button" data-noh="${it.id}" aria-label="Remove minimum mark">×</button></div>`
+          :`<button class="minlink" type="button" data-addh="${it.id}">+ Add minimum mark</button>`}
+      </div>
+      <div class="cell"><span class="ml">Weight</span><div class="suffix"><input class="inp num" data-k="weight" inputmode="decimal" value="${esc(it.weight)}" placeholder="0" aria-label="Weight percent"><span>%</span></div></div>
+      <div class="cell"><span class="ml">Your mark</span>
+        <div class="pair"><input class="inp num" data-k="score" inputmode="decimal" value="${esc(it.score)}" placeholder="—" aria-label="Your score"><span class="slash">/</span><input class="inp num of" data-k="outOf" inputmode="decimal" value="${esc(it.outOf)}" placeholder="100" aria-label="Out of"></div>
+        <div class="interp" id="ip-${it.id}"></div></div>
+      <div class="cell c-need need"><span class="ml">What you need</span><span class="badge" id="nb-${it.id}"></span><div class="why" id="nw-${it.id}"></div></div>
+      <div class="cell c-del"><button class="del" type="button" data-del="${it.id}" aria-label="Delete assessment">×</button></div>
+    </div>`}).join("");
+}
+function updateCourse(){
+  const u=course(),c=compute(u),T=u.target,tb=band(T),nd=c.need(T),hasH=c.pending.some(i=>i.h);
+  $("heroCourse").textContent=u.name.trim()||"New course";
+  const H=$("heroAnswer"),S=$("heroSub");
+  if(!c.items.length||c.totalW===0){H.textContent="Add your assessments to see what you need.";S.textContent="Start with the weightings from your Course Outline."}
+  else if(c.failed.length){H.textContent="A minimum mark wasn't met.";S.textContent="Missing a minimum mark usually means you can't pass the course on total marks alone. Talk to your course coordinator about supplementary assessment."}
+  else if(!c.pending.length){const b=band(c.earned);H.innerHTML=`You finished on <em>${f1(c.earned)}%</em>, ${b.s==="FF"?"which is below a pass":article(b.g)+" "+b.g}.`;S.textContent="Everything is marked."}
+  else if(!nd.possible){const mb=band(c.max);H.textContent=`${cap(article(tb.g))} ${tb.g} is out of reach.`;S.textContent=`The best you can finish on is ${f1(c.max)}% (${mb.s==="FF"?"below a pass":mb.g}) with full marks on everything left. Try a different goal below.`}
+  else if(nd.reached){H.innerHTML=`You've locked in ${article(tb.g)} <em>${tb.g}</em>.`;S.textContent=hasH?"You just need to reach the minimum marks on what's left.":"Anything you get from here is a bonus."}
+  else{H.innerHTML=`You need <em>${f1(nd.r)}%</em> on what's left to get ${article(tb.g)} ${tb.g}.`;S.textContent=`That's your average across the remaining ${f1(c.remW)}% of the course`+(hasH?", while also reaching every minimum mark.":".")}
+
+  let pb=`<div class="got" style="width:${c.earned}%"></div><div class="lost" style="left:${c.earned}%;width:${Math.max(0,c.doneW-c.earned)}%"></div>`;
+  SCALE.forEach(s=>{pb+=`<div class="tk${s.v===T?" on":""}" style="left:${s.v}%"><span>${s.s}</span></div>`});
+  $("pbar").innerHTML=pb;
+  $("stLocked").innerHTML=`${f1(c.earned)}<small> / ${f1(c.doneW)}</small>`;
+  $("stLockedS").textContent=c.doneW?`marks from ${f1(c.doneW)}% marked so far`:"nothing marked yet";
+  $("stAvg").innerHTML=c.avg==null?"—":`${f1(c.avg)}<small>% ${band(c.avg).s}</small>`;
+  $("stLeft").innerHTML=`${f1(c.remW)}<small>%</small>`;
+  $("stMax").innerHTML=`${f1(Math.min(c.max,100))}<small>% ${band(c.max).s}</small>`;
+
+  const ws=$("wsum"),off=Math.abs(c.totalW-100)>0.01;
+  ws.textContent=c.totalW===0?"Weights add to 0%":off?`Weights add to ${f1(c.totalW)}%, not 100%`:"Weights add to 100% ✓";
+  ws.className="wsum "+(off?"off":"ok");
+
+  const al=[];
+  c.failed.forEach(i=>{const it=u.items.find(x=>x.id===i.id);al.push(`<div class="alert bad"><b>${esc(it.name||"An assessment")}</b>: you got ${f1(i.pct)}% but the minimum is ${f1(i.h)}%. Check your Course Outline and talk to your course coordinator.</div>`)});
+  if(c.totalW>0&&off)al.push(`<div class="alert warn">Your weights add to ${f1(c.totalW)}%. Check them against your Course Outline. Until then, results are scaled as if they added to 100%.</div>`);
+  $("alerts").innerHTML=al.join("");
+
+  c.items.forEach(i=>{
+    const nb=$("nb-"+i.id);if(!nb)return;const nw=$("nw-"+i.id),ip=$("ip-"+i.id),rm=i.rm,out=rm.out||num(u.items.find(x=>x.id===i.id).outOf)||100;
+    ip.className="interp"+(rm.err||rm.over?" err":"");
+    ip.textContent=rm.err?rm.err:rm.empty?"":rm.over?`More than full marks (counted as 100%)`:`= ${f1(rm.pct)}%`;
+    if(i.pct!=null){
+      if(i.h!=null&&i.pct<i.h){nb.className="badge bad";nb.textContent="Minimum missed";nw.textContent=`needed ${f1(i.h)}%`}
+      else{nb.className="badge ok";nb.textContent="✓ Done";nw.textContent=i.cw?`${f1(i.contrib)} of ${f1(i.cw)} course marks`:""}
+      return;
+    }
+    if(!i.cw){nb.className="badge none";nb.textContent="Add a weight";nw.textContent="";return}
+    if(!nd.possible){nb.className="badge bad";nb.textContent=i.h?`At least ${f1(i.h)}%`:"Full marks";nw.textContent=`${tb.g} can't be reached`;return}
+    const req=Math.max(nd.r||0,i.h||0);
+    if(req<=0){nb.className="badge ok";nb.textContent="Anything";nw.textContent=`${tb.g} already locked in`;return}
+    nb.className="badge "+(req>90?"warn":"todo");
+    if(out===100){nb.textContent=`${f1(req)}%`;nw.textContent=i.h&&req===i.h?"the minimum mark":`worth ${f1(i.cw)} course marks`}
+    else{nb.textContent=`${f1(req/100*out)} / ${f1(out)}`;nw.textContent=`that's ${f1(req)}%`+(i.h&&req===i.h?" (the minimum)":"")}
+  });
+
+  $("grades").innerHTML=SCALE.map(s=>{const n=c.need(s.v);let cls="",st,sm="";
+    if(!c.items.length||c.totalW===0){st="—";sm="add assessments"}
+    else if(!c.pending.length){cls=c.earned>=s.v?"secured":"gone";st=c.earned>=s.v?"Achieved":"Missed"}
+    else if(!n.possible){cls="gone";st="Out of reach"}
+    else if(n.reached){cls="secured";st="Locked in";sm=hasH?"just meet minimum marks":"already guaranteed"}
+    else{st=`${f1(n.r)}%`;sm="average needed";if(n.r>85)cls="hard"}
+    return `<button class="gt ${cls}" type="button" data-t="${s.v}" aria-pressed="${T===s.v}"><span class="code">${s.s}</span><span class="nm">${s.g} · ${s.v}+</span><span class="st">${st}<small>${sm}</small></span><span class="pick">${T===s.v?"Your goal":"Set as goal"}</span></button>`}).join("");
+}
+
+/* ---------- GPA view ---------- */
+function gpaModel(){
+  const term=state.units.map(u=>({u,...courseGPA(u)}));
+  const past=state.past.map(p=>({units:num(p.units)||10,grade:p.grade}));
+  const live=term.filter(t=>!t.empty);
+  const done=live.filter(t=>t.done),open=live.filter(t=>!t.done);
+  const cur=gpaOf([...past,...done]);
+  const proj=gpaOf([...past,...live]);
+  const low=gpaOf([...past,...done,...open.map(t=>({units:t.units,grade:t.lo}))]);
+  const high=gpaOf([...past,...done,...open.map(t=>({units:t.units,grade:t.hi}))]);
+  return {term,past,live,done,open,cur,proj,low,high};
+}
+function renderTerm(m){
+  $("termRows").innerHTML=m.term.map(t=>{
+    const u=t.u;
+    const goalSel=t.empty||t.done?`<span class="basis">${t.done?"Finished":"—"}</span>`:
+      `<select class="sel" data-goal="${u.id}" aria-label="Goal for ${esc(shortName(u.name))}">${SCALE.slice().reverse().map(s=>`<option value="${s.v}"${u.target===s.v?" selected":""}>${s.s} · ${s.g}</option>`).join("")}</select>`;
+    const grade=t.empty?`<span class="basis">Add assessments</span>`:`<span class="gb ${t.grade}${t.done?"":" proj"}" title="${t.done?"Final":"Projected"}">${t.grade} · ${PTS[t.grade]}</span>`;
+    const note=!t.empty&&!t.done&&!t.goalReachable?`<div class="basis" style="color:var(--warn)">Goal out of reach, using best possible</div>`:"";
+    return `<tr><td class="t-course"><button class="cname" type="button" data-open="${u.id}">${esc(shortName(u.name))}</button>${note}</td>
+      <td class="t-units"><select class="sel" data-units="${u.id}" aria-label="Unit value">${[10,20,40].map(v=>`<option${v===t.units?" selected":""}>${v}</option>`).join("")}</select></td>
+      <td class="hide-sm basis">${t.empty?"No assessments yet":esc(t.basis)}</td>
+      <td class="t-goal">${goalSel}</td><td class="r t-grade">${grade}</td></tr>`}).join("")||`<tr><td colspan="5" class="empty">No courses yet.</td></tr>`;
+}
+function renderPast(){
+  $("pastRows").innerHTML=state.past.length?state.past.map(p=>`<tr data-pid="${p.id}">
+    <td class="p-code"><input class="inp sm" data-pk="code" value="${esc(p.code)}" placeholder="e.g. MATH1110" aria-label="Course code"></td>
+    <td class="p-units"><select class="sel" data-pk="units" aria-label="Unit value">${[10,20,40].map(v=>`<option${v===(num(p.units)||10)?" selected":""}>${v}</option>`).join("")}</select></td>
+    <td class="p-grade"><select class="sel" data-pk="grade" aria-label="Grade">${["HD","D","C","P","FF","UP"].map(g=>`<option value="${g}"${p.grade===g?" selected":""}>${g} · ${GNAME[g]}</option>`).join("")}</select></td>
+    <td class="r p-del"><button class="del" type="button" data-pdel="${p.id}" aria-label="Delete past result">×</button></td></tr>`).join("")
+    :`<tr><td colspan="4" class="empty">No past results yet. Add the courses you've finished to see your real GPA.</td></tr>`;
+}
+function updateGPA(){
+  const m=gpaModel();
+  renderTerm(m);
+  const pu=m.past.filter(p=>p.grade!=="UP").reduce((a,p)=>a+p.units,0);
+  $("pastNote").textContent=state.past.length?`${state.past.length} result${state.past.length>1?"s":""} · ${pu} units counted`:"";
+
+  const A=$("gpaAnswer"),S=$("gpaSubline");
+  if(m.proj.gpa==null){A.textContent="Add courses to see your GPA.";S.textContent="Track this term's courses, and add past results from myHub."}
+  else if(!m.open.length){A.innerHTML=`Your GPA is <em>${fmtGpa(m.cur.gpa)}</em>`;S.textContent=`Across ${m.cur.units} units. Every course here is finished.`}
+  else{A.innerHTML=`You're on track for a <em>${fmtGpa(m.proj.gpa)}</em> GPA`;
+    S.textContent=(m.cur.gpa!=null?`Your GPA from finished courses is ${fmtGpa(m.cur.gpa)}. `:"")+`This term could land you anywhere from ${fmtGpa(m.low.gpa)} to ${fmtGpa(m.high.gpa)}.`}
+
+  $("gCur").textContent=fmtGpa(m.cur.gpa);$("gCurS").textContent=m.cur.units?`${m.cur.units} units finished`:"no finished courses yet";
+  $("gProj").textContent=fmtGpa(m.proj.gpa);$("gProjS").textContent=m.open.length?"if you hit your goals":"nothing in progress";
+  $("gLow").textContent=fmtGpa(m.low.gpa);$("gHigh").textContent=fmtGpa(m.high.gpa);
+
+  const x=g=>Math.max(0,Math.min(100,g/7*100));
+  let gs=`${[["P",4],["C",5],["D",6],["HD",7]].map(([l,v])=>`<span class="lab" style="left:${x(v)}%">${l} ${v}</span>`).join("")}<span class="lab" style="left:0;transform:none">0</span>`;
+  if(m.open.length&&m.low.gpa!=null)gs+=`<div class="range" style="left:${x(m.low.gpa)}%;width:${x(m.high.gpa)-x(m.low.gpa)}%"></div>`;
+  if(m.cur.gpa!=null)gs+=`<div class="pin" style="left:${x(m.cur.gpa)}%" title="Current ${fmtGpa(m.cur.gpa)}"></div>`;
+  if(m.proj.gpa!=null&&m.open.length)gs+=`<div class="pin proj" style="left:${x(m.proj.gpa)}%" title="Projected ${fmtGpa(m.proj.gpa)}"></div>`;
+  $("gscale").innerHTML=gs;
+
+  /* target GPA */
+  const out=$("tgtOut"),tg=num(state.targetGpa);
+  if(document.activeElement!==$("tgtGpa"))$("tgtGpa").value=state.targetGpa??"";
+  const fixed=gpaOf([...m.past,...m.done]),openU=m.open.reduce((a,t)=>a+t.units,0);
+  if(tg==null){out.className="tgt-out";out.textContent="Enter a target GPA, like 6.0."}
+  else if(tg<0||tg>7){out.className="tgt-out bad";out.textContent="GPA runs from 0 to 7."}
+  else if(!openU){out.className="tgt-out";out.textContent="Add a course you're still working on this term to plan towards a target."}
+  else{
+    const totalU=fixed.units+openU,needPts=(tg-0.05)*totalU-fixed.pts,per=needPts/openU; // rounds to 1 d.p., so 5.95 shows as 6.0
+    if(per<=4+1e-9){out.className="tgt-out ok";out.innerHTML=`<b>You're set.</b> Passing everything this term keeps you at ${g1(tg)} or above.`}
+    else if(per>7+1e-9){out.className="tgt-out bad";out.innerHTML=`<b>Not reachable this term.</b> Even straight HDs would give you ${fmtGpa(gpaOf([...m.past,...m.done,...m.open.map(t=>({units:t.units,grade:"HD"}))]).gpa)}. Your degree GPA moves slowly once you have lots of units.`}
+    else{
+      const lo=Math.floor(per),hiG=Math.ceil(per),name=v=>({4:"P",5:"C",6:"D",7:"HD"})[v],full=v=>GNAME[name(v)];
+      const mixTxt=m.open.length===1?`${article(full(hiG))} ${full(hiG)} in ${esc(shortName(m.open[0].u.name))}`:lo===hiG?`${article(full(lo))} ${full(lo)} in every course`:`a mix of ${name(lo)} and ${name(hiG)} grades, leaning ${per-lo>=.5?name(hiG):name(lo)}`;
+      out.className="tgt-out";out.innerHTML=`Average <b>${per.toFixed(1)}</b> grade points across this term's ${openU} units, which means ${mixTxt}.`;
+    }
+  }
+
+  /* grade mix */
+  const tally={HD:0,D:0,C:0,P:0,FF:0};let T=0;
+  [...m.past,...m.live].forEach(r=>{if(r.grade in tally){tally[r.grade]+=r.units;T+=r.units}});
+  const col={HD:"var(--g-hd)",D:"var(--g-d)",C:"var(--g-c)",P:"var(--g-p)",FF:"var(--g-ff)"};
+  $("mix").innerHTML=T?Object.entries(tally).filter(([,v])=>v).map(([g,v])=>`<div style="width:${v/T*100}%;background:${col[g]};${g==="C"||g==="P"?"color:#1f2328":""}">${v/T>=.08?g:""}</div>`).join(""):`<div style="width:100%;color:var(--muted);font-weight:500">Nothing yet</div>`;
+  $("mixLegend").innerHTML=Object.entries(tally).map(([g,v])=>`<span><i style="background:${col[g]}"></i>${g} ${v?Math.round(v/T*100)+"%":"–"}</span>`).join("");
+}
+
+/* ---------- glue ---------- */
+function update(){updateCourse();updateGPA();save()}
+function setView(v){state.view=v;document.querySelectorAll(".view-btn[data-view]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===v)));
+  $("courseView").hidden=v!=="course";$("gpaView").hidden=v!=="gpa";if(v==="gpa")renderPast();update();window.scrollTo(0,0)}
+function full(){renderTabs();renderDetails();renderRows();update()}
+function arm(btn,label,restore,ms){if(btn.classList.contains("armed"))return true;btn.classList.add("armed");btn.textContent=label;setTimeout(()=>{if(btn.isConnected){btn.classList.remove("armed");btn.textContent=restore}},ms||2500);return false}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button");if(!t)return;const u=course();
+  if(t.dataset.view){setView(t.dataset.view);return}
+  if(t.id==="helpBtn"){if(state.view!=="course")setView("course");setTimeout(()=>{const y=$("howto").getBoundingClientRect().top+window.scrollY-74;window.scrollTo({top:y,behavior:"smooth"})},30);return}
+  if(t.classList.contains("ctab")&&t.dataset.id){state.active=t.dataset.id;full();return}
+  if(t.dataset.open){state.active=t.dataset.open;full();setView("course");return}
+  if(t.id==="addCourse"){const n=blankCourse();state.units.push(n);state.active=n.id;full();$("cName").focus();return}
+  if(t.id==="startFresh"){const n=blankCourse();state.units=state.units.filter(x=>x.id!==u.id);state.units.push(n);state.active=n.id;full();$("cName").focus();return}
+  if(t.dataset.t){u.target=+t.dataset.t;update();return}
+  if(t.id==="addItem"){const it={id:uid(),name:"",weight:"",score:"",outOf:"100",hurdle:""};u.items.push(it);renderRows();update();document.querySelector(`.arow[data-id="${it.id}"] [data-k="name"]`).focus();return}
+  if(t.dataset.addh){const it=u.items.find(i=>i.id===t.dataset.addh);it._h=true;renderRows();update();document.querySelector(`.arow[data-id="${it.id}"] [data-k="hurdle"]`).focus();return}
+  if(t.dataset.noh){const it=u.items.find(i=>i.id===t.dataset.noh);it.hurdle="";delete it._h;renderRows();update();return}
+  if(t.dataset.del){if(!arm(t,"Sure?","×"))return;u.items=u.items.filter(i=>i.id!==t.dataset.del);renderRows();update();return}
+  if(t.id==="delCourse"){if(!arm(t,"Tap again to delete","Delete course",3000))return;
+    state.units=state.units.filter(x=>x.id!==u.id);if(!state.units.length)state.units.push(blankCourse());state.active=state.units[0].id;full();return}
+  if(t.id==="addPast"){const p={id:uid(),code:"",units:10,grade:"C"};state.past.push(p);renderPast();update();document.querySelector(`tr[data-pid="${p.id}"] input`).focus();return}
+  if(t.dataset.pdel){if(!arm(t,"Sure?","×"))return;state.past=state.past.filter(p=>p.id!==t.dataset.pdel);renderPast();update();return}
+  if(t.id==="copyBk"){const txt=JSON.stringify(state),ta=$("bkText");
+    const fallback=()=>{ta.value=txt;ta.focus();ta.select();$("copyMsg").textContent="Copy the selected text below."};
+    try{navigator.clipboard.writeText(txt).then(()=>$("copyMsg").textContent="Copied. Paste it somewhere safe.",fallback)}catch(err){fallback()}return}
+  if(t.id==="dlBk"){const a=document.createElement("a"),d=new Date();
+    a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:"application/json"}));
+    a.download=`markx-backup-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}.json`;
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);return}
+  if(t.id==="restoreBk"){restore($("bkText").value)}
+});
+function restore(txt){
+  try{const d=JSON.parse(txt);if(!isBackup(d))throw 0;
+    d.view=state.view;state=migrate(d);save();full();renderPast();$("restoreMsg").textContent="Restored."}
+  catch(err){$("restoreMsg").textContent="That doesn't look like a markx backup."}
+}
+$("ulBk").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;
+  f.text().then(restore,()=>{$("restoreMsg").textContent="Couldn't read that file."});e.target.value=""});
+document.addEventListener("input",e=>{
+  const el=e.target,u=course();
+  if(el.id==="cName"){u.name=el.value;if(u.example){delete u.example;$("exampleNote").innerHTML=""}renderTabs();update();return}
+  if(el.id==="tgtGpa"){state.targetGpa=el.value;updateGPA();save();return}
+  const pr=el.closest("tr[data-pid]");if(pr&&el.dataset.pk==="code"){state.past.find(p=>p.id===pr.dataset.pid).code=el.value;save();return}
+  const row=el.closest(".arow");if(!row||!el.dataset.k)return;
+  const it=u.items.find(i=>i.id===row.dataset.id);it[el.dataset.k]=el.value;update();
+});
+document.addEventListener("change",e=>{
+  const el=e.target;
+  if(el.id==="cUnits"){course().units=+el.value;update();return}
+  if(el.dataset.units){state.units.find(x=>x.id===el.dataset.units).units=+el.value;update();return}
+  if(el.dataset.goal){state.units.find(x=>x.id===el.dataset.goal).target=+el.value;update();return}
+  const pr=el.closest("tr[data-pid]");if(pr&&el.dataset.pk){const p=state.past.find(x=>x.id===pr.dataset.pid);p[el.dataset.pk]=el.dataset.pk==="units"?+el.value:el.value;update()}
+});
+
+full();renderPast();setView(state.view==="gpa"?"gpa":"course");
+})();
+</script>
+</body>
+</html>
