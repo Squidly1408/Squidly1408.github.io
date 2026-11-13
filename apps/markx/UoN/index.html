@@ -7,22 +7,23 @@
 <meta name="description" content="Work out what you need on your remaining assessments to get a P, C, D or HD, and track your GPA on the University of Newcastle 7-point scale. Free, private, runs in your browser.">
 <meta name="theme-color" content="#2d3138">
 <meta name="color-scheme" content="light">
-<link rel="icon" href="../images/logo.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="../images/logo.svg">
+<link rel="icon" href="assets/images/favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/images/icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:title" content="markx · Grade planner for UoN students">
 <meta property="og:description" content="What do you need on the rest of the course to get a Credit? markx works it out, and tracks your GPA too.">
-<meta property="og:image" content="https://squidly1408.github.io/MarkX/images/banner.png">
+<meta property="og:image" content="https://squidly1408.github.io/MarkX/UoN/assets/images/logo.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="fonts/fira-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/fira-sans-condensed-900.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fira-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fira-sans-condensed-900.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:'Fira Sans Condensed';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/fira-sans-condensed-700.woff2) format('woff2')}
-@font-face{font-family:'Fira Sans Condensed';font-weight:800;font-style:normal;font-display:swap;src:url(fonts/fira-sans-condensed-800.woff2) format('woff2')}
-@font-face{font-family:'Fira Sans Condensed';font-weight:900;font-style:normal;font-display:swap;src:url(fonts/fira-sans-condensed-900.woff2) format('woff2')}
-@font-face{font-family:'Fira Sans';font-weight:400;font-style:normal;font-display:swap;src:url(fonts/fira-sans-400.woff2) format('woff2')}
-@font-face{font-family:'Fira Sans';font-weight:600;font-style:normal;font-display:swap;src:url(fonts/fira-sans-600.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans Condensed';font-weight:700;font-style:normal;font-display:swap;src:url(assets/fonts/fira-sans-condensed-700.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans Condensed';font-weight:800;font-style:normal;font-display:swap;src:url(assets/fonts/fira-sans-condensed-800.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans Condensed';font-weight:900;font-style:normal;font-display:swap;src:url(assets/fonts/fira-sans-condensed-900.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans';font-weight:400;font-style:normal;font-display:swap;src:url(assets/fonts/fira-sans-400.woff2) format('woff2')}
+@font-face{font-family:'Fira Sans';font-weight:600;font-style:normal;font-display:swap;src:url(assets/fonts/fira-sans-600.woff2) format('woff2')}
 
 /* Visual language taken from newcastle.edu.au: charcoal + bright UoN blue, heavy condensed headings,
    square grey tiles, centred section titles with a short blue rule, labelled panels. No UoN logo used. */
@@ -268,6 +269,7 @@ footer b{color:#fff}
 .bk-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .bk-file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 footer a{color:#fff}
+footer .disclaimer{border-left:4px solid var(--blue);padding:8px 0 8px 12px;margin:6px 0;color:rgba(255,255,255,.9)}
 .noscript{background:var(--warn-l);color:#6e4100;padding:14px 18px;text-align:center}
 @media print{
   .nav .views,.strip,.afoot,.del,.minlink,.hurdle .x,details.backup,#howto,#faq,.example-note,.btn,.ctab.add{display:none!important}
@@ -459,8 +461,8 @@ footer a{color:#fff}
 <footer>
   <div class="container">
     <span><b>Grade bands:</b> HD 85–100 · D 75–84 · C 65–74 · P 50–64 · FF below 50, as published by UoN. GPA uses UoN's 7-point scale (HD 7, D 6, C 5, P 4, FF 0), weighted by unit value and rounded to one decimal place. Your official results are always the ones on myHub.</span>
-    <span>markx is an independent student-built prototype. It is not affiliated with or endorsed by the University of Newcastle.</span>
-    <span><a href="../">General version</a> · <a href="https://github.com/Squidly1408/MarkX">Source on GitHub</a></span>
+    <span class="disclaimer"><b>Disclaimer:</b> markx is an independent, student-built project. It is not affiliated with, endorsed by, sponsored by or connected to the University of Newcastle, Australia. "University of Newcastle" and "UoN" are used only to describe who this tool is for, and no university logos are used. Results are estimates, not official grades.</span>
+    <span><a href="privacy.html">Privacy policy</a> · <a href="terms.html">Terms and conditions</a> · <a href="../">General version</a> · <a href="https://github.com/Squidly1408/MarkX">Source on GitHub</a></span>
   </div>
 </footer>
 

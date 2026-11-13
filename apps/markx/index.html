@@ -4,10 +4,6 @@
 <head>
   <meta charset=utf8>
   <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Markx</title>
-  <meta name="claude:viewport-fit-sides" content="cover">
-  <link rel="icon" type="image/svg+xml" href="./images/logo.svg">
-  <link rel="apple-touch-icon" href="./images/logo.svg">
   <style>
     :root {
       color-scheme: light;
@@ -39,6 +35,10 @@
 </head>
 
 <body>
+  <title>Markx</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <link rel="shortcut icon" href="./images/logo.svg" type="image/x-icon">
+  <link rel="apple-touch-icon" href="./images/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -793,6 +793,21 @@
       font-size: .78rem
     }
 
+    .foot {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      font-size: .82rem;
+      color: var(--muted)
+    }
+
+    .foot a,
+    .hint a {
+      color: var(--ink)
+    }
+
     .hint {
       font-size: .82rem;
       color: var(--muted);
@@ -890,6 +905,7 @@
     <p class="hint">Enter a mark as a score and what it's out of (e.g. 17 / 20). Leave the score blank for anything not
       marked yet. A hurdle is the minimum mark you need on that piece to pass the unit, whatever your total. Your data
       stays in this browser.</p>
+    <p class="hint">At the University of Newcastle? Try the <a href="./UoN/">UoN version</a>, with UoN grade bands and a GPA planner.</p>
 
     <details class="backup">
       <summary>Back up or move your data</summary>
@@ -900,6 +916,10 @@
             id="restoreMsg"></span></div>
       </div>
     </details>
+    <footer class="foot">
+      <span>Results are estimates, not official grades. Always check your unit outline and your official results.</span>
+      <nav aria-label="Site"><a href="./privacy.html">Privacy policy</a> · <a href="./terms.html">Terms and conditions</a> · <a href="https://github.com/Squidly1408/MarkX">Source on GitHub</a></nav>
+    </footer>
   </div>
 
   <script>
