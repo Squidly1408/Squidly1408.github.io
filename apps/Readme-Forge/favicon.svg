@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Readme Forge "hash-anvil": a markdown # whose top bar is the anvil face,
+       whose strokes are the waist, and whose tips are glowing hot. -->
+  <style>
+    .ink { fill: #17181c; }
+    .hot { fill: #ff5a1f; }
+    @media (prefers-color-scheme: dark) { .ink { fill: #ece7dc; } .hot { fill: #ff6a2b; } }
+  </style>
+  <!-- hot tips of the # -->
+  <path class="hot" d="M25.5 4h7.5l-3 13.5h-7.5z"/>
+  <path class="hot" d="M39 4h7.5l-3 13.5H36z"/>
+  <!-- anvil face + horn (with the small step near the horn) -->
+  <path class="ink" d="M3 20.5h14v-3H60v6l-3.5 4.5H19C11.5 28 5.5 25.5 3 20.5z"/>
+  <!-- waist: the # strokes -->
+  <path class="ink" d="M22.4 28h7.5l-2.3 16h-7.5z"/>
+  <path class="ink" d="M35.9 28h7.5l-2.3 16h-7.5z"/>
+  <!-- base with flared feet -->
+  <path class="ink" d="M10 58v-4.5c0-3.5 3-5.5 7-7.5l2.5-2h25l2.5 2c4 2 7 4 7 7.5V58z"/>
+</svg>
