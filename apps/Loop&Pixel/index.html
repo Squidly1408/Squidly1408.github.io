@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Loop &amp; Pixel — photo to knitting &amp; crochet patterns</title>
+  <meta name="description" content="Turn any photo into a knitting or crochet colourwork chart, then put it on a beanie, jumper, blanket or cushion with sized, step-by-step instructions. Free, private, works offline.">
+  <meta name="theme-color" content="#f6efe5">
+  <meta name="color-scheme" content="light">
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Loop & Pixel — photo to knitting & crochet patterns">
+  <meta property="og:description" content="Turn any photo into a knitting or crochet chart — and a full, sized pattern.">
+  <meta property="og:image" content="/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Loop & Pixel">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <script type="module" crossorigin src="./assets/main-CidtbZbY.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/components-DVDiEoEe.js">
+  <link rel="stylesheet" crossorigin href="./assets/components-DUImONaW.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-BP5jnZFY.css">
+<link rel="manifest" href="./manifest.webmanifest"></head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="#create" aria-label="Loop &amp; Pixel home">
+        <img src="./logo.svg" alt="" width="34" height="34">
+        <span class="brand-name">Loop<em>&amp;</em>Pixel</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <button class="nav-link" data-go="create" data-icon="camera">Create</button>
+        <button class="nav-link" data-go="patterns" data-icon="grid">Patterns</button>
+        <button class="nav-link" data-go="learn" data-icon="learn">Learn</button>
+        <button class="nav-link" data-go="makes" data-icon="bookmark">My makes</button>
+      </nav>
+      <div class="top-tools">
+        <div class="seg" role="group" aria-label="Craft">
+          <button data-craft="knit">Knit</button><button data-craft="crochet">Crochet</button>
+        </div>
+        <button class="terms" id="termsBtn" data-act="terms" title="Switch crochet terms between UK/Australian and US">UK</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="view" id="v-create"></div>
+    <div class="view" id="v-patterns" hidden></div>
+    <div class="view" id="v-project" hidden></div>
+    <div class="view" id="v-learn" hidden></div>
+    <div class="view" id="v-makes" hidden></div>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-in">
+      <div>
+        <a class="brand" href="#create">
+          <img src="./logo.svg" alt="" width="28" height="28">
+          <span class="brand-name">Loop<em>&amp;</em>Pixel</span>
+        </a>
+        <p>Photo-to-chart and pattern generator for knitters and crocheters. Everything runs in your browser, and your photos never leave your device.</p>
+      </div>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#patterns">Patterns</a>
+        <a href="#learn">Tutorials</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+      <div class="foot-legal">
+        <span>© <span id="year">2026</span> Loop &amp; Pixel</span>
+        <span>Made with yarn &amp; code. Works offline.</span>
+      </div>
+    </div>
+  </footer>
+
+  <nav class="tabs" aria-label="Main">
+    <button class="tab" data-go="create" data-icon="camera">Create</button>
+    <button class="tab" data-go="patterns" data-icon="grid">Patterns</button>
+    <button class="tab" data-go="learn" data-icon="learn">Learn</button>
+    <button class="tab" data-go="makes" data-icon="bookmark">My makes</button>
+  </nav>
+
+  <div class="modal" id="reader" hidden role="dialog" aria-modal="true" aria-label="Row by row"><div class="sheet" id="readerBody"></div></div>
+  <div class="modal" id="stepper" hidden role="dialog" aria-modal="true" aria-label="Step-by-step mode"><div class="sheet" id="stepperBody"></div></div>
+  <div class="modal" id="tutModal" hidden role="dialog" aria-modal="true" aria-label="Tutorial"><div class="sheet" id="tutBody"></div></div>
+  <div class="modal" id="copyModal" hidden role="dialog" aria-modal="true" aria-label="Copy text"><div class="sheet" id="copyBody"></div></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <noscript><p style="padding:24px;text-align:center">Loop &amp; Pixel needs JavaScript to turn photos into charts.</p></noscript>
+</body>
+</html>
